@@ -1,0 +1,57 @@
+@import "./variable.scss";
+
+body {
+  color: #333;
+  font-size: 13px;
+  background-color: #fafafa;
+}
+
+.app-logo {
+  width: 34px;
+  height: 34px;
+  background: url(../images/logo-xs.png) no-repeat;
+  background-size: 100% auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+header.app-global {
+  width: 100%;
+  height: $headerHeight;
+  
+  .app-header {
+    width: 100%;
+    height: $headerHeight;
+    background-color: #fff;
+    border-bottom: 1px solid #efefef;
+    position: fixed;
+    left: 0;
+    top: 0;
+    
+    .center {
+      width: 1200px;
+      margin: 0 auto;
+      height: $headerHeight;
+      line-height: $headerHeight;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .title {
+        span {
+          font-size: 16px;
+          margin-left: 10px;
+          vertical-align: middle;
+          font-weight: 600;
+          color: #19009a;
+        }
+      }
+
+      .work-record {
+        span {
+          margin-left: 30px;
+        }
+      }
+    }
+  }
+}

@@ -22,7 +22,7 @@ module.exports = {
     jsHashType: 'chunkhash:8',
     cssHashType: 'contenthash:8',
     publicPath: '/halo/',
-    projectName: '内部管理系统',
+    projectName: 'Halo Team',
     sourceMap: false,
     gzip: false,
     gzipExtensions: ['js', 'css'],
@@ -47,7 +47,7 @@ module.exports = {
     ],
     extCSS: [],
     publicPath: '/',
-    projectName: '内部管理系统',
+    projectName: 'Halo Team',
     checkVersions: true,
     proxyTable: {
       '/inmanage': {
