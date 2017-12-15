@@ -1,0 +1,23 @@
+.home-banner {
+  font-size: 24px;
+  overflow: hidden;
+  position: relative;
+
+  canvas {
+    position: absolute;
+
+    &.bgCanvas {
+      left: 50%;
+      top: 50%;
+      
+      &.origin {
+        transition: opacity .8s;
+        opacity: 0;
+      }
+    }
+  }
+  
+  .bgImg {
+    display: none;
+  }
+}
