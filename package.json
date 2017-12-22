@@ -101,7 +101,7 @@
     "less-loader": "^4.0.5",
     "mkdirp": "^0.5.1",
     "mocha": "4.0.1",
-    "moment": "2.20.0",
+    "moment": "2.20.1",
     "node-sass": "^4.7.2",
     "npm-check-updates": "^2.13.0",
     "npmlog": "^4.1.2",
@@ -126,7 +126,7 @@
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.9.1",
-    "webpack-dev-middleware": "^2.0.1",
+    "webpack-dev-middleware": "^2.0.2",
     "webpack-hot-middleware": "^2.21.0",
     "webpack-merge": "^4.1.1"
   },
