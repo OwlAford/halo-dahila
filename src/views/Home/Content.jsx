@@ -12,6 +12,7 @@ class Content extends React.Component {
   @observable scrollable = false
   @observable cricleState = 'hide'
   @observable avatarState = 'hide'
+  @observable darkState = false
 
   componentWillMount () {
     this.clientH = document.documentElement.clientHeight
@@ -27,6 +28,7 @@ class Content extends React.Component {
     await waiter(1000)
     this.cricleState = 'hide'
     this.avatarState = 'run'
+    this.darkState = true
     await waiter(1000)
     this.avatarState = 'up'
     await waiter(300)
@@ -43,7 +45,7 @@ class Content extends React.Component {
       <div
         className={classNames({
           'home-content': true,
-          'dark': this.avatarState === 'up'
+          'dark': this.darkState
         })}
       >
         <canvas className='tween' ref={node => { this.$tween = node }} />
