@@ -24,7 +24,7 @@ module.exports = {
     jsHashType: 'chunkhash:8',
     cssHashType: 'contenthash:8',
     publicPath: '/halo/',
-    projectName: 'Carpe Diem',
+    projectName: 'HALO - Carpe Diem',
     sourceMap: false,
     gzip: false,
     gzipExtensions: ['js', 'css'],
@@ -51,7 +51,7 @@ module.exports = {
     ],
     extCSS: [],
     publicPath: '/',
-    projectName: 'Carpe Diem',
+    projectName: 'HALO - Carpe Diem',
     checkVersions: true,
     proxyTable: {
       '/inmanage': {

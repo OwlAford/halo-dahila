@@ -16,6 +16,18 @@
   }
 }
 
+@keyframes circle-zoom-in {
+  0% {
+    opacity: 0;
+    transform: scale(1.4) rotate(0deg);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
 @keyframes avatar-zoom-out {
   0% {
     transform: scale(.4) rotate(0deg);
@@ -34,7 +46,7 @@
   transition: background-color .6s;
 
   &.dark {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.68);
   }
 
   .tween {
@@ -165,6 +177,55 @@
         }
       }
     }
+
+    .menu {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 60px;
+      text-align: center;
+      opacity: 0;
+
+      &.show {
+        animation: fadeInUp 1s 1.8s both;
+      }
+
+      .item {
+        display: inline-block;
+        vertical-align: middle;
+        color: rgba(255, 255, 255, 0.6);
+        width: 68px;
+        height: 68px;
+        line-height: 68px;
+        margin: 0 30px;
+        border-radius: 100%;
+        cursor: pointer;
+        position: relative;
+        
+        &:hover:after {
+          content: "";
+          display: block;
+          height: 70px;
+          width: 70px;
+          position: absolute;
+          left: -2px;
+          top: -2px;
+          background: url(../images/circle.svg) no-repeat;
+          background-size: 100% 100%;
+          animation: circle-zoom-in ease .6s;
+        }
+        
+        &.active {
+          color: #fff;
+
+          &:after {
+            display: none;
+          }
+
+          border: 6px solid rgba(255, 255, 255, .1);
+        }
+      }
+    }
   }
 
   .content-wrap {
@@ -172,6 +233,7 @@
     background-color: #fff;
     background-color: rgba(255, 255, 255, .9);
     margin: 0 auto;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
     display: none;
 
     &.scrollable {

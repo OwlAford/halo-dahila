@@ -1,8 +1,10 @@
 let width, height, canvas, ctx, points, target, animateHeader = true
 
 const initHeader = (canvas, w, h) => {
-  width = w || window.clientWidth
-  height = h || (window.clientHeight > 560 ? window.clientHeight : 560)
+  const clientHeight = document.documentElement.clientHeight
+  const clientWidth = document.documentElement.clientWidth
+  width = w || clientWidth
+  height = h || (clientHeight > 560 ? clientHeight : 560)
   target = {
     x: width / 2, 
     y: height / 2
@@ -100,14 +102,14 @@ const animate = () => {
     for (let i in points) {
       // detect points in range
       if (Math.abs(getDistance(target, points[i])) < 4000) {
-        points[i].active = 0.15
-        points[i].circle.active = 0.3
+        points[i].active = 0.12
+        points[i].circle.active = 0.18
       } else if (Math.abs(getDistance(target, points[i])) < 20000) {
-        points[i].active = 0.05
-        points[i].circle.active = 0.15
+        points[i].active = 0.04
+        points[i].circle.active = 0.12
       } else if (Math.abs(getDistance(target, points[i])) < 40000) {
         points[i].active = 0.01
-        points[i].circle.active = 0.05
+        points[i].circle.active = 0.04
       } else {
         points[i].active = 0
         points[i].circle.active = 0

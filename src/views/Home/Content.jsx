@@ -20,6 +20,7 @@ class Content extends React.Component {
 
   @action
   async componentDidMount () {
+    this.$menu.style.width = `${this.clientW}px`
     this.$banner.style.height = `${this.clientH}px`
     await waiter(1500)
     this.cricleState = 'run'
@@ -85,6 +86,20 @@ class Content extends React.Component {
               <div className='userName'>Aford</div>
               <div className='motto'>谁终将声震人间，必长久深自缄默；谁终将点燃闪电，必长久如云漂泊</div>
             </div>
+          </div>
+          <div
+            className={classNames({
+              'menu': true,
+              'show': this.avatarState === 'up'
+            })}
+            ref={node => { this.$menu = node }}
+          >
+            <div className='item active'>HOME</div>
+            <div className='item'>POST</div>
+            <div className='item'>ART</div>
+            <div className='item'>SHOT</div>
+            <div className='item'>SITE</div>
+            <div className='item'>TALK</div>
           </div>
         </div>
         <div
