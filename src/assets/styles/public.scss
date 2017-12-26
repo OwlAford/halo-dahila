@@ -1,7 +1,24 @@
 @import "./variable.scss";
 
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none
+  }
+}
+
 body {
   color: $fc;
   font-size: $ft;
   background-color: $bg;
+  overflow-x: hidden;
+
+  &:lang(zh-CN) {
+    font-family: "SF Pro SC", "SF Pro Text", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  }
+  
 }

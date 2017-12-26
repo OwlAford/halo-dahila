@@ -1,23 +1,25 @@
 .home-banner {
-  font-size: 24px;
+  width: 100%;
   overflow: hidden;
   position: relative;
+  position: fixed;
+  left: 0;
+  top: 0;
 
-  canvas {
-    position: absolute;
-
-    &.bgCanvas {
-      left: 50%;
-      top: 50%;
-      
-      &.origin {
-        transition: opacity .8s;
-        opacity: 0;
-      }
-    }
+  .originImage, .imageThumb {
+    display: none;
   }
   
-  .bgImg {
-    display: none;
+  .blurCanvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  .thumbCanvas {
+    @extend .blurCanvas;
+    opacity: 1;
+    transition: opacity .3s;
   }
 }
