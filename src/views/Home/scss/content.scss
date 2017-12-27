@@ -38,6 +38,22 @@
   }
 }
 
+@keyframes avatar-up {
+  to {
+    transform: translateY(-100px);
+  }
+}
+
+@keyframes avatar-scale {
+  to {
+    transform: scale(.84);
+  }
+}
+
+.home {
+  font-size: 0;
+}
+
 .home-content {
   width: 100%;
   position: absolute;
@@ -56,8 +72,32 @@
   }
 
   .content-banner {
+    font-size: 14px;
     height: 500px;
+    overflow: hidden;
     position: relative;
+
+    .app-logo {
+      height: 42px;
+      width: 42px;
+      background-size: 42px 42px;
+      position: absolute;
+      left: 30px;
+      top: 30px;
+      transition: transform ease-in-out 3s;
+
+      &.running {
+        transform: rotate(2160deg);
+      }
+    }
+
+    .app-brand {
+      height: 42px;
+      background-size: auto 32px;
+      position: absolute;
+      left: 84px;
+      top: 30px;
+    }
 
     .circleLoop {
       height: 80px;
@@ -92,14 +132,16 @@
       left: 50%;
       top: 200px;
       margin: -60px 0 0 -60px;
-      transition: margin-top 1s;
 
       &.hide {
         display: none;
       }
 
       &.upper {
-        margin-top: -160px;
+        animation: avatar-up ease-in-out 1s both;
+        .wrap {
+          animation: avatar-scale ease-in-out 1s both;
+        }
       }
 
       &.running {
@@ -107,43 +149,49 @@
         animation: avatar-zoom-out 1s;
       }
 
-      .halo {
+      .wrap {
         width: 132px;
         height: 132px;
-        background-color: #fff;
         position: absolute;
         left: -6px;
         top: -6px;
-        border-radius: 100%;
-        opacity: 0;
-        transition: all 1s;
-
-        &.show {
-          opacity: .2;
-        }
-      }
-
-      .imgr {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        border-radius: 100%;
-        transition: all 1s;
-
-        &.fire {
-          box-shadow: 0 0 22px rgba(246, 77, 20, .8);
-        }
         
-        img {
-          display: block;
-          height: 100%;
-          width: 100%;
+        .halo {
+          background-color: #fff;
           border-radius: 100%;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          transition: all 1s;
+  
+          &.show {
+            opacity: .2;
+          }
+        }
+  
+        .imgr {
+          position: absolute;
+          left: 6px;
+          top: 6px;
+          width: 120px;
+          height: 120px;
+          overflow: hidden;
+          border-radius: 100%;
+          transition: all 1s;
+  
+          &.fire {
+            box-shadow: 0 0 22px rgba(246, 77, 20, .8);
+          }
+          
+          img {
+            display: block;
+            height: 100%;
+            width: 100%;
+            border-radius: 100%;
+          }
         }
       }
+
 
       .textNode {
         color: #fff;
@@ -152,7 +200,7 @@
         left: 50%;
         margin-left: -250px;
         position: absolute;
-        top: 140px;
+        top: 144px;
         display: none;
 
         &.show {
@@ -197,9 +245,10 @@
         width: 68px;
         height: 68px;
         line-height: 68px;
-        margin: 0 30px;
+        margin: 0 35px;
         border-radius: 100%;
         cursor: pointer;
+        text-decoration: none;
         position: relative;
         
         &:hover:after {
@@ -226,15 +275,30 @@
         }
       }
     }
+
+    .arrowDown {
+      position: absolute;
+      left: 50%;
+      bottom: 30px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 14px;
+      margin-left: -7px;
+      animation: upDownMove 1.2s ease-in-out infinite alternate;
+      display: none;
+
+      &.show {
+        display: block;
+      }
+    }
   }
 
   .content-wrap {
-    width: 1200px;
-    background-color: #fff;
-    background-color: rgba(255, 255, 255, .9);
-    margin: 0 auto;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
     display: none;
+    
+    .content-main {
+      width: 1200px;
+      margin: 0 auto;
+    }
 
     &.scrollable {
       display: block;

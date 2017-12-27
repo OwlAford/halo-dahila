@@ -1,7 +1,9 @@
 import React from 'react'
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
+import { withErrorHandler } from './ErrorHandler'
 
+@withErrorHandler
 @observer
 export default class LazyLoader extends React.Component {
   @observable model = null

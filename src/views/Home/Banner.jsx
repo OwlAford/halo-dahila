@@ -15,6 +15,9 @@ class Banner extends React.Component {
   componentWillMount () {
     this.clientH = document.documentElement.clientHeight
     this.clientW = document.documentElement.clientWidth
+    window.addEventListener('resize', () => {
+      window.location.reload()
+    })
   }
 
   scrollPage () {

@@ -4,7 +4,7 @@ import Loading from './Loading'
 
 const Bumper = ({ compnent }) => (
   <LazyLoader load={compnent}>
-    {Bumper => Bumper ? <Bumper /> : <Loading />}
+    {Bumper => Bumper ? <Bumper /> : <Loading delay={200} />}
   </LazyLoader>
 )
 
