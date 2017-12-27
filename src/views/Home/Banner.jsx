@@ -1,4 +1,5 @@
 import React from 'react'
+import { observer, inject } from 'mobx-react'
 import './scss/banner.scss'
 import throttle from 'lodash/throttle'
 import StackBlur from 'stackblur-canvas'
@@ -6,6 +7,14 @@ import { initImage } from '~/libs/tools'
 import imageThumb from './images/bg-city-thumb.jpg'
 import originImage from './images/bg-city.jpg'
 
+@inject(stores => {
+  return {
+    isNearBottomHandle: state => stores.home.isNearBottomHandle(state),
+    is2rdScreenHandle: state => stores.home.is2rdScreenHandle(state)
+  }
+})
+
+@observer
 class Banner extends React.Component {
   constructor (props) {
     super(props)
@@ -27,6 +36,15 @@ class Banner extends React.Component {
     if (percent > 1) {
       percent = 1
     }
+
+    scrollTop > this.clientH
+      ? this.props.is2rdScreenHandle(true)
+      : this.props.is2rdScreenHandle(false)
+
+    scrollTop > this.clientH * 2
+      ? this.props.isNearBottomHandle(true)
+      : this.props.isNearBottomHandle(false)
+
     this.$thumbCanvas.style.opacity = percent
   }
 

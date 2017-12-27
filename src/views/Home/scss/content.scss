@@ -249,6 +249,8 @@
         border-radius: 100%;
         cursor: pointer;
         text-decoration: none;
+        border: 6px solid transparent;
+        transition: border .3s;
         position: relative;
         
         &:hover:after {
@@ -296,8 +298,9 @@
     display: none;
     
     .content-main {
-      width: 1200px;
-      margin: 0 auto;
+      width: 100%;
+      min-height: 300px;
+      position: relative;
     }
 
     &.scrollable {

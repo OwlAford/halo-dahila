@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import { Switch, Route, NavLink, Redirect } from 'react-router-dom'
 import { observable, action } from 'mobx'
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import classNames from 'classnames'
 import Footer from './Footer'
 import { waiter } from '~/libs/tools'
@@ -14,6 +14,14 @@ import Profile from 'bundle-loader?lazy&name=profile!../Profile'
 import Note from 'bundle-loader?lazy&name=note!../Note'
 
 @withRouter
+
+@inject(stores => {
+  const { home: { is2rdScreen } } = stores
+  return {
+    is2rdScreen
+  }
+})
+
 @observer
 class Content extends React.Component {
   @observable scrollable = true // 测试
@@ -53,7 +61,7 @@ class Content extends React.Component {
       <div
         className={classNames({
           'home-content': true,
-          'dark': this.darkState
+          'dark': this.darkState && !this.props.is2rdScreen
         })}
       >
         <canvas className='tween' ref={node => { this.$tween = node }} />

@@ -9,7 +9,7 @@ export default class Note extends React.Component {
   render () {
     return (
       <div className='home-note'>
-        <Loading delay={5000} />
+        <Loading delay={100} />
       </div>
     )
   }

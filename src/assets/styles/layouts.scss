@@ -1,0 +1,49 @@
+.app-toolbar {
+  width: 54px;
+  position: fixed;
+  bottom: 100px;
+  right: 0;
+  z-index: 999;
+  transition: box-shadow .3s;
+  box-shadow: -3px 3px 24px rgba(0,0,0,.2);
+  transform: translate3d(100%, 0, 0);
+  opacity: 0;
+  transition: all .3s;
+
+  &.show {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+    
+  &:hover {
+    box-shadow: -3px 3px 24px rgba(0,0,0,.12);
+  }
+
+  .iconfont {
+    width: 54px;
+    height: 54px;
+    color: #999;
+    display: block;
+    cursor: pointer;
+    line-height: 54px;
+    text-align: center;
+    background-color: rgba(255,255,255,.9);
+    position: relative;
+    
+    &:hover {
+      color: #666;
+      background-color: #f9f9f9;
+    }
+  }
+
+  .iconfont + .iconfont:after {
+    content: '';
+    display: block;
+    height: 1px;
+    background-color: rgba(0,0,0,.06);
+    position: absolute;
+    top: 0;
+    left: 8px;
+    right: 8px;
+  }
+}
