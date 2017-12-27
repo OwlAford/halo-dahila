@@ -26,6 +26,18 @@
   url('https://at.alicdn.com/t/font_156150_r6p6bi4h1c6xn7b9.svg#iconfont') format('svg');
 }
 
+@font-face {
+  font-family: 'halofont';
+  src: url('../fonts/halo.ttf') format('truetype');
+}
+
+.halofont {
+  font-family: "halofont" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .iconfont {
   font-family: "iconfont" !important;
   font-size: 20px;

@@ -110,7 +110,7 @@ class Content extends React.Component {
                 'show': this.avatarState === 'up'
               })}
             >
-              <div className='userName'>Aford</div>
+              <div className='userName halofont'>Aford</div>
               <div className='motto'>谁终将声震人间，必长久深自缄默；谁终将点燃闪电，必长久如云漂泊</div>
             </div>
           </div>
@@ -122,7 +122,7 @@ class Content extends React.Component {
             ref={node => { this.$menu = node }}
           >
             <NavLink
-              className='item'
+              className='item halofont'
               exact
               to='/home/profile'
               activeClassName='active'
@@ -130,7 +130,7 @@ class Content extends React.Component {
               HOME
             </NavLink>
             <NavLink
-              className='item'
+              className='item halofont'
               exact
               to='/home/note'
               activeClassName='active'
@@ -138,7 +138,7 @@ class Content extends React.Component {
               NOTE
             </NavLink>
             <NavLink
-              className='item'
+              className='item halofont'
               exact
               to='/login'
               activeClassName='active'
@@ -146,7 +146,7 @@ class Content extends React.Component {
               ART
             </NavLink>
             <NavLink
-              className='item'
+              className='item halofont'
               exact
               to='/home/shot'
               activeClassName='active'
@@ -154,7 +154,7 @@ class Content extends React.Component {
               SHOT
             </NavLink>
             <NavLink
-              className='item'
+              className='item halofont'
               exact
               to='/home/site'
               activeClassName='active'
@@ -162,7 +162,7 @@ class Content extends React.Component {
               SITE
             </NavLink>
             <NavLink
-              className='item'
+              className='item halofont'
               exact
               to='/home/talk'
               activeClassName='active'

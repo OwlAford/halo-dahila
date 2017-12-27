@@ -68,7 +68,7 @@ let plugins = [
 
 module.exports = {
   entry: {
-    app: './src/core/main.js'
+    app: './src/core/entry.js'
     // vendor: []
   },
   output: {
