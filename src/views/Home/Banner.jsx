@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 import { observer, inject } from 'mobx-react'
 import './scss/banner.scss'
 import throttle from 'lodash/throttle'
@@ -6,6 +7,8 @@ import StackBlur from 'stackblur-canvas'
 import { initImage } from '~/libs/tools'
 import imageThumb from './images/bg-city-thumb.jpg'
 import originImage from './images/bg-city.jpg'
+
+@withRouter
 
 @inject(stores => {
   return {
@@ -25,7 +28,7 @@ class Banner extends React.Component {
     this.clientH = document.documentElement.clientHeight
     this.clientW = document.documentElement.clientWidth
     window.addEventListener('resize', () => {
-      window.location.reload()
+      this.props.history.push('/')
     })
   }
 

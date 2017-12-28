@@ -52,7 +52,7 @@ class Content extends React.Component {
   async componentDidMount () {
     const wavesurfer = this.wavesurfer = WaveSurfer.create({
       container: '#music',
-      waveColor: 'rgba(255, 255, 255, 0.3)',
+      waveColor: 'rgba(255, 255, 255, 0.2)',
       progressColor: 'rgba(255, 255, 255, 0.8)',
       height: 64
     })
@@ -142,7 +142,8 @@ class Content extends React.Component {
               <div
                 className={classNames({
                   'halo': true,
-                  'show': this.avatarState === 'up'
+                  'show': this.avatarState === 'up',
+                  'playing': this.isPlaying
                 })}
               />
               <div className={classNames({
@@ -151,6 +152,12 @@ class Content extends React.Component {
               })}>
                 <img src={avatar} alt='avatar' width='120' height='120' />
               </div>
+              <div className={classNames({
+                'album': true,
+                'playing': this.isPlaying
+              })}>
+                <img src={cover} alt='album cover' width='120' height='120' />
+              </div>
             </div>
             <div
               className={classNames({
@@ -158,8 +165,12 @@ class Content extends React.Component {
                 'show': this.avatarState === 'up'
               })}
             >
-              <div className='userName halofont'>Aford</div>
-              <div className='motto'>谁终将声震人间，必长久深自缄默；谁终将点燃闪电，必长久如云漂泊</div>
+              <div className='userName halofont'>{this.isPlaying ? 'Viva La Vida' : 'Aford'}</div>
+              {
+                this.isPlaying
+                  ? null
+                  : <div className='motto'>谁终将声震人间，必长久深自缄默；谁终将点燃闪电，必长久如云漂泊</div>
+              }
             </div>
           </div>
           <div
@@ -201,7 +212,8 @@ class Content extends React.Component {
             <div
               className={classNames({
                 'musicControl': true,
-                'pause': this.isPlaying
+                'pause': this.isPlaying,
+                'right': this.clientH < 620
               })}
               onClick={e => this.musicHandle()}
             />
