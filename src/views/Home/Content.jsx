@@ -9,6 +9,7 @@ import { waiter } from '~/libs/tools'
 import initTween from '~/libs/tween'
 import './scss/content.scss'
 import avatar from './images/avatar.jpg'
+import cover from './images/cover.jpg'
 import { getBumper } from '^/Bumper'
 import Profile from 'bundle-loader?lazy&name=profile!../Profile'
 import Note from 'bundle-loader?lazy&name=note!../Note'
@@ -28,6 +29,8 @@ class Content extends React.Component {
   @observable cricleState = 'hide'
   @observable avatarState = 'hide'
   @observable darkState = false
+  @observable musicReady = false
+  @observable isPlaying = false
 
   componentWillMount () {
     this.clientH = document.documentElement.clientHeight
@@ -35,7 +38,31 @@ class Content extends React.Component {
   }
 
   @action
+  musicHandle () {
+    if (this.isPlaying) {
+      this.isPlaying = false
+      this.wavesurfer.pause()
+    } else {
+      this.isPlaying = true
+      this.wavesurfer.play()
+    }
+  }
+
+  @action
   async componentDidMount () {
+    const wavesurfer = this.wavesurfer = WaveSurfer.create({
+      container: '#music',
+      waveColor: 'rgba(255, 255, 255, 0.3)',
+      progressColor: 'rgba(255, 255, 255, 0.8)',
+      height: 64
+    })
+
+    wavesurfer.load('http://7u2kad.com1.z0.glb.clouddn.com/Coldplay%20-%20Viva%20la%20Vida.mp3')
+
+    wavesurfer.on('ready', () => {
+      this.musicReady = true
+    })
+
     this.$menu.style.width = `${this.clientW}px`
     this.$banner.style.height = `${this.clientH}px`
     await waiter(1500)
@@ -54,9 +81,30 @@ class Content extends React.Component {
 
   render () {
     const middStyle = {
-      top: `${this.clientH * 0.5}px`,
+      top: `${this.clientH * 0.4}px`,
       left: `${this.clientW * 0.5}px`
     }
+
+    const menuList = [{
+      label: 'HOME',
+      path: '/home/profile'
+    }, {
+      label: 'NOTE',
+      path: '/home/note'
+    }, {
+      label: 'ART',
+      path: '/home/art'
+    }, {
+      label: 'SHOT',
+      path: '/home/shot'
+    }, {
+      label: 'SITE',
+      path: '/home/site'
+    }, {
+      label: 'TALK',
+      path: '/home/talk'
+    }]
+
     return (
       <div
         className={classNames({
@@ -72,7 +120,7 @@ class Content extends React.Component {
               'running': this.darkState
             })}
           />
-          <div className='app-brand' />
+          <div className='app-brand halofont'>Halo</div>
           <div
             className={classNames({
               'circleLoop': true,
@@ -121,54 +169,21 @@ class Content extends React.Component {
             })}
             ref={node => { this.$menu = node }}
           >
-            <NavLink
-              className='item halofont'
-              exact
-              to='/home/profile'
-              activeClassName='active'
-            >
-              HOME
-            </NavLink>
-            <NavLink
-              className='item halofont'
-              exact
-              to='/home/note'
-              activeClassName='active'
-            >
-              NOTE
-            </NavLink>
-            <NavLink
-              className='item halofont'
-              exact
-              to='/login'
-              activeClassName='active'
-            >
-              ART
-            </NavLink>
-            <NavLink
-              className='item halofont'
-              exact
-              to='/home/shot'
-              activeClassName='active'
-            >
-              SHOT
-            </NavLink>
-            <NavLink
-              className='item halofont'
-              exact
-              to='/home/site'
-              activeClassName='active'
-            >
-              SITE
-            </NavLink>
-            <NavLink
-              className='item halofont'
-              exact
-              to='/home/talk'
-              activeClassName='active'
-            >
-              TALK
-            </NavLink>
+            {
+              menuList.map((item, i) => {
+                return (
+                  <NavLink
+                    key={i}
+                    className='item halofont'
+                    exact
+                    to={item.path}
+                    activeClassName='active'
+                  >
+                    {item.label}
+                  </NavLink>
+                )
+              })
+            }
           </div>
           <i
             className={classNames({
@@ -177,6 +192,23 @@ class Content extends React.Component {
               'show': this.scrollable
             })}
           >&#xe608;</i>
+          <div
+            id='music'
+            className={classNames({
+              'show': this.avatarState === 'up' && this.musicReady
+            })}
+          >
+            <div
+              className={classNames({
+                'musicControl': true,
+                'pause': this.isPlaying
+              })}
+              onClick={e => this.musicHandle()}
+            />
+            <div className='cover'>
+              <img src={cover} width='100%' alt='viva la vida' />
+            </div>
+          </div>
         </div>
         <div
           className={classNames({
@@ -194,7 +226,7 @@ class Content extends React.Component {
                 path='/home/note'
                 component={getBumper(Note)}
               />
-              <Route component={() => (<Redirect to='/home/profile' />)} />
+              <Route component={() => <Redirect to='/home/profile' />} />
             </Switch>
           </div>
           <Footer />

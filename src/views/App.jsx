@@ -21,7 +21,7 @@ const App = () => (
         path='/todolist'
         component={getBumper(TodoList)}
       />
-      <Route component={() => (<Redirect to='/home' />)} />
+      <Route component={() => <Redirect to='/home' />} />
     </Switch>
   </div>
 )

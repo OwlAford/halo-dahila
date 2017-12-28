@@ -59,7 +59,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  transition: background-color .6s;
+  transition: background-color .8s;
 
   &.dark {
     background-color: rgba(0, 0, 0, 0.68);
@@ -93,7 +93,9 @@
 
     .app-brand {
       height: 42px;
-      background-size: auto 26px;
+      line-height: 42px;
+      color: #fff;
+      font-size: 28px;
       position: absolute;
       left: 84px;
       top: 30px;
@@ -252,6 +254,7 @@
         border: 6px solid transparent;
         transition: border .3s;
         position: relative;
+        font-size: 16px;
         
         &:hover:after {
           content: "";
@@ -290,6 +293,60 @@
 
       &.show {
         display: block;
+      }
+    }
+
+    #music {
+      width: 1000px;
+      height: 64px;
+      position: absolute;
+      left: 50%;
+      bottom: 180px;
+      margin-left: -500px;
+      z-index: 99;
+      opacity: 0;
+
+      &.show {
+        animation: fadeInUp 1s .3s both;
+      }
+
+      .musicControl {
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        left: 50%;
+        margin-left: -20px;
+        bottom: 84px;
+        background: url(../images/play.svg) no-repeat;
+        background-size: 100% auto;
+        cursor: pointer;
+        opacity: .6;
+        transition: opacity .3s;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &.pause {
+          background-image: url(../images/pause.svg);
+        }
+      }
+
+      .cover {
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        top: -8px;
+        left: -100px;
+        box-shadow: 0 3px 14px -2px rgba(0, 0, 0, 0.8);
+        border-radius: 4px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
       }
     }
   }

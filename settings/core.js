@@ -18,7 +18,8 @@ module.exports = {
       'https://cdn.bootcss.com/es5-shim/4.5.10/es5-shim.min.js',
       'https://cdn.bootcss.com/es6-shim/0.35.3/es6-shim.min.js',
       'http://plug.qiniudn.com/TweenLite.min.js',
-      'http://plug.qiniudn.com/EasePack.min.js'
+      'http://plug.qiniudn.com/EasePack.min.js',
+      'https://cdn.bootcss.com/wavesurfer.js/2.0.0-beta01/wavesurfer.min.js'
     ],
     extCSS: [],
     jsHashType: 'chunkhash:8',
@@ -47,7 +48,8 @@ module.exports = {
       'https://cdn.bootcss.com/es5-shim/4.5.10/es5-shim.min.js',
       'https://cdn.bootcss.com/es6-shim/0.35.3/es6-shim.min.js',
       'http://plug.qiniudn.com/TweenLite.min.js',
-      'http://plug.qiniudn.com/EasePack.min.js'
+      'http://plug.qiniudn.com/EasePack.min.js',
+      'https://cdn.bootcss.com/wavesurfer.js/2.0.0-beta01/wavesurfer.min.js'
     ],
     extCSS: [],
     publicPath: '/',
