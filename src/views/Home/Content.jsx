@@ -56,7 +56,7 @@ class Content extends React.Component {
       progressColor: 'rgba(255, 255, 255, 0.8)',
       height: 64
     })
-
+    // console.log(wavesurfer)
     wavesurfer.load('http://7u2kad.com1.z0.glb.clouddn.com/Coldplay%20-%20Viva%20la%20Vida.mp3')
 
     wavesurfer.on('ready', () => {
@@ -77,6 +77,11 @@ class Content extends React.Component {
     initTween(this.$tween, this.clientW, this.clientH)
     await waiter(2600)
     this.scrollable = true
+  }
+
+  componentWillUnmount () {
+    this.isPlaying = false
+    this.wavesurfer.destroy()
   }
 
   render () {
@@ -220,6 +225,13 @@ class Content extends React.Component {
             <div className='cover'>
               <img src={cover} width='100%' alt='viva la vida' />
             </div>
+          </div>
+          <div className='calibration'>
+            {
+              (new Array(21)).fill(0).map((e, i) => {
+                return i === 10 ? <i key={i} className='long' /> : <i key={i} />
+              })
+            }
           </div>
         </div>
         <div

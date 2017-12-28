@@ -62,7 +62,7 @@
   transition: background-color .8s;
 
   &.dark {
-    background-color: rgba(0, 0, 0, 0.68);
+    background-color: rgba(0, 0, 0, 0.72);
   }
 
   .tween {
@@ -203,11 +203,11 @@
 
         .album {
           @extend .imgr;
+          animation: circle-rotate linear 20s infinite;
           opacity: 0;
 
           &.playing {
             opacity: 1;
-            animation: circle-rotate linear 20s infinite;
           }
         }
       }
@@ -370,6 +370,52 @@
           width: 100%;
           height: 100%;
           display: block;
+        }
+      }
+    }
+
+    .calibration {
+      width: 44px;
+      height: 200px;
+      position: absolute;
+      right: 90px;
+      top: 50%;
+      margin-top: -100px;
+      padding-left: 18px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      i {
+        display: block;
+        height: 0px;
+        width: 12px;
+        border-top: 1px solid #fff;
+        flex-grow: 0;
+
+        &:nth-child(1), &:nth-last-child(1) {
+          opacity: 0.1;
+        }
+
+        &:nth-child(2), &:nth-last-child(2) {
+          opacity: 0.3;
+        }
+
+        &:nth-child(3), &:nth-last-child(3) {
+          opacity: 0.5;
+        }
+
+        &:nth-child(4), &:nth-last-child(4) {
+          opacity: 0.7;
+        }
+
+        &:nth-child(5), &:nth-last-child(5) {
+          opacity: 0.9;
+        }
+
+        &.long {
+          width: 26px;
         }
       }
     }
