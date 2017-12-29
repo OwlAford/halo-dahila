@@ -30,11 +30,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 156150 */
-  src: url('https://at.alicdn.com/t/font_156150_r6p6bi4h1c6xn7b9.eot');
-  src: url('https://at.alicdn.com/t/font_156150_r6p6bi4h1c6xn7b9.eot?#iefix') format('embedded-opentype'),
-  url('https://at.alicdn.com/t/font_156150_r6p6bi4h1c6xn7b9.woff') format('woff'),
-  url('https://at.alicdn.com/t/font_156150_r6p6bi4h1c6xn7b9.ttf') format('truetype'),
-  url('https://at.alicdn.com/t/font_156150_r6p6bi4h1c6xn7b9.svg#iconfont') format('svg');
+  src: url('https://at.alicdn.com/t/font_156150_zdep54wv3brcnmi.eot');
+  src: url('https://at.alicdn.com/t/font_156150_zdep54wv3brcnmi.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/font_156150_zdep54wv3brcnmi.woff') format('woff'),
+  url('https://at.alicdn.com/t/font_156150_zdep54wv3brcnmi.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/font_156150_zdep54wv3brcnmi.svg#iconfont') format('svg');
 }
 
 @font-face {
@@ -66,6 +66,10 @@ body {
   &:lang(zh-CN) {
     font-family: "SF Pro SC", "SF Pro Text", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   }
+}
+
+.gitfont {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 }
 
 .app-logo {
