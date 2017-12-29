@@ -33,7 +33,7 @@ class Banner extends React.Component {
       this.props.history.push('/')
     }
 
-    window.addEventListener('resize', debounce(refresh, 30))
+    window.addEventListener('resize', debounce(refresh, 200))
   }
 
   scrollPage () {

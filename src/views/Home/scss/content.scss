@@ -387,6 +387,10 @@
       justify-content: space-between;
       display: none;
 
+      &.upper {
+        top: 40%;
+      }
+
       &.show {
         display: flex;
         animation: fadeInLeft .6s 1.3s both;
@@ -434,6 +438,10 @@
       cursor: pointer;
       user-select: none;
       display: none;
+
+      &.upper {
+        top: 40%;
+      }
       
       &.show {
         display: block;

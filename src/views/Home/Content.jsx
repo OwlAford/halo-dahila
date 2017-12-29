@@ -299,6 +299,7 @@ class Content extends React.Component {
           <div
             className={classNames({
               'calibration': true,
+              'upper': this.clientH < 620,
               'show': this.avatarState === 'up' && this.musicReady
             })}
           >
@@ -311,6 +312,7 @@ class Content extends React.Component {
           <div
             className={classNames({
               'volume': true,
+              'upper': this.clientH < 620,
               'show': this.avatarState === 'up' && this.musicReady
             })}
             onMouseDown={e => this.mousedownHandle(e)}
