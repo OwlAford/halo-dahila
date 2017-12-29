@@ -54,12 +54,16 @@ class Content extends React.Component {
   }
 
   setVolChildsFocus (vol) {
-    vol = vol - vol % 5
+    vol = vol - vol % 5 + (vol % 5 > 2 ? 5 : 0)
     Array.prototype.forEach.call(this.volChilds, (e, i) => {
       const curNum = e.innerText * 1
       const dis = Math.abs(curNum - vol)
       if (dis < 20) {
-        e.style.opacity = 1 - dis / 20
+        let opc = 1 - dis / 20
+        if (opc !== 1) {
+          opc /= 2
+        }
+        e.style.opacity = opc
       } else {
         e.style.opacity = 0
       }

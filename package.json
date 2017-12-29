@@ -1,5 +1,5 @@
 {
-  "name": "react-lolipop",
+  "name": "react-dahila",
   "version": "0.0.1",
   "description": "A React Application",
   "author": "OwlAford <zhangyh@belink.com>",
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "babel-core": "6.26.0",
-    "babel-eslint": "^8.1.1",
+    "babel-eslint": "^8.1.2",
     "babel-loader": "7.1.2",
     "babel-plugin-async-to-promises": "^1.0.5",
     "babel-plugin-dynamic-import-node": "1.2.0",
@@ -103,7 +103,7 @@
     "less": "^3.0.0-alpha.3",
     "less-loader": "^4.0.5",
     "mkdirp": "^0.5.1",
-    "mocha": "4.0.1",
+    "mocha": "4.1.0",
     "moment": "2.20.1",
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.3",
