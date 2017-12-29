@@ -9,9 +9,12 @@ const initHeader = (canvas, w, h) => {
     x: width / 2, 
     y: height / 2
   }
-  canvas.width = width
-  canvas.height = height
-  ctx = canvas.getContext('2d')
+
+  if (canvas) {
+    canvas.width = width
+    canvas.height = height
+    ctx = canvas.getContext('2d')
+  }
 
   // create points
   points = []

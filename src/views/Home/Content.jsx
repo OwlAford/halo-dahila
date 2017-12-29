@@ -48,19 +48,89 @@ class Content extends React.Component {
     }
   }
 
+  setPosition (val) {
+    const el = this.$scroller
+    el.style.transform = el.style.webkitTransform = `translateY(${val}px)`
+  }
+
+  setVolChildsFocus (vol) {
+    vol = vol - vol % 5
+    Array.prototype.forEach.call(this.volChilds, (e, i) => {
+      const curNum = e.innerText * 1
+      const dis = Math.abs(curNum - vol)
+      if (dis < 20) {
+        e.style.opacity = 1 - dis / 20
+      } else {
+        e.style.opacity = 0
+      }
+    })
+  }
+
+  volume2Position (vol) {
+    return 108 - (vol / 5 * 24)
+  }
+
+  position2Volume (pos) {
+    return (108 - pos) / 24 * 5
+  }
+
+  initVolumeScroller (vol) {
+    this.currentVol = vol
+    this.wavesurfer.backend.setVolume(~~vol / 100)
+    const currY = this.currY = this.volume2Position(vol)
+    this.volChilds = this.$scroller.childNodes
+    this.setPosition(currY)
+    this.setVolChildsFocus(vol)
+    this.$banner.addEventListener('mouseup', e => {
+      this.mouseupHandle()
+    })
+  }
+
+  mousedownHandle (e) {
+    this.moveFlag = true
+    this.startY = e.pageY
+  }
+
+  mousemoveHandle (e) {
+    if (this.moveFlag) {
+      this.moveY = e.pageY - this.startY
+      let newY = this.currY + this.moveY
+      let newVol = ~~this.position2Volume(newY)
+      if (newVol > 100) {
+        newVol = 100
+        newY = this.volume2Position(100)
+      } else if (newVol < 0) {
+        newVol = 0
+        newY = this.volume2Position(0)
+      }
+      this.setPosition(newY)
+      this.setVolChildsFocus(newVol)
+      this.currentVol = newVol
+      this.wavesurfer.backend.setVolume(newVol / 100)
+    }
+  }
+
+  mouseupHandle () {
+    if (this.moveFlag) {
+      this.moveFlag = false
+      this.currY += this.moveY
+    }
+  }
+
   @action
   async componentDidMount () {
     const wavesurfer = this.wavesurfer = WaveSurfer.create({
       container: '#music',
       waveColor: 'rgba(255, 255, 255, 0.2)',
       progressColor: 'rgba(255, 255, 255, 0.8)',
-      height: 64
+      height: 64,
+      backend: 'MediaElement'
     })
-    // console.log(wavesurfer)
     wavesurfer.load('http://7u2kad.com1.z0.glb.clouddn.com/Coldplay%20-%20Viva%20la%20Vida.mp3')
 
     wavesurfer.on('ready', () => {
       this.musicReady = true
+      this.initVolumeScroller(75)
     })
 
     this.$menu.style.width = `${this.clientW}px`
@@ -226,12 +296,37 @@ class Content extends React.Component {
               <img src={cover} width='100%' alt='viva la vida' />
             </div>
           </div>
-          <div className='calibration'>
+          <div
+            className={classNames({
+              'calibration': true,
+              'show': this.avatarState === 'up' && this.musicReady
+            })}
+          >
             {
               (new Array(21)).fill(0).map((e, i) => {
                 return i === 10 ? <i key={i} className='long' /> : <i key={i} />
               })
             }
+          </div>
+          <div
+            className={classNames({
+              'volume': true,
+              'show': this.avatarState === 'up' && this.musicReady
+            })}
+            onMouseDown={e => this.mousedownHandle(e)}
+            onMouseMove={e => this.mousemoveHandle(e)}
+          >
+            <div className='scroller' ref={node => { this.$scroller = node }}>
+              {
+                (new Array(101)).fill(0).map((e, num) => {
+                  if (num !== 0 && num % 5) {
+                    return null
+                  }
+                  num > 9 ? num = String(num) : num = '0' + num
+                  return <div className='num' key={num}>{num}</div>
+                })
+              }
+            </div>
           </div>
         </div>
         <div

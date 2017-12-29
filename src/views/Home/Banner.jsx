@@ -3,6 +3,7 @@ import { withRouter } from 'react-router'
 import { observer, inject } from 'mobx-react'
 import './scss/banner.scss'
 import throttle from 'lodash/throttle'
+import debounce from 'lodash/debounce'
 import StackBlur from 'stackblur-canvas'
 import { initImage } from '~/libs/tools'
 import imageThumb from './images/bg-city-thumb.jpg'
@@ -27,9 +28,12 @@ class Banner extends React.Component {
   componentWillMount () {
     this.clientH = document.documentElement.clientHeight
     this.clientW = document.documentElement.clientWidth
-    window.addEventListener('resize', () => {
+
+    const refresh = () => {
       this.props.history.push('/')
-    })
+    }
+
+    window.addEventListener('resize', debounce(refresh, 30))
   }
 
   scrollPage () {
@@ -48,7 +52,9 @@ class Banner extends React.Component {
       ? this.props.isNearBottomHandle(true)
       : this.props.isNearBottomHandle(false)
 
-    this.$thumbCanvas.style.opacity = percent
+    if (this.$thumbCanvas) {
+      this.$thumbCanvas.style.opacity = percent
+    }
   }
 
   async componentDidMount () {
