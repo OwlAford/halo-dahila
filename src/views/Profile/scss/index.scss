@@ -5,15 +5,21 @@
   color: #333;
   font-size: 14px;
 
-  .service {
+  .card {
     width: 100%;
-    background-color: #f9f9f9;
+    background-color: #fff;
+    margin-bottom: 15px;
+
+    &.light-gray {
+      background-color: #f9f9f9;
+    }
 
     h1 {
       padding: 30px;
       font-size: 18px;
       font-weight: 700;
       color: #333;
+      margin: 0 0 15px;
 
       span {
         font-size: 14px;
@@ -23,7 +29,7 @@
     }
 
     .grid {
-      padding: 0 30px 30px;
+      padding: 0 30px 40px;
       display: flex;
       justify-content: space-between;
 
