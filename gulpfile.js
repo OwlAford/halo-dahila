@@ -8,14 +8,6 @@ const sftp = require('gulp-sftp')
 const ncu = require('npm-check-updates')
 const tools = require('./bin/analyze-tools')
 
-gulp.task('dev', () => {
-  require('./bin/dev-server')
-})
-
-gulp.task('build', () => {
-  require('./bin/production')
-})
-
 gulp.task('upload', () =>
   gulp.src('dist/**')
     .pipe(sftp({
@@ -75,10 +67,6 @@ gulp.task('report', () => {
 })
 
 gulp.task('compare-report', ['compare', 'report'])
-
-gulp.task('dist-server', () => {
-  require('./bin/dist-server.js')
-})
 
 gulp.task('ncu', () => {
   ncu.run({

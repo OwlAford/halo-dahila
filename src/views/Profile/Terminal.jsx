@@ -15,9 +15,9 @@ export default class Terminal extends React.Component {
   currentScreen = null
   infoData = {
     list: [
-      '感兴趣和擅长的事情',
-      '喜欢的音乐类型',
-      '喜欢的食物'
+      '⚽ 感兴趣和擅长的事情',
+      '🎻 喜欢的音乐类型',
+      '🍳 喜欢的食物'
     ],
     details: [
       [
@@ -104,7 +104,7 @@ export default class Terminal extends React.Component {
       />
     )
 
-    const next = () => <p key='continue'>请按Enter键继续...{cursor()}</p>
+    const next = () => <p key='continue'>请点击输入框按Enter键继续...{cursor()}</p>
 
     const inputNext = () => [
       <p className='gap' key='iptcontinue'>请输入您选择的数字Enter键继续：</p>,
@@ -127,7 +127,7 @@ export default class Terminal extends React.Component {
         ]
       } else if (this.step === 2) {
         return [
-          <p key='title' className='title'>【{this.infoData.list[this.applySelected - 1]}】</p>,
+          <p key='title' className='title'># {this.infoData.list[this.applySelected - 1]}</p>,
           this.currentScreen.map((item, i) => {
             return (
               <p key={i}>{item}</p>
