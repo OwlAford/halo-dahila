@@ -27,6 +27,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "classnames": "^2.2.5",
+    "dynamics.js": "^1.1.5",
     "lodash": "^4.17.4",
     "md5": "^2.2.1",
     "mobx": "^3.4.1",
@@ -106,7 +107,7 @@
     "mocha": "4.1.0",
     "moment": "2.20.1",
     "node-sass": "^4.7.2",
-    "nodemon": "^1.14.6",
+    "nodemon": "^1.14.7",
     "npm-check-updates": "^2.14.0",
     "npmlog": "^4.1.2",
     "opn": "^5.1.0",

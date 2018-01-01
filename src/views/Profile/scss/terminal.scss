@@ -99,3 +99,16 @@
     }
   }
 }
+
+.profile-effect {
+  .soccer {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    left: 0;
+    top: -80px;
+    background: url(../images/soccer.png) no-repeat;
+    background-size: 100% auto;
+    transition: left 2s ease-out;
+  }
+}

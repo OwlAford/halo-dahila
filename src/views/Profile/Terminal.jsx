@@ -2,6 +2,8 @@ import React from 'react'
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
 import classNames from 'classnames'
+import dynamics from 'dynamics.js'
+import { waiter } from '~/libs/tools'
 import './scss/terminal.scss'
 
 @observer
@@ -64,6 +66,7 @@ export default class Terminal extends React.Component {
       } else if (this.step === 1 && this.menuSelected) {
         let cur = this.infoData.details[this.menuSelected - 1]
         if (cur) {
+          this.menuSelected === '1' && this.triggerBall(this.menuSelected)
           this.applySelected = this.menuSelected
           this.currentScreen = cur
           this.step = 2
@@ -86,6 +89,26 @@ export default class Terminal extends React.Component {
     } else if ((this.isNumString(e.key) || e.key === 'Backspace' || this.isLetter(e.key)) && this.step === 1) {
       this.menuSelected = this.$textArea.value.trim()
     }
+  }
+
+  async triggerBall () {
+    const { $effect } = this
+    const clientWidth = document.documentElement.clientWidth
+    const $ball = document.createElement('div')
+    $effect.appendChild($ball)
+    $ball.classList = 'soccer'
+
+    dynamics.animate($ball, {
+      translateY: 519
+    }, {
+      type: dynamics.gravity,
+      duration: 2000,
+      bounciness: 810,
+      elasticity: 300
+    })
+    $ball.style.left = `${clientWidth + 160}px`
+    await waiter(1000)
+    $effect.removeChild($ball)
   }
 
   render () {
@@ -140,8 +163,8 @@ export default class Terminal extends React.Component {
       }
     }
 
-    return (
-      <div className='profile-terminal'>
+    return [
+      <div className='profile-terminal' key='terminal'>
         <div className='header'>
           <i />
           <i />
@@ -158,7 +181,8 @@ export default class Terminal extends React.Component {
             onKeyUp={e => this.keyupHandle(e)}
           />
         </div>
-      </div>
-    )
+      </div>,
+      <div className='profile-effect' key='effect' ref={node => { this.$effect = node }} />
+    ]
   }
 }
