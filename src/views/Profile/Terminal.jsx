@@ -95,19 +95,19 @@ export default class Terminal extends React.Component {
     const { $effect } = this
     const clientWidth = document.documentElement.clientWidth
     const $ball = document.createElement('div')
+    $ball.className = 'soccer'
     $effect.appendChild($ball)
-    $ball.classList = 'soccer'
 
     dynamics.animate($ball, {
       translateY: 519
     }, {
       type: dynamics.gravity,
-      duration: 2000,
-      bounciness: 810,
-      elasticity: 300
+      duration: 3000,
+      bounciness: 950,
+      elasticity: 700
     })
     $ball.style.left = `${clientWidth + 160}px`
-    await waiter(1000)
+    await waiter(3000)
     $effect.removeChild($ball)
   }
 

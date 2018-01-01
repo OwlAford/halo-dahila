@@ -17,9 +17,8 @@ import Note from 'bundle-loader?lazy&name=note!../Note'
 @withRouter
 
 @inject(stores => {
-  const { home: { is2rdScreen } } = stores
   return {
-    is2rdScreen
+    bannerDarkHandle: state => stores.home.bannerDarkHandle(state)
   }
 })
 
@@ -28,7 +27,6 @@ class Content extends React.Component {
   @observable scrollable = true // 测试
   @observable cricleState = 'hide'
   @observable avatarState = 'hide'
-  @observable darkState = false
   @observable musicReady = false
   @observable isPlaying = false
 
@@ -144,7 +142,7 @@ class Content extends React.Component {
     await waiter(1000)
     this.cricleState = 'hide'
     this.avatarState = 'run'
-    this.darkState = true
+    this.props.bannerDarkHandle(true)
     await waiter(1000)
     this.avatarState = 'up'
     await waiter(300)
@@ -185,21 +183,9 @@ class Content extends React.Component {
     }]
 
     return (
-      <div
-        className={classNames({
-          'home-content': true,
-          'dark': this.darkState && !this.props.is2rdScreen
-        })}
-      >
+      <div className='home-content'>
         <canvas className='tween' ref={node => { this.$tween = node }} />
         <div className='content-banner' ref={node => { this.$banner = node }}>
-          <div
-            className={classNames({
-              'app-logo': true,
-              'running': this.darkState
-            })}
-          />
-          <div className='app-brand halofont'>Halo</div>
           <div
             className={classNames({
               'circleLoop': true,

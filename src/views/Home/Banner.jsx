@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { observer, inject } from 'mobx-react'
+import classNames from 'classnames'
 import './scss/banner.scss'
 import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
@@ -12,7 +13,10 @@ import originImage from './images/bg-city.jpg'
 @withRouter
 
 @inject(stores => {
+  const { home: { is2rdScreen, bannerDarkState } } = stores
   return {
+    is2rdScreen,
+    bannerDarkState,
     isNearBottomHandle: state => stores.home.isNearBottomHandle(state),
     is2rdScreenHandle: state => stores.home.is2rdScreenHandle(state)
   }
@@ -141,8 +145,8 @@ class Banner extends React.Component {
   }
 
   render () {
-    return (
-      <div className='home-banner' ref={node => { this.$banner = node }}>
+    return [
+      <div key='banner' className='home-banner' ref={node => { this.$banner = node }}>
         <canvas
           className='originCanvas'
           ref={node => { this.$originCanvas = node }}
@@ -161,8 +165,23 @@ class Banner extends React.Component {
           src={originImage}
           ref={node => { this.$originImage = node }}
         />
-      </div>
-    )
+      </div>,
+      <div
+        key='home-mask'
+        className={classNames({
+          'home-mask': true,
+          'dark': !this.props.is2rdScreen && this.props.bannerDarkState
+        })}
+      />,
+      <div
+        key='app-logo'
+        className={classNames({
+          'app-logo': true,
+          'running': this.props.bannerDarkState
+        })}
+      />,
+      <div key='app-brand' className='app-brand halofont'>Halo</div>
+    ]
   }
 }
 

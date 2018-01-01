@@ -23,3 +23,43 @@
     transition: opacity .3s;
   }
 }
+
+.app-logo {
+  height: 42px;
+  width: 42px;
+  background-size: 42px 42px;
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  
+  &.running {
+    &:after {
+      animation: triangleRotate ease-in-out 3s;
+    }
+  }
+}
+
+.app-brand {
+  height: 42px;
+  line-height: 42px;
+  color: #fff;
+  font-size: 28px;
+  position: absolute;
+  left: 84px;
+  top: 30px;
+}
+
+.home-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.72);
+  opacity: 0;
+  transition: opacity .8s;
+
+  &.dark {
+    opacity: 1;
+  }
+}

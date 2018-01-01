@@ -109,6 +109,7 @@
     top: -80px;
     background: url(../images/soccer.png) no-repeat;
     background-size: 100% auto;
-    transition: left 2s ease-out;
+    transition: left 3s ease-out;
+    z-index: 99;
   }
 }
