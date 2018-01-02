@@ -2,6 +2,8 @@
   "globals": {
     "axios": true,
     "echarts": true,
-    "WaveSurfer": true
+    "StackBlur": true,
+    "WaveSurfer": true,
+    "dynamics": true
   }
 }

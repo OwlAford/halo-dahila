@@ -1,5 +1,5 @@
 import qs from 'qs'
-import axios from 'axios'
+// import axios from 'axios'
 import { getCookie, setCookie } from './cookie'
 import { serverRootPath, routeRootPath, routeLoginPath } from '~/constants/config'
 
