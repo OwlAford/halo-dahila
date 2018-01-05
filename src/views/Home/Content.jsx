@@ -9,7 +9,7 @@ import { waiter } from '~/libs/tools'
 import initTween from '~/libs/tween'
 import './scss/content.scss'
 import avatar from './images/avatar.jpg'
-import cover from './images/cover.jpg'
+// import cover from './images/cover.jpg'
 import { getBumper } from '^/Bumper'
 import Profile from 'bundle-loader?lazy&name=profile!../Profile'
 import Note from 'bundle-loader?lazy&name=note!../Note'
@@ -29,10 +29,34 @@ class Content extends React.Component {
   @observable avatarState = 'hide'
   @observable musicReady = false
   @observable isPlaying = false
+  @observable loadingProgress = 0
+  @observable currentMusic = null
+
+  authorName = 'Aford'
+  mottoWord = '谁终将声震人间，必长久深自缄默；谁终将点燃闪电，必长久如云漂泊'
+
+  musicPlayList = [{
+    name: 'Viva La Vida',
+    file: 'http://7u2kad.com1.z0.glb.clouddn.com/Coldplay%20-%20Viva%20la%20Vida.mp3',
+    cover: 'http://7u2kad.com1.z0.glb.clouddn.com/viva_la_vida.jpg'
+  }, {
+    name: 'Forever Starts Tonight',
+    file: 'http://7u2kad.com1.z0.glb.clouddn.com/TylerWard-ForeverStartsTonight.mp3',
+    cover: 'http://7u2kad.com1.z0.glb.clouddn.com/forever_starts_tonight.jpg'
+  }]
 
   componentWillMount () {
+    const list = this.musicPlayList
+    const len = list.length
+    const randomNum = Math.round(Math.random() * (len - 1))
+    this.currentMusic = list[randomNum]
     this.clientH = document.documentElement.clientHeight
     this.clientW = document.documentElement.clientWidth
+  }
+
+  @action
+  setLoadingProgress (val) {
+    this.loadingProgress = Number(val)
   }
 
   @action
@@ -119,22 +143,33 @@ class Content extends React.Component {
     }
   }
 
-  @action
-  async componentDidMount () {
+  initMusicPlayer (id, file) {
     const wavesurfer = this.wavesurfer = WaveSurfer.create({
-      container: '#music',
+      container: id,
       waveColor: 'rgba(255, 255, 255, 0.2)',
       progressColor: 'rgba(255, 255, 255, 0.8)',
       height: 64,
       backend: 'MediaElement'
     })
-    wavesurfer.load('http://7u2kad.com1.z0.glb.clouddn.com/Coldplay%20-%20Viva%20la%20Vida.mp3')
+    wavesurfer.load(file)
+
+    wavesurfer.on('loading', e => {
+      this.setLoadingProgress(e)
+    })
 
     wavesurfer.on('ready', () => {
       this.musicReady = true
       this.initVolumeScroller(75)
     })
 
+    wavesurfer.on('finish', () => {
+      this.isPlaying = false
+    })
+  }
+
+  @action
+  async componentDidMount () {
+    this.initMusicPlayer('#music', this.currentMusic.file)
     this.$menu.style.width = `${this.clientW}px`
     this.$banner.style.height = `${this.clientH}px`
     await waiter(1500)
@@ -221,7 +256,7 @@ class Content extends React.Component {
                 'album': true,
                 'playing': this.isPlaying
               })}>
-                <img src={cover} alt='album cover' width='120' height='120' />
+                <img src={this.currentMusic.cover} alt='album cover' width='120' height='120' />
               </div>
             </div>
             <div
@@ -230,11 +265,15 @@ class Content extends React.Component {
                 'show': this.avatarState === 'up'
               })}
             >
-              <div className='userName halofont'>{this.isPlaying ? 'Viva La Vida' : 'Aford'}</div>
+              <div className='userName halofont'>
+                {
+                  this.isPlaying
+                    ? this.currentMusic.name
+                    : this.authorName
+                }
+              </div>
               {
-                this.isPlaying
-                  ? null
-                  : <div className='motto'>谁终将声震人间，必长久深自缄默；谁终将点燃闪电，必长久如云漂泊</div>
+                !this.isPlaying && <div className='motto'>{this.mottoWord}</div>
               }
             </div>
           </div>
@@ -283,7 +322,8 @@ class Content extends React.Component {
               onClick={e => this.musicHandle()}
             />
             <div className='cover'>
-              <img src={cover} width='100%' alt='viva la vida' />
+              <img src={this.currentMusic.cover} width='100%' alt='viva la vida' />
+              <div className='progress' style={{ height: `${100 - this.loadingProgress}%` }} />
             </div>
           </div>
           <div
@@ -292,6 +332,8 @@ class Content extends React.Component {
               'upper': this.clientH < 620,
               'show': this.avatarState === 'up' && this.musicReady
             })}
+            onMouseDown={e => this.mousedownHandle(e)}
+            onMouseMove={e => this.mousemoveHandle(e)}
           >
             {
               (new Array(21)).fill(0).map((e, i) => {
