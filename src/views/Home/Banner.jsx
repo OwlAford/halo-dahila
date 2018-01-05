@@ -17,6 +17,7 @@ import originImage from './images/bg-city.jpg'
   return {
     is2rdScreen,
     bannerDarkState,
+    bannerDarkHandle: state => stores.home.bannerDarkHandle(state),
     isNearBottomHandle: state => stores.home.isNearBottomHandle(state),
     is2rdScreenHandle: state => stores.home.is2rdScreenHandle(state)
   }
@@ -32,6 +33,7 @@ class Banner extends React.Component {
   componentWillMount () {
     this.clientH = document.documentElement.clientHeight
     this.clientW = document.documentElement.clientWidth
+    this.props.bannerDarkHandle(false)
 
     const refresh = () => {
       this.props.history.push('/')

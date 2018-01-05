@@ -4,6 +4,7 @@ import { observer } from 'mobx-react'
 import classNames from 'classnames'
 // import dynamics from 'dynamics.js'
 import { waiter } from '~/libs/tools'
+import Payload from './Payload'
 import './scss/terminal.scss'
 
 @observer
@@ -25,6 +26,7 @@ export default class Terminal extends React.Component {
       [
         '对视觉设计相关事物感兴趣，包括平面设计、插画、UI设计、用户体验设计',
         '对书法有浓烈兴趣，喜欢书法大家赵孟頫的作品',
+        '业余喜欢摄影，水平不高，自娱自乐',
         '热爱维修，包括但不限于家电、电子设备、生活用具',
         '对编程有执着的热情，有代码强迫症，不能接受奇怪的变量命令和随意的缩进'
       ],
@@ -164,23 +166,26 @@ export default class Terminal extends React.Component {
     }
 
     return [
-      <div className='profile-terminal' key='terminal'>
-        <div className='header'>
-          <i />
-          <i />
-          <i />
+      <div className='grid' key='grid'>
+        <div className='profile-terminal' key='terminal'>
+          <div className='header'>
+            <i />
+            <i />
+            <i />
+          </div>
+          <div className='content'>
+            <div className='inner'>{renderTerminal()}</div>
+            <textarea
+              className='inputArea'
+              name='user_input'
+              ref={node => { this.$textArea = node }}
+              onClick={e => this.setFocusState(true)}
+              onBlur={e => this.setFocusState(false)}
+              onKeyUp={e => this.keyupHandle(e)}
+            />
+          </div>
         </div>
-        <div className='content'>
-          <div className='inner'>{renderTerminal()}</div>
-          <textarea
-            className='inputArea'
-            name='user_input'
-            ref={node => { this.$textArea = node }}
-            onClick={e => this.setFocusState(true)}
-            onBlur={e => this.setFocusState(false)}
-            onKeyUp={e => this.keyupHandle(e)}
-          />
-        </div>
+        <Payload option={this.applySelected} />
       </div>,
       <div className='profile-effect' key='effect' ref={node => { this.$effect = node }} />
     ]

@@ -26,9 +26,7 @@ const Profile = () => (
     </div>
     <div className='card'>
       <h1>ABOUT ME / <span>everything about me</span></h1>
-      <div className='grid'>
-        <Terminal />
-      </div>
+      <Terminal />
     </div>
   </div>
 )

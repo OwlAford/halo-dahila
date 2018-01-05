@@ -1,0 +1,50 @@
+.terminal-payload {
+  width: 630px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .poetry {
+    color: #444;
+    width: 470px;
+    padding: 0 15px;
+
+    h2.title {
+      text-align: center;
+      font-size: 24px;
+    }
+
+    h3.author {
+      font-size: 13px;
+      font-style: italic;
+      text-align: center;
+    }
+    
+    .content {
+      margin-bottom: 30px;
+
+      p {
+        
+        &.quota {
+          color: #999;
+          line-height: 1.5;
+          padding: 15px 20px;
+          border-left: 4px solid #82C7B0;
+        }
+      }
+    }
+  }
+
+  .pic {
+    width: 147px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -10px rgba(0, 0, 0, .4);
+    
+    img {
+      display: block;
+      border-radius: 6px;
+    }
+  }
+
+}
