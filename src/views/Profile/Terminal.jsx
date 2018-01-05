@@ -20,7 +20,8 @@ export default class Terminal extends React.Component {
     list: [
       '⚽ 感兴趣和擅长的事情',
       '🎻 喜欢的音乐类型',
-      '🍳 喜欢的食物'
+      '🍳 喜欢的食物',
+      '🎥 喜欢的影视剧'
     ],
     details: [
       [
@@ -43,6 +44,13 @@ export default class Terminal extends React.Component {
         '最喜欢的菜除了妈妈做的家常菜',
         '就要数烤鱼、香锅、烧烤',
         '晚上大排档撸个串，美滋滋'
+      ],
+      [
+        '喜欢动作类、科幻类爆米花大片',
+        '对宇宙类电影尤其感兴趣',
+        '喜欢节奏简明欢快的日剧，场面宏大的美剧和制作精良的英剧',
+        '偶尔也看肥皂剧、情景喜剧',
+        '现在更爱上B站看影评短视频'
       ]
     ]
   }
@@ -166,8 +174,9 @@ export default class Terminal extends React.Component {
     }
 
     return [
-      <div className='grid' key='grid'>
-        <div className='profile-terminal' key='terminal'>
+      <div className='profile-terminal' key='grid'>
+        <h1>ABOUT ME / <span>everything about me</span></h1>
+        <div className='terminal' key='terminal'>
           <div className='header'>
             <i />
             <i />
@@ -185,9 +194,9 @@ export default class Terminal extends React.Component {
             />
           </div>
         </div>
-        <Payload option={this.applySelected} />
       </div>,
-      <div className='profile-effect' key='effect' ref={node => { this.$effect = node }} />
+      <div className='profile-effect' key='effect' ref={node => { this.$effect = node }} />,
+      <Payload key='payload' option={this.applySelected} />
     ]
   }
 }

@@ -169,14 +169,14 @@ class Content extends React.Component {
       label: 'NOTE',
       path: '/home/note'
     }, {
-      label: 'ART',
-      path: '/home/art'
+      label: 'DESIGN',
+      path: '/home/design'
     }, {
-      label: 'SHOT',
-      path: '/home/shot'
+      label: 'SHOOT',
+      path: '/home/shoot'
     }, {
-      label: 'SITE',
-      path: '/home/site'
+      label: 'WEBSITE',
+      path: '/home/website'
     }, {
       label: 'TALK',
       path: '/home/talk'

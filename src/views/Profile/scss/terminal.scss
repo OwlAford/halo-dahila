@@ -8,97 +8,103 @@
 }
 
 .profile-terminal {
-  width: 480px;
-  overflow: hidden;
-  border-radius: 5px;
-  box-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.64);
-  
-  .header {
-    width: 100%;
-    height: 24px;
-    background-color: #d7d7d7;
-    box-sizing: border-box;
-    padding: 0 6px;
-    line-height: 24px;
+  padding: 0 30px 40px;
+  background-color: #fff;
 
-    i {
-      display: inline-block;
-      height: 9px;
-      width: 9px;
-      border-radius: 100%;
-      background-color: #c23824;
-      vertical-align: middle;
-      margin: 0 3px;
-
-      &:nth-child(2) {
-        background-color: #f2c600;
-      }
-
-      &:nth-child(3) {
-        background-color: #1aaf5d;
-      }
-    }
-  }
-  
-  .content {
-    height: 360px;
-    background-color: #2b3d50;
-    color: #27d971;
-    font-family: "Source Code Pro";
-    position: relative;
-
-    i.cursor {
-      font-style: normal;
-      padding: 0 2px;
-
-      &.flash {
-        animation: text-flashing .6s infinite;
-      }
-
-      &:after {
-        content: "_"
-      }
-    }
-
-    .inner {
+  .terminal {
+    width: 480px;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.64);
+    
+    .header {
       width: 100%;
-      height: 100%;
+      height: 24px;
+      background-color: #d7d7d7;
       box-sizing: border-box;
-      padding: 5px;
-      line-height: 1.8;
-      overflow: hidden;
-      font-size: 12px;
-
-      p {
-        margin: 0;
-
-        &.gap {
-          margin-top: 16px;
+      padding: 0 6px;
+      line-height: 24px;
+  
+      i {
+        display: inline-block;
+        height: 9px;
+        width: 9px;
+        border-radius: 100%;
+        background-color: #c23824;
+        vertical-align: middle;
+        margin: 0 3px;
+  
+        &:nth-child(2) {
+          background-color: #f2c600;
         }
-
-        &.title {
-          color: #ebc807;
-          margin-bottom: 16px;
+  
+        &:nth-child(3) {
+          background-color: #1aaf5d;
         }
       }
     }
-
-    .inputArea {
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      border: none;
-      outline: none;
-      padding: 0;
-      margin: 0;
-      overflow: hidden;
+    
+    .content {
+      height: 360px;
+      background-color: #2b3d50;
+      color: #27d971;
+      font-family: "Source Code Pro";
+      position: relative;
+  
+      i.cursor {
+        font-style: normal;
+        padding: 0 2px;
+  
+        &.flash {
+          animation: text-flashing .6s infinite;
+        }
+  
+        &:after {
+          content: "_"
+        }
+      }
+  
+      .inner {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 5px;
+        line-height: 1.8;
+        overflow: hidden;
+        font-size: 12px;
+  
+        p {
+          margin: 0;
+  
+          &.gap {
+            margin-top: 16px;
+          }
+  
+          &.title {
+            color: #ebc807;
+            margin-bottom: 16px;
+          }
+        }
+      }
+  
+      .inputArea {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        border: none;
+        outline: none;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+      }
     }
   }
 }
+
 
 .profile-effect {
   .soccer {
