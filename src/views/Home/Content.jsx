@@ -4,11 +4,13 @@ import { Switch, Route, NavLink, Redirect } from 'react-router-dom'
 import { observable, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import classNames from 'classnames'
+import List from './List'
 import Footer from './Footer'
 import { waiter } from '~/libs/tools'
 import initTween from '~/libs/tween'
 import './scss/content.scss'
 import avatar from './images/avatar.jpg'
+import info from './info.json'
 // import cover from './images/cover.jpg'
 import { getBumper } from '^/Bumper'
 import Profile from 'bundle-loader?lazy&name=profile!../Profile'
@@ -30,26 +32,24 @@ class Content extends React.Component {
   @observable musicReady = false
   @observable isPlaying = false
   @observable loadingProgress = 0
-  @observable currentMusic = null
+  @observable currentIndex = 0
+  @observable currentMusic = {
+    name: '',
+    file: '',
+    cover: ''
+  }
 
-  authorName = 'Aford'
-  mottoWord = '谁终将声震人间，必长久深自缄默；谁终将点燃闪电，必长久如云漂泊'
+  authorName = info.author
+  mottoWord = info.motto
+  musicPlayList = info.playlist
+  menuList = info.submenu
 
-  musicPlayList = [{
-    name: 'Viva La Vida',
-    file: 'http://7u2kad.com1.z0.glb.clouddn.com/Coldplay%20-%20Viva%20la%20Vida.mp3',
-    cover: 'http://7u2kad.com1.z0.glb.clouddn.com/viva_la_vida.jpg'
-  }, {
-    name: 'Forever Starts Tonight',
-    file: 'http://7u2kad.com1.z0.glb.clouddn.com/TylerWard-ForeverStartsTonight.mp3',
-    cover: 'http://7u2kad.com1.z0.glb.clouddn.com/forever_starts_tonight.jpg'
-  }]
+  constructor (props) {
+    super(props)
+    this.initMusicPlayer = this.initMusicPlayer.bind(this)
+  }
 
   componentWillMount () {
-    const list = this.musicPlayList
-    const len = list.length
-    const randomNum = Math.round(Math.random() * (len - 1))
-    this.currentMusic = list[randomNum]
     this.clientH = document.documentElement.clientHeight
     this.clientW = document.documentElement.clientWidth
   }
@@ -143,15 +143,21 @@ class Content extends React.Component {
     }
   }
 
-  initMusicPlayer (id, file) {
-    const wavesurfer = this.wavesurfer = WaveSurfer.create({
-      container: id,
-      waveColor: 'rgba(255, 255, 255, 0.2)',
-      progressColor: 'rgba(255, 255, 255, 0.8)',
-      height: 64,
-      backend: 'MediaElement'
-    })
-    wavesurfer.load(file)
+  initMusicPlayer (index) {
+    this.setLoadingProgress(0)
+    this.musicReady = false
+    this.isPlaying = false
+
+    const list = this.musicPlayList
+    if (index === undefined) {
+      index = Math.round(Math.random() * (list.length - 1))
+    }
+    this.currentIndex = index
+    this.currentMusic = list[index]
+
+    const wavesurfer = this.wavesurfer
+
+    wavesurfer.load(this.currentMusic.file)
 
     wavesurfer.on('loading', e => {
       this.setLoadingProgress(e)
@@ -169,9 +175,19 @@ class Content extends React.Component {
 
   @action
   async componentDidMount () {
-    this.initMusicPlayer('#music', this.currentMusic.file)
+    this.wavesurfer = WaveSurfer.create({
+      container: '#music',
+      waveColor: 'rgba(255, 255, 255, 0.2)',
+      progressColor: 'rgba(255, 255, 255, 0.8)',
+      height: 64,
+      backend: 'MediaElement'
+    })
+
+    this.initMusicPlayer(0)
+
     this.$menu.style.width = `${this.clientW}px`
     this.$banner.style.height = `${this.clientH}px`
+
     await waiter(1500)
     this.cricleState = 'run'
     await waiter(1000)
@@ -196,26 +212,12 @@ class Content extends React.Component {
       top: `${this.clientH * 0.4}px`,
       left: `${this.clientW * 0.5}px`
     }
-
-    const menuList = [{
-      label: 'HOME',
-      path: '/home/profile'
-    }, {
-      label: 'NOTE',
-      path: '/home/note'
-    }, {
-      label: 'DESIGN',
-      path: '/home/design'
-    }, {
-      label: 'SHOOT',
-      path: '/home/shoot'
-    }, {
-      label: 'WEBSITE',
-      path: '/home/website'
-    }, {
-      label: 'TALK',
-      path: '/home/talk'
-    }]
+    const musicBox = {
+      play: this.isPlaying,
+      switchMusic: this.initMusicPlayer,
+      index: this.currentIndex,
+      list: this.musicPlayList
+    }
 
     return (
       <div className='home-content'>
@@ -285,7 +287,7 @@ class Content extends React.Component {
             ref={node => { this.$menu = node }}
           >
             {
-              menuList.map((item, i) => {
+              this.menuList.map((item, i) => {
                 return (
                   <NavLink
                     key={i}
@@ -369,6 +371,7 @@ class Content extends React.Component {
             'scrollable': this.scrollable
           })}
         >
+          <List {...musicBox} />
           <div className='content-main'>
             <Switch>
               <Route

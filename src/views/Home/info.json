@@ -1,0 +1,53 @@
+{
+  "author": "Aford",
+  "motto": "谁终将声震人间，必长久深自缄默；谁终将点燃闪电，必长久如云漂泊",
+  "playlist": [
+    {
+    "name": "Viva La Vida",
+    "singer": "Coldplay",
+    "file": "/music/Coldplay-Viva_la_Vida.mp3",
+    "cover": "/music/viva_la_vida.jpg"
+    }, {
+    "name": "Forever Starts Tonight",
+    "singer": "Tyler Ward",
+    "file": "/music/TylerWard-ForeverStartsTonight.mp3",
+    "cover": "/music/forever_starts_tonight.jpg"
+    }, {
+      "name": "Fall In Love",
+      "singer": "德永英明",
+      "file": "/music/fallinlove.mp3",
+      "cover": "/music/fall_in_love.jpg"
+    }, {
+      "name": " Golden Globe Theme",
+      "singer": "Yoshiki",
+      "file": "/music/YOSHIKI-Golden_Globe_Theme.mp3",
+      "cover": "/music/Golden_Globe_Theme.jpg"
+    }
+  ],
+  "submenu": [
+    {
+      "label": "HOME",
+      "path": "/home/profile"
+    },
+    {
+      "label": "NOTE",
+      "path": "/home/note"
+    },
+    {
+      "label": "DESIGN",
+      "path": "/home/design"
+    },
+    {
+      "label": "SHOOT",
+      "path": "/home/shoot"
+    },
+    {
+      "label": "WEBSITE",
+      "path": "/home/website"
+    },
+    {
+      "label": "TALK",
+      "path": "/home/talk"
+    }
+  ]
+}
