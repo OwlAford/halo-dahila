@@ -39,20 +39,22 @@ export default class Footer extends React.Component {
 
   render () {
     return (
-      <div className='home-footer'>
-        <div className='wave' ref={node => { this.$wave = node }} />
-        <div className='text'>
-          <div className='social'>
-            <a className='iconfont' href='https://www.twitter.com/Aford79872215' target='_blank'>&#xe638;</a>
-            <a className='iconfont' href='https://www.instagram.com/owlaford' target='_blank'>&#xe61d;</a>
-            <a className='iconfont' href='https://github.com/OwlAford' target='_blank'>&#xe602;</a>
-          </div>
-          <div className='slogan'>
-            <span>If no necessary, not by entity. </span>
-            <span className='author'>Author @Aford</span>
+      <footer>
+        <div className='home-footer'>
+          <div className='wave' ref={node => { this.$wave = node }} />
+          <div className='text'>
+            <div className='social'>
+              <a className='iconfont' href='https://www.twitter.com/Aford79872215' target='_blank'>&#xe638;</a>
+              <a className='iconfont' href='https://www.instagram.com/owlaford' target='_blank'>&#xe61d;</a>
+              <a className='iconfont' href='https://github.com/OwlAford' target='_blank'>&#xe602;</a>
+            </div>
+            <div className='slogan'>
+              <span>If no necessary, not by entity. </span>
+              <span className='author'>Author @Aford</span>
+            </div>
           </div>
         </div>
-      </div>
+      </footer>
     )
   }
 }

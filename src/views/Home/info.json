@@ -18,10 +18,20 @@
       "file": "/music/fallinlove.mp3",
       "cover": "/music/fall_in_love.jpg"
     }, {
-      "name": " Golden Globe Theme",
+      "name": "Golden Globe Theme",
       "singer": "Yoshiki",
       "file": "/music/YOSHIKI-Golden_Globe_Theme.mp3",
       "cover": "/music/Golden_Globe_Theme.jpg"
+    }, {
+      "name": "Sagan",
+      "singer": "Nightwish",
+      "file": "/music/Nightwish-Sagan.mp3",
+      "cover": "/music/elan.jpg"
+    }, {
+      "name": "Say Anything",
+      "singer": "X Japan",
+      "file": "/music/X-JAPAN-Say_Anything.mp3",
+      "cover": "/music/x-jpan.jpg"
     }
   ],
   "submenu": [

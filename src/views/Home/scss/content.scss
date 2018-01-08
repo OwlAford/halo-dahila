@@ -74,6 +74,7 @@
   .content-banner {
     font-size: 14px;
     height: 500px;
+    transition: height .3s;
     overflow: hidden;
     position: relative;
 
@@ -290,14 +291,24 @@
       }
     }
 
-    #music {
+    .musicPlaceholder {
       width: 900px;
       height: 64px;
       position: absolute;
       left: 50%;
       bottom: 180px;
-      margin-left: -400px;
+      margin-left: -450px;
       z-index: 99;
+    }
+    
+    .musicPlaceholder .app-loading {
+      min-height: 64px;
+      height: 64px;
+    }
+    
+    #music {
+      @extend .musicPlaceholder;
+      margin-left: -400px;
       opacity: 0;
 
       &.show {
@@ -464,6 +475,78 @@
 
     &.scrollable {
       display: block;
+    }
+  }
+
+  .readModeMenu {
+    height: 80px;
+    width: 100%;
+    font-size: 14px;
+    position: relative;
+
+    .inner {
+      width: 100%;
+      height: 60px;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.86);
+      color: #333;
+      box-shadow: 0 6px 18px -5px rgba(0, 0, 0, .2);
+      
+      .midd {
+        width: 1200px;
+        margin: 0 auto;
+        height: 100%;
+        position: relative;
+        padding-left: 60px;
+        box-sizing: border-box;
+      }
+
+      .app-logo {
+        left: 0;
+        top: 12px;
+        height: 36px;
+        width: 36px;
+      }
+
+      a.item {
+        line-height: 60px;
+        display: inline-block;
+        color: #666;
+        margin: 0 20px;
+        text-decoration: none;
+        position: relative;
+
+        &.active {
+          color: #333;
+          font-weight: 700;
+        }
+      }
+      
+      .quitBtn {
+        position: absolute;
+        width: 120px;
+        height: 38px;
+        right: 0;
+        top: 11px;
+        background-color: #ff7373;
+        color: #fff;
+        text-align: center;
+        line-height: 38px;
+        font-size: 13px;
+        z-index: 99;
+        cursor: pointer;
+        border-radius: 19px;
+        box-shadow: 0 10px 28px hsla(0, 100%, 81%, .3);
+        transition: all .3s;
+
+        &:hover {
+          background-color: #ff6153;
+          box-shadow: 0 10px 28px rgba(255, 97, 83, .3);
+        }
+      }
     }
   }
 }

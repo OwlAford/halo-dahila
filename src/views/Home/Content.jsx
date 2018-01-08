@@ -4,6 +4,7 @@ import { Switch, Route, NavLink, Redirect } from 'react-router-dom'
 import { observable, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import classNames from 'classnames'
+import Loading from '^/Loading'
 import List from './List'
 import Footer from './Footer'
 import { waiter } from '~/libs/tools'
@@ -30,9 +31,11 @@ class Content extends React.Component {
   @observable cricleState = 'hide'
   @observable avatarState = 'hide'
   @observable musicReady = false
+  @observable bannerDarkState = false
   @observable isPlaying = false
   @observable loadingProgress = 0
   @observable currentIndex = 0
+  @observable readMode = false
   @observable currentMusic = {
     name: '',
     file: '',
@@ -47,11 +50,20 @@ class Content extends React.Component {
   constructor (props) {
     super(props)
     this.initMusicPlayer = this.initMusicPlayer.bind(this)
+    this.changeReadMode = this.changeReadMode.bind(this)
   }
 
   componentWillMount () {
-    this.clientH = document.documentElement.clientHeight
-    this.clientW = document.documentElement.clientWidth
+    const doc = document.documentElement
+    this.clientH = doc.clientHeight
+    this.clientW = doc.clientWidth
+  }
+
+  @action
+  changeReadMode (state) {
+    this.readMode = state
+    this.isPlaying = false
+    this.wavesurfer.pause()
   }
 
   @action
@@ -157,6 +169,7 @@ class Content extends React.Component {
 
     const wavesurfer = this.wavesurfer
 
+    wavesurfer.empty()
     wavesurfer.load(this.currentMusic.file)
 
     wavesurfer.on('loading', e => {
@@ -186,13 +199,13 @@ class Content extends React.Component {
     this.initMusicPlayer(0)
 
     this.$menu.style.width = `${this.clientW}px`
-    this.$banner.style.height = `${this.clientH}px`
 
     await waiter(1500)
     this.cricleState = 'run'
     await waiter(1000)
     this.cricleState = 'hide'
     this.avatarState = 'run'
+    this.bannerDarkState = true
     this.props.bannerDarkHandle(true)
     await waiter(1000)
     this.avatarState = 'up'
@@ -216,13 +229,46 @@ class Content extends React.Component {
       play: this.isPlaying,
       switchMusic: this.initMusicPlayer,
       index: this.currentIndex,
-      list: this.musicPlayList
+      list: this.musicPlayList,
+      changeMode: this.changeReadMode,
+      readMode: this.readMode
     }
+
+    const Menu = ({ defaultClass }) => this.menuList.map(
+      (item, i) => (
+        <NavLink
+          key={i}
+          className={defaultClass}
+          exact
+          to={item.path}
+          activeClassName='active'
+        >
+          {item.label}
+        </NavLink>
+      )
+    )
+
+    const couldPlay = this.avatarState === 'up' && this.musicReady
+    const waitPlay = this.avatarState === 'up' && !this.musicReady
 
     return (
       <div className='home-content'>
         <canvas className='tween' ref={node => { this.$tween = node }} />
-        <div className='content-banner' ref={node => { this.$banner = node }}>
+        <div
+          className='content-banner'
+          ref={node => { this.$banner = node }}
+          style={{
+            height: this.readMode ? '0' : `${this.clientH}px`
+          }}
+        >
+          <div
+            key='app-logo'
+            className={classNames({
+              'app-logo': true,
+              'running': this.bannerDarkState
+            })}
+          />
+          <div key='app-brand' className='app-brand halofont'>Halo</div>
           <div
             className={classNames({
               'circleLoop': true,
@@ -286,21 +332,7 @@ class Content extends React.Component {
             })}
             ref={node => { this.$menu = node }}
           >
-            {
-              this.menuList.map((item, i) => {
-                return (
-                  <NavLink
-                    key={i}
-                    className='item halofont'
-                    exact
-                    to={item.path}
-                    activeClassName='active'
-                  >
-                    {item.label}
-                  </NavLink>
-                )
-              })
-            }
+            <Menu defaultClass='item halofont' />
           </div>
           <i
             className={classNames({
@@ -312,7 +344,7 @@ class Content extends React.Component {
           <div
             id='music'
             className={classNames({
-              'show': this.avatarState === 'up' && this.musicReady
+              'show': couldPlay
             })}
           >
             <div
@@ -328,11 +360,14 @@ class Content extends React.Component {
               <div className='progress' style={{ height: `${100 - this.loadingProgress}%` }} />
             </div>
           </div>
+          {
+            waitPlay && <div className='musicPlaceholder'><Loading /></div>
+          }
           <div
             className={classNames({
               'calibration': true,
               'upper': this.clientH < 620,
-              'show': this.avatarState === 'up' && this.musicReady
+              'show': couldPlay
             })}
             onMouseDown={e => this.mousedownHandle(e)}
             onMouseMove={e => this.mousemoveHandle(e)}
@@ -347,7 +382,7 @@ class Content extends React.Component {
             className={classNames({
               'volume': true,
               'upper': this.clientH < 620,
-              'show': this.avatarState === 'up' && this.musicReady
+              'show': couldPlay
             })}
             onMouseDown={e => this.mousedownHandle(e)}
             onMouseMove={e => this.mousemoveHandle(e)}
@@ -370,8 +405,29 @@ class Content extends React.Component {
             'content-wrap': true,
             'scrollable': this.scrollable
           })}
+          style={{
+            minHeight: `${this.clientH}px`
+          }}
         >
           <List {...musicBox} />
+          {
+            this.readMode && (
+              <div className='readModeMenu'>
+                <div className='inner'>
+                  <div className='midd'>
+                    <div className='app-logo' />
+                    <Menu defaultClass='item' />
+                    <div
+                      className='quitBtn'
+                      onClick={e => { this.changeReadMode(false) }}
+                    >
+                      退出阅读模式
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+          }
           <div className='content-main'>
             <Switch>
               <Route

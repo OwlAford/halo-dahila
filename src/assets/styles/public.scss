@@ -75,6 +75,21 @@ body {
   &:lang(zh-CN) {
     font-family: "SF Pro SC", "SF Pro Text", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   }
+
+  &::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .16);
+    background-clip: padding-box;
+    border: 3px solid #eff4f8;
+    border-radius: 7px;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background-color: #eff4f8;
+  }
 }
 
 .gitfont {

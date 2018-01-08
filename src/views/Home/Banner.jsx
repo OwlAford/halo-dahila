@@ -31,8 +31,9 @@ class Banner extends React.Component {
   }
 
   componentWillMount () {
-    this.clientH = document.documentElement.clientHeight
-    this.clientW = document.documentElement.clientWidth
+    const doc = document.documentElement
+    this.clientH = doc.clientHeight
+    this.clientW = doc.clientWidth
     this.props.bannerDarkHandle(false)
 
     const refresh = () => {
@@ -174,15 +175,7 @@ class Banner extends React.Component {
           'home-mask': true,
           'dark': !this.props.is2rdScreen && this.props.bannerDarkState
         })}
-      />,
-      <div
-        key='app-logo'
-        className={classNames({
-          'app-logo': true,
-          'running': this.props.bannerDarkState
-        })}
-      />,
-      <div key='app-brand' className='app-brand halofont'>Halo</div>
+      />
     ]
   }
 }
