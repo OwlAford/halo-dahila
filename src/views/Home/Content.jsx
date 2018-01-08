@@ -51,6 +51,7 @@ class Content extends React.Component {
     super(props)
     this.initMusicPlayer = this.initMusicPlayer.bind(this)
     this.changeReadMode = this.changeReadMode.bind(this)
+    this.musicHandle = this.musicHandle.bind(this)
   }
 
   componentWillMount () {
@@ -155,7 +156,7 @@ class Content extends React.Component {
     }
   }
 
-  initMusicPlayer (index) {
+  initMusicPlayer (index, auto) {
     this.setLoadingProgress(0)
     this.musicReady = false
     this.isPlaying = false
@@ -184,6 +185,8 @@ class Content extends React.Component {
     wavesurfer.on('finish', () => {
       this.isPlaying = false
     })
+
+    auto && this.musicHandle()
   }
 
   @action
@@ -231,7 +234,8 @@ class Content extends React.Component {
       index: this.currentIndex,
       list: this.musicPlayList,
       changeMode: this.changeReadMode,
-      readMode: this.readMode
+      readMode: this.readMode,
+      musicHandle: this.musicHandle
     }
 
     const Menu = ({ defaultClass }) => this.menuList.map(

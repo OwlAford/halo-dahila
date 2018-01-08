@@ -5,6 +5,7 @@ import './scss/list.scss'
 export default class List extends React.Component {
   $items = []
   $canvas = []
+  currentIndex = null
 
   mouseoverHandle (i) {
     const $item = this.$items[i]
@@ -16,6 +17,16 @@ export default class List extends React.Component {
     $item.className = 'item out-right'
   }
 
+  playHandle (i) {
+    const { switchMusic, musicHandle } = this.props
+    if (this.currentIndex === i) {
+      musicHandle()
+    } else {
+      switchMusic(i, true)
+      this.currentIndex = i
+    }
+  }
+
   loadHandle (e, i) {
     const $img = e.target
     const $cav = this.$canvas[i]
@@ -25,7 +36,7 @@ export default class List extends React.Component {
   }
 
   render () {
-    const { list, index, play, switchMusic, changeMode, readMode } = this.props
+    const { list, index, play, changeMode, readMode, musicHandle } = this.props
     return (
       <div
         className={
@@ -56,13 +67,17 @@ export default class List extends React.Component {
                     </div>
                     <div className='title'>
                       <canvas width='160' height='160' ref={node => { this.$canvas[i] = node }} />
-                      <div
-                        className={classNames({
-                          'iconfont': true,
-                          'pause': index === i && play
-                        })}
-                        onClick={e => { switchMusic(i) }}
-                      />
+                      {
+                        index === i && play
+                          ? <div
+                            className='iconfont pause'
+                            onClick={e => { musicHandle() }}
+                          />
+                          : <div
+                            className='iconfont'
+                            onClick={e => { this.playHandle(i) }}
+                          />
+                      }
                     </div>
                   </div>
                 </div>
