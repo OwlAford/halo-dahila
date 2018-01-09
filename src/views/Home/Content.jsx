@@ -265,142 +265,144 @@ class Content extends React.Component {
             height: this.readMode ? '0' : `${this.clientH}px`
           }}
         >
-          <div
-            key='app-logo'
-            className={classNames({
-              'app-logo': true,
-              'running': this.bannerDarkState
-            })}
-          />
-          <div key='app-brand' className='app-brand halofont'>Halo</div>
-          <div
-            className={classNames({
-              'circleLoop': true,
-              'hide': this.cricleState === 'hide',
-              'running': this.cricleState === 'run'
-            })}
-            style={middStyle}
-          />
-          <div
-            style={middStyle}
-            className={classNames({
-              'avatar': true,
-              'hide': this.avatarState === 'hide',
-              'upper': this.avatarState === 'up',
-              'running': this.avatarState === 'run'
-            })}
-          >
-            <div className='wrap'>
-              <div
-                className={classNames({
-                  'halo': true,
-                  'show': this.avatarState === 'up',
-                  'playing': this.isPlaying
-                })}
-              />
-              <div className={classNames({
-                'imgr': true,
-                'fire': this.avatarState === 'run'
-              })}>
-                <img src={avatar} alt='avatar' width='120' height='120' />
-              </div>
-              <div className={classNames({
-                'album': true,
-                'playing': this.isPlaying
-              })}>
-                <img src={this.currentMusic.cover} alt='album cover' width='120' height='120' />
-              </div>
-            </div>
+          <div className='banner-inner' style={{ height: `${this.clientH}px` }}>
+            <div
+              key='app-logo'
+              className={classNames({
+                'app-logo': true,
+                'running': this.bannerDarkState
+              })}
+            />
+            <div key='app-brand' className='app-brand halofont'>Halo</div>
             <div
               className={classNames({
-                'textNode': true,
-                'show': this.avatarState === 'up'
+                'circleLoop': true,
+                'hide': this.cricleState === 'hide',
+                'running': this.cricleState === 'run'
+              })}
+              style={middStyle}
+            />
+            <div
+              style={middStyle}
+              className={classNames({
+                'avatar': true,
+                'hide': this.avatarState === 'hide',
+                'upper': this.avatarState === 'up',
+                'running': this.avatarState === 'run'
               })}
             >
-              <div className='userName halofont'>
+              <div className='wrap'>
+                <div
+                  className={classNames({
+                    'halo': true,
+                    'show': this.avatarState === 'up',
+                    'playing': this.isPlaying
+                  })}
+                />
+                <div className={classNames({
+                  'imgr': true,
+                  'fire': this.avatarState === 'run'
+                })}>
+                  <img src={avatar} alt='avatar' width='120' height='120' />
+                </div>
+                <div className={classNames({
+                  'album': true,
+                  'playing': this.isPlaying
+                })}>
+                  <img src={this.currentMusic.cover} alt='album cover' width='120' height='120' />
+                </div>
+              </div>
+              <div
+                className={classNames({
+                  'textNode': true,
+                  'show': this.avatarState === 'up'
+                })}
+              >
+                <div className='userName halofont'>
+                  {
+                    this.isPlaying
+                      ? this.currentMusic.name
+                      : this.authorName
+                  }
+                </div>
                 {
-                  this.isPlaying
-                    ? this.currentMusic.name
-                    : this.authorName
+                  !this.isPlaying && <div className='motto'>{this.mottoWord}</div>
                 }
               </div>
-              {
-                !this.isPlaying && <div className='motto'>{this.mottoWord}</div>
-              }
             </div>
-          </div>
-          <div
-            className={classNames({
-              'menu': true,
-              'show': this.avatarState === 'up'
-            })}
-            ref={node => { this.$menu = node }}
-          >
-            <Menu defaultClass='item halofont' />
-          </div>
-          <i
-            className={classNames({
-              'iconfont': true,
-              'arrowDown': true,
-              'show': this.scrollable
-            })}
-          >&#xe608;</i>
-          <div
-            id='music'
-            className={classNames({
-              'show': couldPlay
-            })}
-          >
             <div
               className={classNames({
-                'musicControl': true,
-                'pause': this.isPlaying,
-                'right': this.clientH < 620
+                'menu': true,
+                'show': this.avatarState === 'up'
               })}
-              onClick={e => this.musicHandle()}
-            />
-            <div className='cover'>
-              <img src={this.currentMusic.cover} width='100%' alt='viva la vida' />
-              <div className='progress' style={{ height: `${100 - this.loadingProgress}%` }} />
+              ref={node => { this.$menu = node }}
+            >
+              <Menu defaultClass='item halofont' />
             </div>
-          </div>
-          {
-            waitPlay && <div className='musicPlaceholder'><Loading /></div>
-          }
-          <div
-            className={classNames({
-              'calibration': true,
-              'upper': this.clientH < 620,
-              'show': couldPlay
-            })}
-            onMouseDown={e => this.mousedownHandle(e)}
-            onMouseMove={e => this.mousemoveHandle(e)}
-          >
+            <i
+              className={classNames({
+                'iconfont': true,
+                'arrowDown': true,
+                'show': this.scrollable
+              })}
+            >&#xe608;</i>
+            <div
+              id='music'
+              className={classNames({
+                'show': couldPlay
+              })}
+            >
+              <div
+                className={classNames({
+                  'musicControl': true,
+                  'pause': this.isPlaying,
+                  'right': this.clientH < 620
+                })}
+                onClick={e => this.musicHandle()}
+              />
+              <div className='cover'>
+                <img src={this.currentMusic.cover} width='100%' alt='viva la vida' />
+                <div className='progress' style={{ height: `${100 - this.loadingProgress}%` }} />
+              </div>
+            </div>
             {
-              (new Array(21)).fill(0).map((e, i) => {
-                return i === 10 ? <i key={i} className='long' /> : <i key={i} />
-              })
+              waitPlay && <div className='musicPlaceholder'><Loading /></div>
             }
-          </div>
-          <div
-            className={classNames({
-              'volume': true,
-              'upper': this.clientH < 620,
-              'show': couldPlay
-            })}
-            onMouseDown={e => this.mousedownHandle(e)}
-            onMouseMove={e => this.mousemoveHandle(e)}
-          >
-            <div className='scroller' ref={node => { this.$scroller = node }}>
+            <div
+              className={classNames({
+                'calibration': true,
+                'upper': this.clientH < 620,
+                'show': couldPlay
+              })}
+              onMouseDown={e => this.mousedownHandle(e)}
+              onMouseMove={e => this.mousemoveHandle(e)}
+            >
               {
-                (new Array(101)).fill(0).map((e, num) => {
-                  if (num !== 0 && num % 5) {
-                    return null
-                  }
-                  num > 9 ? num = String(num) : num = '0' + num
-                  return <div className='num' key={num}>{num}</div>
+                (new Array(21)).fill(0).map((e, i) => {
+                  return i === 10 ? <i key={i} className='long' /> : <i key={i} />
                 })
               }
+            </div>
+            <div
+              className={classNames({
+                'volume': true,
+                'upper': this.clientH < 620,
+                'show': couldPlay
+              })}
+              onMouseDown={e => this.mousedownHandle(e)}
+              onMouseMove={e => this.mousemoveHandle(e)}
+            >
+              <div className='scroller' ref={node => { this.$scroller = node }}>
+                {
+                  (new Array(101)).fill(0).map((e, num) => {
+                    if (num !== 0 && num % 5) {
+                      return null
+                    }
+                    num > 9 ? num = String(num) : num = '0' + num
+                    return <div className='num' key={num}>{num}</div>
+                  })
+                }
+              </div>
             </div>
           </div>
         </div>

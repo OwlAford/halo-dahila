@@ -1,3 +1,90 @@
 .home-note {
+  width: 1200px;
+  margin: 0 auto;
+  font-size: 14px;
 
+  .note-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .note-item {
+    width: 592px;
+    height: 250px;
+    background-color: #fff;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+    .title {
+      padding: 15px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      border-bottom: 1px solid #f4f4f4;
+      position: relative;
+      cursor: default;
+
+      .more {
+        height: 54px;
+        width: 54px;
+        line-height: 54px;
+        text-align: center;
+        font-size: 16px;
+        color: #bbb;
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: block;
+        font-weight: normal;
+        cursor: pointer;
+
+        &:hover {
+          color: #666;
+        }
+      }
+    }
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 15px 20px 25px;
+      position: relative;
+
+      .thumb {
+        height: 160px;
+        width: 160px;
+        flex-grow: 0;
+        flex-shrink: 0;
+
+        img {
+          display: block;
+          height: 100%;
+          width: 100%;
+        }
+      }
+
+      .preview {
+        padding-left: 15px;
+        line-height: 1.5;
+        color: #666;
+      }
+
+      .timestamp {
+        position: absolute;
+        right: 20px;
+        bottom: 25px;
+        color: #bbb;
+        font-size: 13px;
+
+        i {
+          font-size: 16px;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
 }
