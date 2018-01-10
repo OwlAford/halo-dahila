@@ -10,7 +10,6 @@ import { waiter } from '~/libs/tools'
 import initTween from '~/libs/tween'
 import avatar from './images/avatar.jpg'
 import info from './info.json'
-// import cover from './images/cover.jpg'
 
 @withRouter
 
@@ -24,7 +23,7 @@ import info from './info.json'
 })
 
 @observer
-class Music extends React.Component {
+export default class Music extends React.Component {
   @observable cricleState = 'hide'
   @observable avatarState = 'hide'
   @observable musicReady = false
@@ -438,5 +437,3 @@ class Music extends React.Component {
     ]
   }
 }
-
-export default Music
