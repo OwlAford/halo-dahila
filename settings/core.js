@@ -18,7 +18,9 @@ module.exports = {
     extJS: [
       'https://cdn.bootcss.com/es5-shim/4.5.10/es5-shim.min.js',
       'https://cdn.bootcss.com/es6-shim/0.35.3/es6-shim.min.js',
-      'https://cdn.bootcss.com/axios/0.17.1/axios.min.js',
+      // 'https://cdn.bootcss.com/axios/0.17.1/axios.min.js',
+      'https://cdn.wilddog.com/sdk/js/2.5.17/wilddog-sync.js',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js',
       'https://cdn.bootcss.com/stackblur-canvas/1.4.0/stackblur.min.js',
       'http://plug.qiniudn.com/TweenLite.min.js',
       'http://plug.qiniudn.com/EasePack.min.js',
@@ -26,7 +28,8 @@ module.exports = {
       'https://cdn.bootcss.com/dynamics.js/1.1.5/dynamics.min.js'
     ],
     extCSS: [
-      'https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css'
+      'https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
     ],
     jsHashType: 'chunkhash:8',
     cssHashType: 'contenthash:8',
@@ -53,7 +56,9 @@ module.exports = {
     extJS: [
       'https://cdn.bootcss.com/es5-shim/4.5.10/es5-shim.min.js',
       'https://cdn.bootcss.com/es6-shim/0.35.3/es6-shim.min.js',
-      'https://cdn.bootcss.com/axios/0.17.1/axios.min.js',
+      // 'https://cdn.bootcss.com/axios/0.17.1/axios.min.js',
+      'https://cdn.wilddog.com/sdk/js/2.5.17/wilddog-sync.js',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js',
       'https://cdn.bootcss.com/stackblur-canvas/1.4.0/stackblur.min.js',
       'http://plug.qiniudn.com/TweenLite.min.js',
       'http://plug.qiniudn.com/EasePack.min.js',
@@ -61,16 +66,17 @@ module.exports = {
       'https://cdn.bootcss.com/dynamics.js/1.1.5/dynamics.min.js'
     ],
     extCSS: [
-      'https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css'
+      'https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
     ],
     publicPath: '/',
     projectName: 'HALO - Carpe Diem',
     checkVersions: true,
     proxyTable: {
-      '/inmanage': {
-        target: 'https://flameapp.cn',
-        changeOrigin: true
-      },
+      // '/inmanage': {
+      //   target: 'https://flameapp.cn',
+      //   changeOrigin: true
+      // },
       '/music': {
         target: 'http://yuis.qiniudn.com',
         changeOrigin: true

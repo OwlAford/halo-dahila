@@ -71,16 +71,16 @@
     top: 0;
   }
 
-  .content-banner {
-    font-size: 14px;
-    height: 500px;
+  .musciBox {
     transition: height .3s;
     overflow: hidden;
+  }
 
-    .banner-inner {
-      width: 100%;
-      position: relative;
-    }
+  .content-banner {
+    font-size: 14px;
+    min-height: 500px;
+    width: 100%;
+    position: relative;
 
     .circleLoop {
       height: 80px;
@@ -487,6 +487,10 @@
     width: 100%;
     font-size: 14px;
     position: relative;
+
+    &.hide {
+      display: none;
+    }
 
     .inner {
       width: 100%;

@@ -1,8 +1,40 @@
 import React from 'react'
+import { computed } from 'mobx'
+import { observer, inject } from 'mobx-react'
+import { timeAgo, limitString } from '~/filters'
+import book from './images/book.svg'
 import './scss/index.scss'
 
+@inject(stores => {
+  const {
+    article: { articleList },
+    home: { isAtBottom }
+  } = stores
+
+  return {
+    isAtBottom,
+    articleList,
+    getArticleList: cb => stores.article.getArticleList(cb)
+  }
+})
+
+@observer
 export default class Note extends React.Component {
-  componentDidMount () {
+  groupIndex = -1
+  group = ~~(document.documentElement.clientHeight / 150)
+
+  @computed get displayList () {
+    this.groupIndex++
+    return this.props.articleList.slice(0, this.group * this.groupIndex)
+  }
+
+  goDetailPage (id) {
+    window.open('/article.html?' + id)
+  }
+
+  componentWillMount () {
+    NProgress.start()
+    this.props.getArticleList(NProgress.done)
   }
 
   render () {
@@ -10,22 +42,30 @@ export default class Note extends React.Component {
       <div className='home-note'>
         <div className='note-list'>
           {
-            Array(6).fill(0).map((item, i) => (
+            this.displayList.map((item, i) => (
               <div className='note-item' key={i}>
                 <div className='title'>
-                  <span>我是你们期望已久的标题君</span>
-                  <i className='iconfont more'>&#xe601;</i>
+                  <span>{item.title}</span>
+                  <i
+                    className='iconfont more'
+                    onClick={e => { this.goDetailPage(item.id) }}
+                  >&#xe601;</i>
                 </div>
                 <div className='content'>
                   <div className='thumb'>
-                    <img src='http://picur.qiniudn.com/o_1avq9sraqvrq1b0v1d3c178idejh.jpg?imageView2/1/w/200/h/200/interlace/0/q/100' alt='' />
+                    <img
+                      src={
+                        item.cover
+                          ? `${item.cover}?imageView2/1/w/200/h/200/interlace/0/q/100`
+                          : book
+                      }
+                      alt={item.title}
+                    />
                   </div>
-                  <div className='preview'>
-                    本文主要是阅读Effective Javascript书籍的读书笔记。编写高质量JS代码目录让自己习惯JavaScript变量作用域使用函数对象和原型数组和字典库和API设计并发内容详解让自己习惯JavaScript了解你使用的js版本决定你的应用程序支持JS的哪些版本
-                  </div>
+                  <div className='preview'>{limitString(160, item.content)}</div>
                   <span className='timestamp'>
                     <i className='iconfont'>&#xe619;</i>
-                    发布于442天前
+                    发布于{timeAgo(item.time)}前
                   </span>
                 </div>
               </div>

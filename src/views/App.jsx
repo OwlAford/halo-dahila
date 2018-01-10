@@ -1,9 +1,9 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { getBumper } from '^/Bumper'
+// import { getBumper } from '^/Bumper'
 import Home from './Home'
-import Login from './Login'
-import TodoList from 'bundle-loader?lazy&name=todolist!./TodoList'
+// import Login from './Login'
+// import TodoList from 'bundle-loader?lazy&name=todolist!./TodoList'
 import '#/styles'
 
 const App = () => (
@@ -13,14 +13,14 @@ const App = () => (
         path='/home'
         component={Home}
       />
-      <Route
+      {/* <Route
         path='/login'
         component={Login}
       />
       <Route
         path='/todolist'
         component={getBumper(TodoList)}
-      />
+      /> */}
       <Route component={() => <Redirect to='/home' />} />
     </Switch>
   </div>

@@ -1,11 +1,13 @@
-import HomeStore from './HomeStore'
-import TodoListStore from './TodoListStore'
-import LoginStore from './LoginStore'
+import HomeModel from '&/HomeModel'
+import ArticleModel from '&/ArticleModel'
+// import LoginModel from '&/LoginModel'
+// import TodoListStore from './TodoListStore'
 
 const stores = {
-  home: HomeStore,
-  todos: TodoListStore,
-  login: LoginStore
+  home: HomeModel.fromJS(true),
+  article: new ArticleModel()
+  // login: new LoginModel(),
+  // todos: TodoListStore
 }
 
 export default stores

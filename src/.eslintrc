@@ -1,6 +1,8 @@
 {
   "globals": {
     "axios": true,
+    "wilddog": true,
+    "NProgress": true,
     "echarts": true,
     "StackBlur": true,
     "WaveSurfer": true,

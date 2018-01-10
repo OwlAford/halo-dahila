@@ -19,7 +19,8 @@ import originImage from './images/bg-city.jpg'
     bannerDarkState,
     bannerDarkHandle: state => stores.home.bannerDarkHandle(state),
     isNearBottomHandle: state => stores.home.isNearBottomHandle(state),
-    is2rdScreenHandle: state => stores.home.is2rdScreenHandle(state)
+    is2rdScreenHandle: state => stores.home.is2rdScreenHandle(state),
+    isAtBottomHandle: state => stores.home.isAtBottomHandle(state)
   }
 })
 
@@ -45,6 +46,8 @@ class Banner extends React.Component {
 
   scrollPage () {
     const docEl = document.documentElement
+    const $content = document.querySelector('.home-content')
+    const fullHeight = $content ? $content.offsetHeight : 0
     const scrollTop = docEl.scrollTop || document.body.scrollTop
     let percent = (~~(scrollTop / this.clientH * 2 * 10000)) / 10000
     if (percent > 1) {
@@ -58,6 +61,10 @@ class Banner extends React.Component {
     scrollTop > this.clientH * 2
       ? this.props.isNearBottomHandle(true)
       : this.props.isNearBottomHandle(false)
+
+    fullHeight - scrollTop - this.clientH > 100
+      ? this.props.isAtBottomHandle(false)
+      : this.props.isAtBottomHandle(true)
 
     if (this.$thumbCanvas) {
       this.$thumbCanvas.style.opacity = percent

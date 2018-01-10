@@ -1,5 +1,4 @@
 import React from 'react'
-import classNames from 'classnames'
 import './scss/list.scss'
 
 export default class List extends React.Component {
@@ -36,16 +35,9 @@ export default class List extends React.Component {
   }
 
   render () {
-    const { list, index, play, changeMode, readMode, musicHandle } = this.props
+    const { list, index, play, changeMode, musicHandle } = this.props
     return (
-      <div
-        className={
-          classNames({
-            'home-list': true,
-            'hide': readMode
-          })
-        }
-      >
+      <div className='home-list'>
         <div className='list-wrap'>
           {
             list.map((item, i) => (
