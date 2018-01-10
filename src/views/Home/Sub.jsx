@@ -19,6 +19,10 @@ import Note from 'bundle-loader?lazy&name=note!../Note'
 
 @observer
 class Sub extends React.Component {
+  componentWillMount () {
+    const doc = document.documentElement
+    this.clientH = doc.clientHeight
+  }
 
   render () {
     return (

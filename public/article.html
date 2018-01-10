@@ -49,17 +49,18 @@
   var WD = window.wilddog.initializeApp({
     authDomain: 'carbon.wilddog.com',
     syncURL: 'carbon.wilddogio.com'
-  })
+  });
 
   WD.sync().ref(rootPath + 'article/' + id).on('value', function (snapshot) {
     var val = snapshot.val();
     document.getElementById('title').innerHTML = document.title = val.title;
     document.getElementById('time').innerHTML = (new Date(val.time * 1)).toLocaleDateString();
-  })
-  NProgress.start()
+  });
+
+  NProgress.start();
   WD.sync().ref(rootPath + 'articleList/' + id).on('value', function (snapshot) {
-    document.getElementById('content').innerHTML = snapshot.val()
-    NProgress.done()
+    document.getElementById('content').innerHTML = snapshot.val();
+    NProgress.done();
   })
 </script>
 </body>

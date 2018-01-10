@@ -29,7 +29,7 @@ export default class Note extends React.Component {
   }
 
   goDetailPage (id) {
-    window.open('/article.html?' + id)
+    window.open('article.html?' + id)
   }
 
   componentWillMount () {

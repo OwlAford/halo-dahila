@@ -25,6 +25,7 @@ app.use(history({
 }))
 
 app.use(publicPath, staticFileMiddleware)
+app.use(publicPath, express.static('./public'))
 
 app.listen(port, error => {
   if (error) {
