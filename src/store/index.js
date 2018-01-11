@@ -5,7 +5,7 @@ import ShootModel from '&/ShootModel'
 // import TodoListStore from './TodoListStore'
 
 const stores = {
-  home: HomeModel.fromJS(true),
+  home: HomeModel.fromJS(false),
   article: new ArticleModel(),
   shoot: new ShootModel()
   // login: new LoginModel(),
