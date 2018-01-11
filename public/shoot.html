@@ -54,6 +54,14 @@
   <div class="imgBox" id="box"></div>
 </div>
 <script>
+  var getById = function (id) {
+    return document.getElementById(id)
+  }
+  var attr = function (el, vals) {
+    vals.forEach(function (item, index) {
+      el.setAttribute(item.name, item.value);
+    })
+  }
   var params = window.location.search.substr(1).split('&');
   var host = 'http://picur.qiniudn.com/';
   var file = host + params[0];
@@ -62,15 +70,24 @@
   document.title = title;
   var dateTime = params[2];
   dateTime = (new Date(dateTime * 1)).toLocaleDateString();
-  var box = document.getElementById('box');
+  var box = getById('box');
   var imgr = document.createElement('img');
-  imgr.setAttribute('src', thumbFile);
-  imgr.setAttribute('data-original', file);
-  imgr.setAttribute('alt', title);
-  imgr.setAttribute('title', '点击查看大图');
+  attr(imgr, [{
+    name: 'src',
+    value: thumbFile
+  }, {
+    name: 'data-original',
+    value: file
+  }, {
+    name: 'alt',
+    value: title
+  }, {
+    name: 'title',
+    value: '点击查看大图'
+  }]);
   box.appendChild(imgr);
-  document.getElementById('title').innerText = title;
-  document.getElementById('time').innerText = '发布于：' + dateTime;
+  getById('title').innerText = title;
+  getById('time').innerText = '发布于：' + dateTime;
   var viewer = new Viewer(box, {
     url: 'data-original',
     toolbar: false
