@@ -16,7 +16,7 @@ export const getData2Array = (path, callback) => {
     let arr = []
     for (let key in val) {
       let item = val[key]
-      item.id = 'article_' + key
+      item.id = 'detail_' + key
       arr.push(item)
     }
     callback(arr)

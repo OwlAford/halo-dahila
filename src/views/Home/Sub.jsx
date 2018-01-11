@@ -7,6 +7,7 @@ import Footer from './Footer'
 import { getBumper } from '^/Bumper'
 import Profile from 'bundle-loader?lazy&name=profile!../Profile'
 import Note from 'bundle-loader?lazy&name=note!../Note'
+import Shoot from 'bundle-loader?lazy&name=shoot!../Shoot'
 
 @withRouter
 
@@ -45,7 +46,15 @@ export default class Sub extends React.Component {
               path='/home/note'
               component={getBumper(Note)}
             />
-            <Route component={() => <Redirect to='/home/profile' />} />
+            <Route
+              path='/home/shoot'
+              component={getBumper(Shoot)}
+            />
+            <Route
+              component={
+                () => <Redirect to='/home/profile' />
+              }
+            />
           </Switch>
         </div>
         <Footer key='footer' />

@@ -14,9 +14,10 @@ import info from './info.json'
 @withRouter
 
 @inject(stores => {
-  const { home: { scrollable } } = stores
+  const { home: { scrollable, is2rdScreen } } = stores
   return {
     scrollable,
+    is2rdScreen,
     bannerDarkHandle: state => stores.home.bannerDarkHandle(state),
     scrollableHandle: state => stores.home.scrollableHandle(state)
   }
@@ -417,7 +418,9 @@ export default class Music extends React.Component {
         className={
           classNames({
             'readModeMenu': true,
-            'hide': !this.readMode
+            'alpha': this.props.is2rdScreen,
+            'hasHeight': this.readMode,
+            'show': this.readMode || this.props.is2rdScreen
           })
         }
       >
@@ -425,12 +428,16 @@ export default class Music extends React.Component {
           <div className='midd'>
             <div className='app-logo' />
             <Menu defaultClass='item' />
-            <div
-              className='quitBtn'
-              onClick={e => { this.changeReadMode(false) }}
-            >
-              退出阅读模式
-            </div>
+            {
+              this.readMode && (
+                <div
+                  className='quitBtn'
+                  onClick={e => { this.changeReadMode(false) }}
+                >
+                  退出阅读模式
+                </div>
+              )
+            }
           </div>
         </div>
       </div>

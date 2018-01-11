@@ -9,8 +9,13 @@ import './scss/content.scss'
 @withRouter
 export default class Home extends React.Component {
   componentWillMount () {
+    const clientH = document.documentElement.clientHeight
     this.props.history.listen(e => {
-      window.scrollTo(0, 0)
+      if (document.querySelector('.readModeMenu').classList.contains('hasHeight')) {
+        window.scrollTo(0, 0)
+      } else {
+        window.scrollTo(0, clientH + 240)
+      }
     })
   }
 

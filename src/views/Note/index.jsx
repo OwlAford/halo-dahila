@@ -2,6 +2,7 @@ import React from 'react'
 import { computed } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import { timeAgo, limitString } from '~/filters'
+import Loading from '^/Loading'
 import book from './images/book.svg'
 import './scss/index.scss'
 
@@ -20,11 +21,11 @@ import './scss/index.scss'
 
 @observer
 export default class Note extends React.Component {
-  groupIndex = -1
-  group = ~~(document.documentElement.clientHeight / 150)
+  groupIndex = 1
+  group = Math.ceil(document.documentElement.clientHeight / 100)
 
   @computed get displayList () {
-    this.groupIndex++
+    this.props.isAtBottom && this.groupIndex++
     return this.props.articleList.slice(0, this.group * this.groupIndex)
   }
 
@@ -33,13 +34,16 @@ export default class Note extends React.Component {
   }
 
   componentWillMount () {
-    NProgress.start()
-    this.props.getArticleList(NProgress.done)
+    if (this.props.articleList.length === 0) {
+      NProgress.start()
+      this.props.getArticleList(NProgress.done)
+    }
   }
 
   render () {
     return (
       <div className='home-note'>
+        {this.displayList.length === 0 && <Loading /> }
         <div className='note-list'>
           {
             this.displayList.map((item, i) => (
