@@ -209,7 +209,7 @@ export default class Music extends React.Component {
     this.avatarState = 'up'
     await waiter(300)
     initTween(this.$tween, this.clientW, this.clientH)
-    await waiter(2600)
+    await waiter(2000)
     this.props.scrollableHandle(true)
   }
 

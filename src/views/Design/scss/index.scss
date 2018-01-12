@@ -1,0 +1,26 @@
+.home-design {
+  width: 1200px;
+  margin: 0 auto;
+  font-size: 14px;
+
+  .design-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .app-pic-box {
+      width: 552px;
+      padding: 0 20px 20px;
+      margin-bottom: 20px;
+
+      .title {
+        padding: 15px 0;
+      }
+
+      .content {
+        width: 552px;
+        height: 414px;
+      }
+    }
+  }
+}

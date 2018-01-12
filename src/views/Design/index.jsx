@@ -7,19 +7,19 @@ import './scss/index.scss'
 
 @inject(stores => {
   const {
-    shoot: { shootList },
+    design: { designList },
     home: { isAtBottom }
   } = stores
 
   return {
     isAtBottom,
-    shootList,
-    getShootList: cb => stores.shoot.getShootList(cb)
+    designList,
+    getDesignList: cb => stores.design.getDesignList(cb)
   }
 })
 
 @observer
-export default class Shoot extends React.Component {
+export default class Design extends React.Component {
   groupIndex = 1
   group = Math.ceil(document.documentElement.clientHeight / 450)
 
@@ -30,7 +30,7 @@ export default class Shoot extends React.Component {
 
   @computed get displayList () {
     this.props.isAtBottom && this.groupIndex++
-    return this.props.shootList.slice(0, this.group * this.groupIndex)
+    return this.props.designList.slice(0, this.group * this.groupIndex)
   }
 
   goDetailPage (path, title, time) {
@@ -39,24 +39,24 @@ export default class Shoot extends React.Component {
   }
 
   componentWillMount () {
-    if (this.props.shootList.length === 0) {
+    if (this.props.designList.length === 0) {
       NProgress.start()
-      this.props.getShootList(NProgress.done)
+      this.props.getDesignList(NProgress.done)
     }
   }
 
   render () {
     return (
-      <div className='home-shoot'>
+      <div className='home-design'>
         {this.displayList.length === 0 && <Loading />}
-        <div className='shoot-list'>
+        <div className='design-list'>
           {
             this.displayList.map((item, i) => (
               <PicBox
                 key={i}
                 title={item.title}
                 time={(new Date(item.time * 1)).toLocaleDateString()}
-                lnk={item.lnk + '?imageView2/1/w/1150/h/646/interlace/0/q/100'}
+                lnk={item.lnk + '?imageView2/1/w/552/h/414/interlace/0/q/100'}
                 clickEvent={e => { this.goDetailPage(item.lnk, item.title, item.time) }}
               />
             ))

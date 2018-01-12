@@ -1,16 +1,12 @@
 import React from 'react'
-import { withRouter } from 'react-router'
 import { observer, inject } from 'mobx-react'
 import classNames from 'classnames'
 import './scss/banner.scss'
 import throttle from 'lodash/throttle'
-import debounce from 'lodash/debounce'
 // import StackBlur from 'stackblur-canvas'
 import { initImage } from '~/libs/tools'
 import imageThumb from './images/bg-city-thumb.jpg'
 import originImage from './images/bg-city.jpg'
-
-@withRouter
 
 @inject(stores => {
   const { home: { is2rdScreen, bannerDarkState } } = stores
@@ -36,12 +32,6 @@ class Banner extends React.Component {
     this.clientH = doc.clientHeight
     this.clientW = doc.clientWidth
     this.props.bannerDarkHandle(false)
-
-    const refresh = () => {
-      this.props.history.push('/')
-    }
-
-    window.addEventListener('resize', debounce(refresh, 600))
   }
 
   scrollPage () {

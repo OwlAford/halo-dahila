@@ -8,6 +8,7 @@ import { getBumper } from '^/Bumper'
 import Profile from 'bundle-loader?lazy&name=profile!../Profile'
 import Note from 'bundle-loader?lazy&name=note!../Note'
 import Shoot from 'bundle-loader?lazy&name=shoot!../Shoot'
+import Design from 'bundle-loader?lazy&name=design!../Design'
 
 @withRouter
 
@@ -49,6 +50,10 @@ export default class Sub extends React.Component {
             <Route
               path='/home/shoot'
               component={getBumper(Shoot)}
+            />
+            <Route
+              path='/home/design'
+              component={getBumper(Design)}
             />
             <Route
               component={

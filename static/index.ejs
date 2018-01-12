@@ -46,6 +46,15 @@
         socket.emit(type, item)
       })
     }
+    window.onerror = function () {
+      arglen = arguments.length
+      var errorMsg = '\n参数个数：' + arglen + '个'
+      for (var i = 0; i < arglen; i++) {
+        errorMsg += '\n参数' + (i + 1) + '：' + arguments[i]
+      }
+      console.remote('log:error', errorMsg)
+      return true
+    }
   </script>
 <%}%>
 <% for(var i = 0; i < htmlWebpackPlugin.options.extCSS.length; i++) {%>
