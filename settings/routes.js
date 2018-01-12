@@ -1,5 +1,5 @@
 module.exports = [{
-  path: '',
-  name: 'login',
-  delay: 600
+  path: '#/home/profile',
+  name: 'profile',
+  delay: 30000
 }]

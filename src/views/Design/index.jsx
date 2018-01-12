@@ -21,7 +21,7 @@ import './scss/index.scss'
 @observer
 export default class Design extends React.Component {
   groupIndex = 1
-  group = Math.ceil(document.documentElement.clientHeight / 450)
+  group = Math.ceil(document.documentElement.clientHeight / 320)
 
   constructor (props) {
     super(props)

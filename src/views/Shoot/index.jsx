@@ -21,7 +21,7 @@ import './scss/index.scss'
 @observer
 export default class Shoot extends React.Component {
   groupIndex = 1
-  group = Math.ceil(document.documentElement.clientHeight / 450)
+  group = Math.ceil(document.documentElement.clientHeight / 600)
 
   constructor (props) {
     super(props)

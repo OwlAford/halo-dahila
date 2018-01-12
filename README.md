@@ -13,6 +13,10 @@
 
 >  🚀 A Web Application Created By React.js
 
+## 📦 Effect Preview
+
+![preview demo](https://raw.githubusercontent.com/OwlAford/halo-dahila/master/preview.png)
+
 
 ## 🐠 Install Chromium
  [Click to download chromium](https://storage.googleapis.com/chromium-browser-snapshots/Win_x64/515411/chrome-win32.zip)
