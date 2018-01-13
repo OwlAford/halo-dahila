@@ -39,7 +39,7 @@ export default class Home extends React.Component {
       if ($menu && $menu.classList.contains('hasHeight')) {
         window.scrollTo(0, 0)
       } else {
-        window.scrollTo(0, clientH + 240)
+        window.scrollTo(0, clientH + 250)
       }
     })
   }

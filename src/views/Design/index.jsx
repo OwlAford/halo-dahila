@@ -1,6 +1,7 @@
 import React from 'react'
 import { computed } from 'mobx'
 import { observer, inject } from 'mobx-react'
+import { num2even } from '~/libs/tools'
 import Loading from '^/Loading'
 import PicBox from '^/PicBox'
 import './scss/index.scss'
@@ -21,7 +22,7 @@ import './scss/index.scss'
 @observer
 export default class Design extends React.Component {
   groupIndex = 1
-  group = Math.ceil(document.documentElement.clientHeight / 320)
+  group = num2even(Math.ceil(document.documentElement.clientHeight / 320))
 
   constructor (props) {
     super(props)

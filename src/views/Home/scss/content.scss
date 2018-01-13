@@ -495,7 +495,7 @@
     }
     
     &.hasHeight {
-      height: 80px;
+      height: 72px;
     }
 
     &.show {
@@ -508,7 +508,7 @@
 
     .inner {
       width: 100%;
-      height: 60px;
+      height: 52px;
       position: fixed;
       z-index: 999;
       left: 0;
@@ -528,13 +528,13 @@
 
       .app-logo {
         left: 0;
-        top: 12px;
+        top: 8px;
         height: 36px;
         width: 36px;
       }
 
       a.item {
-        line-height: 60px;
+        line-height: 52px;
         display: inline-block;
         color: #666;
         margin: 0 20px;
@@ -552,7 +552,7 @@
         width: 120px;
         height: 38px;
         right: 0;
-        top: 11px;
+        top: 7px;
         background-color: #ff7373;
         color: #fff;
         text-align: center;

@@ -18,4 +18,5 @@ export const waiter = time => {
   })
 }
 
+export const num2even = num => num + num % 2
 
