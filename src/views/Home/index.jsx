@@ -11,30 +11,31 @@ import './scss/content.scss'
 @withRouter
 
 @inject(stores => ({
-  bannerDarkHandle: state => stores.home.bannerDarkHandle(state),
-  isNearBottomHandle: state => stores.home.isNearBottomHandle(state),
-  is2rdScreenHandle: state => stores.home.is2rdScreenHandle(state),
-  isAtBottomHandle: state => stores.home.isAtBottomHandle(state),
-  scrollableHandle: state => stores.home.scrollableHandle(state)
+  setBannerDark: state => stores.home.bannerDarkHandle(state),
+  setIsNearBottom: state => stores.home.isNearBottomHandle(state),
+  setIs2rdScreen: state => stores.home.is2rdScreenHandle(state),
+  setIsAtBottom: state => stores.home.isAtBottomHandle(state),
+  setScrollable: state => stores.home.scrollableHandle(state)
 }))
 
 @observer
 export default class Home extends React.Component {
   componentWillMount () {
     const clientH = document.documentElement.clientHeight
+    const Props = this.props
 
     const refresh = () => {
-      this.props.scrollableHandle(false)
-      this.props.bannerDarkHandle(false)
-      this.props.isNearBottomHandle(false)
-      this.props.is2rdScreenHandle(false)
-      this.props.isAtBottomHandle(false)
-      this.props.history.push('/')
+      Props.setScrollable(false)
+      Props.setBannerDark(false)
+      Props.setIsNearBottom(false)
+      Props.setIs2rdScreen(false)
+      Props.setIsAtBottom(false)
+      Props.history.push('/')
     }
 
     window.addEventListener('resize', debounce(refresh, 600))
 
-    this.props.history.listen(e => {
+    Props.history.listen(e => {
       const $menu = document.querySelector('.readModeMenu')
       if ($menu && $menu.classList.contains('hasHeight')) {
         window.scrollTo(0, 0)
