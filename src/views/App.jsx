@@ -1,7 +1,8 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-// import { getBumper } from '^/Bumper'
+import { getBumper } from '^/Bumper'
 import Home from './Home'
+import Efforts from 'bundle-loader?lazy&name=efforts!./Efforts'
 // import Login from './Login'
 // import TodoList from 'bundle-loader?lazy&name=todolist!./TodoList'
 import '#/styles'
@@ -12,6 +13,10 @@ const App = () => (
       <Route
         path='/home'
         component={Home}
+      />
+      <Route
+        path='/efforts'
+        component={getBumper(Efforts)}
       />
       {/* <Route
         path='/login'

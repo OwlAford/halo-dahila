@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import { observer, inject } from 'mobx-react'
+import './scss/index.scss'
 
 @inject(stores => {
   const { home: { is2rdScreen, isNearBottom } } = stores

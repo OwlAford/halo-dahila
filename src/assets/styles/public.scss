@@ -1,53 +1,5 @@
 @import "./variable.scss";
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 100%, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: none
-  }
-}
-
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, -100%, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: none
-  }
-}
-
-@keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: none
-  }
-}
-
-@keyframes upDownMove {
-  to {
-    transform: translateY(10px);
-  }
-}
-
 @font-face {
   font-family: 'iconfont';  /* project id 156150 */
   src: url('https://at.alicdn.com/t/font_156150_zdep54wv3brcnmi.eot');
@@ -101,6 +53,11 @@ body {
   &::-webkit-scrollbar-track-piece {
     background-color: #eff4f8;
   }
+}
+
+.app-core {
+min-width: 1200px;
+min-height: 400px;
 }
 
 .gitfont {

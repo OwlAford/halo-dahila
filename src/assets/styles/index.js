@@ -42,5 +42,5 @@
 
 // 消除不同浏览器的显示差异
 // import 'normalize.css'
+import './animate.scss'
 import './public.scss'
-import './layouts.scss'

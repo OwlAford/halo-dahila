@@ -1,0 +1,67 @@
+.home-efforts {
+  padding: 40px;
+  min-height: 780px;
+
+  .QRcode {
+    height: 250px;
+    width: 250px;
+    position: fixed;
+    left: 100px;
+    top: 50%;
+    margin-top: -200px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 28px rgba(0, 0, 0, .16);
+    animation: fadeInRight 1.6s 1s both;
+
+    &:after {
+      height: 70px;
+      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.2), transparent);
+    }
+
+    img {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+    
+    .desc {
+      position: absolute;
+      left: 0;
+      bottom: 300px;
+      width: 100%;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      z-index: 999;
+    }
+  }
+
+  .phone {
+    width: 420px;
+    height: 778px;
+    padding: 110px 20px;
+    background: url(../images/phone.png) no-repeat;
+    background-color: #1d2023;
+    background-size: 100% auto;
+    transform-origin: 50% 50%;
+    position: absolute;
+    right: 40px;
+    top: 0;
+    border-radius: 66px;
+    box-shadow: 0 38px 64px -14px rgba(0, 0, 0, .8);
+    transform: scale(0.8) translate3d(0, -10%, 0);
+  }
+
+  .homeBtn {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    margin-left: -40px;
+    display: block;
+    border-radius: 50%;
+    cursor: url(../images/finger.png), auto;
+  }
+}
