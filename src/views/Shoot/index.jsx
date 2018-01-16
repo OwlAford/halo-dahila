@@ -7,14 +7,14 @@ import './scss/index.scss'
 
 @inject(stores => {
   const {
-    shoot: { shootList },
+    shoot: { list },
     home: { isAtBottom }
   } = stores
 
   return {
     isAtBottom,
-    shootList,
-    getShootList: cb => stores.shoot.getShootList(cb)
+    list,
+    getShootList: cb => stores.shoot.getList(cb)
   }
 })
 
@@ -30,7 +30,7 @@ export default class Shoot extends React.Component {
 
   @computed get displayList () {
     this.props.isAtBottom && this.groupIndex++
-    return this.props.shootList.slice(0, this.group * this.groupIndex)
+    return this.props.list.slice(0, this.group * this.groupIndex)
   }
 
   goDetailPage (path, title, time) {
@@ -39,7 +39,7 @@ export default class Shoot extends React.Component {
   }
 
   componentWillMount () {
-    if (this.props.shootList.length === 0) {
+    if (this.props.list.length === 0) {
       NProgress.start()
       this.props.getShootList(NProgress.done)
     }

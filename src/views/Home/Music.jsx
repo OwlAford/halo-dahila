@@ -5,7 +5,7 @@ import { observable, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import classNames from 'classnames'
 import Loading from '^/Loading'
-import List from './List'
+import PlayList from './PlayList'
 import { waiter } from '~/libs/tools'
 import initTween from '~/libs/tween'
 import avatar from './images/avatar.jpg'
@@ -256,7 +256,9 @@ export default class Music extends React.Component {
         : `${this.clientH}px`
 
     return [
-      <canvas className='tween' key='tween' ref={node => { this.$tween = node }} />,
+      <div className='tween-wrap' key='tween'>
+        <canvas className='tween' ref={node => { this.$tween = node }} />
+      </div>,
       <div
         key='musicBox'
         className='musciBox'
@@ -411,7 +413,7 @@ export default class Music extends React.Component {
             </div>
           </div>
         </div>
-        <List {...musicBox} />
+        <PlayList {...musicBox} />
       </div>,
       <div
         key='readModeMenu'

@@ -8,14 +8,14 @@ import './scss/index.scss'
 
 @inject(stores => {
   const {
-    article: { articleList },
+    article: { list },
     home: { isAtBottom }
   } = stores
 
   return {
     isAtBottom,
-    articleList,
-    getArticleList: cb => stores.article.getArticleList(cb)
+    list,
+    getArticleList: cb => stores.article.getList(cb)
   }
 })
 
@@ -26,7 +26,7 @@ export default class Note extends React.Component {
 
   @computed get displayList () {
     this.props.isAtBottom && this.groupIndex++
-    return this.props.articleList.slice(0, this.group * this.groupIndex)
+    return this.props.list.slice(0, this.group * this.groupIndex)
   }
 
   goDetailPage (id) {
@@ -34,7 +34,7 @@ export default class Note extends React.Component {
   }
 
   componentWillMount () {
-    if (this.props.articleList.length === 0) {
+    if (this.props.list.length === 0) {
       NProgress.start()
       this.props.getArticleList(NProgress.done)
     }

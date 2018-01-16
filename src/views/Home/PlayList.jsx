@@ -1,7 +1,7 @@
 import React from 'react'
 import './scss/list.scss'
 
-export default class List extends React.Component {
+export default class PlayList extends React.Component {
   $items = []
   $canvas = []
   currentIndex = null

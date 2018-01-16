@@ -65,10 +65,12 @@
     background-color: rgba(0, 0, 0, 0.72);
   }
 
-  .tween {
+  .tween-wrap {
     position: absolute;
     left: 0;
     top: 0;
+    width: 100%;
+    overflow: hidden;
   }
 
   .musciBox {
@@ -470,6 +472,7 @@
 
   .content-wrap {
     display: none;
+    overflow: hidden;
     
     .content-main {
       width: 100%;

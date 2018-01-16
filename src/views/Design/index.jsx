@@ -8,14 +8,14 @@ import './scss/index.scss'
 
 @inject(stores => {
   const {
-    design: { designList },
+    design: { list },
     home: { isAtBottom }
   } = stores
 
   return {
     isAtBottom,
-    designList,
-    getDesignList: cb => stores.design.getDesignList(cb)
+    list,
+    getDesignList: cb => stores.design.getList(cb)
   }
 })
 
@@ -31,7 +31,7 @@ export default class Design extends React.Component {
 
   @computed get displayList () {
     this.props.isAtBottom && this.groupIndex++
-    return this.props.designList.slice(0, this.group * this.groupIndex)
+    return this.props.list.slice(0, this.group * this.groupIndex)
   }
 
   goDetailPage (path, title, time) {
@@ -40,7 +40,7 @@ export default class Design extends React.Component {
   }
 
   componentWillMount () {
-    if (this.props.designList.length === 0) {
+    if (this.props.list.length === 0) {
       NProgress.start()
       this.props.getDesignList(NProgress.done)
     }

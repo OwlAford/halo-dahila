@@ -1,15 +1,13 @@
 import HomeModel from '&/HomeModel'
-import ArticleModel from '&/ArticleModel'
-import ShootModel from '&/ShootModel'
-import DesignModel from '&/DesignModel'
+import ListModel from '&/ListModel'
 // import LoginModel from '&/LoginModel'
 // import TodoListStore from './TodoListStore'
 
 const stores = {
   home: HomeModel.fromJS(false),
-  article: new ArticleModel(),
-  shoot: new ShootModel(),
-  design: new DesignModel()
+  article: new ListModel('article'),
+  shoot: new ListModel('photo'),
+  design: new ListModel('design')
   // login: new LoginModel(),
   // todos: TodoListStore
 }

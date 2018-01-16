@@ -1,4 +1,4 @@
-@import "./variable.scss";
+@import './variable.scss';
 
 @font-face {
   font-family: 'iconfont';  /* project id 156150 */
@@ -15,14 +15,14 @@
 }
 
 .halofont {
-  font-family: "halofont" !important;
+  font-family: 'halofont' !important;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
+  font-family: 'iconfont' !important;
   font-size: 20px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
@@ -33,10 +33,9 @@ body {
   color: $fc;
   font-size: $ft;
   background-color: $bg;
-  overflow-x: hidden;
 
   &:lang(zh-CN) {
-    font-family: "SF Pro SC", "SF Pro Text", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-family: 'SF Pro SC', 'SF Pro Text', 'SF Pro Icons', 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   }
 
   &::-webkit-scrollbar {
@@ -73,7 +72,7 @@ min-height: 400px;
   position: absolute;
   
   &:after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     left: 0;
@@ -89,7 +88,7 @@ min-height: 400px;
   position: relative;
   
   &:after {
-    content: "";
+    content: '';
     display: block;
     background-image: linear-gradient(180deg, rgba(0,0,0,.3), transparent);
     height: 40px;
