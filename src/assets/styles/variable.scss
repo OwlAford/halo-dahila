@@ -34,3 +34,18 @@
 $fc: #333;
 $ft: 14px;
 $bg: #fafafa;
+
+@mixin setIconFont ($path) {
+  font-family: 'iconfont';
+  src: url('https://at.alicdn.com/t/#{$path}.eot');
+  src: url('https://at.alicdn.com/t/#{$path}.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/#{$path}.woff') format('woff'),
+  url('https://at.alicdn.com/t/#{$path}.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/#{$path}.svg#iconfont') format('svg');
+}
+
+@mixin fontSetter {
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

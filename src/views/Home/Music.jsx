@@ -5,6 +5,7 @@ import { observable, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import classNames from 'classnames'
 import Loading from '^/Loading'
+import Logo from '~/layouts/Logo'
 import PlayList from './PlayList'
 import { waiter } from '~/libs/tools'
 import initTween from '~/libs/tween'
@@ -209,7 +210,7 @@ export default class Music extends React.Component {
     this.avatarState = 'up'
     await waiter(300)
     initTween(this.$tween, this.clientW, this.clientH)
-    await waiter(2000)
+    await waiter(3000)
     this.props.scrollableHandle(true)
   }
 
@@ -271,12 +272,14 @@ export default class Music extends React.Component {
           ref={node => { this.$banner = node }}
           style={{ height: `${this.clientH}px` }}
         >
-          <div
+          <Logo
+            size={48}
             key='app-logo'
-            className={classNames({
-              'app-logo': true,
-              'running': this.bannerDarkState
-            })}
+            run={this.bannerDarkState}
+            style={{
+              left: '30px',
+              top: '30px'
+            }}
           />
           <div key='app-brand' className='app-brand halofont'>Halo</div>
           <div
@@ -428,7 +431,14 @@ export default class Music extends React.Component {
       >
         <div className='inner'>
           <div className='midd'>
-            <div className='app-logo' />
+            <Logo
+              size={36}
+              run={this.bannerDarkState}
+              style={{
+                left: '0',
+                top: '8px'
+              }}
+            />
             <Menu defaultClass='item' />
             {
               this.readMode && (

@@ -24,21 +24,6 @@
   }
 }
 
-.app-logo {
-  height: 42px;
-  width: 42px;
-  background-size: 42px 42px;
-  position: absolute;
-  left: 30px;
-  top: 30px;
-  
-  &.running {
-    &:after {
-      animation: triangleRotate ease-in-out 3s;
-    }
-  }
-}
-
 .app-brand {
   height: 42px;
   line-height: 42px;

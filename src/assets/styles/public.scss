@@ -1,12 +1,7 @@
 @import './variable.scss';
 
 @font-face {
-  font-family: 'iconfont';  /* project id 156150 */
-  src: url('https://at.alicdn.com/t/font_156150_zdep54wv3brcnmi.eot');
-  src: url('https://at.alicdn.com/t/font_156150_zdep54wv3brcnmi.eot?#iefix') format('embedded-opentype'),
-  url('https://at.alicdn.com/t/font_156150_zdep54wv3brcnmi.woff') format('woff'),
-  url('https://at.alicdn.com/t/font_156150_zdep54wv3brcnmi.ttf') format('truetype'),
-  url('https://at.alicdn.com/t/font_156150_zdep54wv3brcnmi.svg#iconfont') format('svg');
+  @include setIconFont(font_156150_zdep54wv3brcnmi);
 }
 
 @font-face {
@@ -15,18 +10,14 @@
 }
 
 .halofont {
+  @include fontSetter;
   font-family: 'halofont' !important;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .iconfont {
+  @include fontSetter;
   font-family: 'iconfont' !important;
   font-size: 20px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -61,27 +52,6 @@ min-height: 400px;
 
 .gitfont {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-}
-
-.app-logo {
-  height: 48px;
-  width: 48px;
-  display: block;
-  background: url(../images/logo-bg.png) no-repeat;
-  background-size: 100% 100%;
-  position: absolute;
-  
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background: url(../images/logo-origin.png) no-repeat;
-    background-size: 100% 100%;
-  }
 }
 
 .app-skew-shadow {
