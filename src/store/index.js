@@ -4,7 +4,7 @@ import ListModel from '&/ListModel'
 // import TodoListStore from './TodoListStore'
 
 const stores = {
-  home: HomeModel.fromJS(false),
+  home: HomeModel.fromJS(true),
   article: new ListModel('article'),
   shoot: new ListModel('photo'),
   design: new ListModel('design')

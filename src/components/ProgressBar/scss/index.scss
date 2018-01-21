@@ -1,0 +1,187 @@
+.progress-chart {
+  font-size: 1em;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  backface-visibility: visible;
+
+  .bar {
+    font-size: 1em;
+    position: relative;
+    height: 10em;
+    transition: all 0.3s ease-in-out;
+    transform: rotateX(60deg) rotateY(0deg);
+    transform-style: preserve-3d;
+
+    .face {
+      font-size: 2em;
+      position: relative;
+      width: 100%;
+      height: 2em;
+      background-color: rgba(254, 254, 254, 0.3);
+
+      &.side-a, &.side-b {
+        width: 2em;
+      }
+    }
+
+    .side-a {
+      transform: rotateX(90deg) rotateY(-90deg) translateX(2em) translateY(1em) translateZ(1em);
+    }
+
+    .side-b {
+      transform: rotateX(90deg) rotateY(-90deg) translateX(4em) translateY(1em) translateZ(-1em);
+      position: absolute;
+      right: 0;
+    }
+
+    .side-0 {
+      transform: rotateX(90deg) rotateY(0) translateX(0) translateY(1em) translateZ(-1em);
+    }
+    .side-1 {
+      transform: rotateX(90deg) rotateY(0) translateX(0) translateY(1em) translateZ(3em);
+    }
+    .top {
+      transform: rotateX(0deg) rotateY(0) translateX(0em) translateY(4em) translateZ(2em);
+    }
+    .floor {
+      box-shadow: 0 0.1em 0.6em rgba(0, 0, 0, 0.3), 0.6em -0.5em 3em rgba(0, 0, 0, 0.3), 1em -1em 8em #fefefe;
+    }
+
+    &.yellow {
+      .side-a, .growing-bar {
+        background-color: rgba(241, 196, 15, 0.6);
+      }
+
+      .side-0 .growing-bar {
+        box-shadow: -0.5em -1.5em 4em rgba(241, 196, 15, 0.8);
+      }
+
+      .floor .growing-bar {
+        box-shadow: 0em 0em 2em rgba(241, 196, 15, 0.8);
+      }
+    }
+
+    &.navy {
+      .side-a, .growing-bar {
+        background-color: rgba(10, 64, 105, 0.6);
+      }
+
+      .side-0 .growing-bar {
+        box-shadow: -0.5em -1.5em 4em rgba(10, 64, 105, 0.8);
+      }
+
+      .floor .growing-bar {
+        box-shadow: 0em 0em 2em rgba(10, 64, 105, 0.8);
+      }
+    }
+
+    &.red {
+      .side-a, .growing-bar {
+        background-color: rgba(236, 0, 140, 0.6);
+      }
+
+      .side-0 .growing-bar {
+        box-shadow: -0.5em -1.5em 4em rgba(236, 0, 140, 0.8);
+      }
+
+      .floor .growing-bar {
+        box-shadow: 0em 0em 2em rgba(236, 0, 140, 0.8);
+      }
+    }
+
+    &.cyan {
+      .side-a, .growing-bar {
+        background-color: rgba(87, 202, 244, 0.6);
+      }
+
+      .side-0 .growing-bar {
+        box-shadow: -0.5em -1.5em 4em #57caf4;
+      }
+
+      .floor .growing-bar {
+        box-shadow: 0em 0em 2em #57caf4;
+      }
+    }
+
+    &.lime {
+      .side-a, .growing-bar {
+        background-color: rgba(118, 201, 0, 0.6);
+      }
+
+      .side-0 .growing-bar {
+        box-shadow: -0.5em -1.5em 4em #76c900;
+      }
+
+      .floor .growing-bar {
+        box-shadow: 0em 0em 2em #76c900;
+      }
+    }
+
+    &.white {
+      .side-a, .growing-bar {
+        background-color: rgba(254, 254, 254, 0.6);
+      }
+
+      .side-0 .growing-bar {
+        box-shadow: -0.5em -1.5em 4em #fefefe;
+      }
+
+      .floor .growing-bar {
+        box-shadow: 0em 0em 2em #fefefe;
+      }
+    }
+
+    &.gray {
+      .side-a, .growing-bar {
+        background-color: rgba(68, 68, 68, 0.6);
+      }
+
+      .side-0 .growing-bar {
+        box-shadow: -0.5em -1.5em 4em #444;
+      }
+
+      .floor .growing-bar {
+        box-shadow: 0em 0em 2em #444;
+      }
+    }
+
+    &.yellow-face .face {
+      background-color: rgba(241, 196, 15, 0.2);
+    }
+
+    &.lime-face .face {
+      background-color: rgba(118, 201, 0, 0.2);
+    }
+
+    &.red-face .face {
+      background-color: rgba(236, 0, 140, 0.2);
+    }
+
+    &.navy-face .face {
+      background-color: rgba(10, 64, 105, 0.2);
+    }
+
+    &.cyan-face .face {
+      background-color: rgba(87, 202, 244, 0.2);
+    }
+
+    &.gray-face .face {
+      background-color: rgba(68, 68, 68, 0.2);
+    }
+
+    &.lightGray-face .face {
+      background-color: rgba(145, 145, 145, 0.2);
+    }
+
+    &.lighterGray-face .face {
+      background-color: rgba(145, 145, 145, 0.05);
+    }
+  }
+
+  .growing-bar {
+    transition: all 0.3s ease-in-out;
+    background-color: rgba(236, 0, 140, 0.6);
+    width: 100%;
+    height: 2em;
+  }
+}

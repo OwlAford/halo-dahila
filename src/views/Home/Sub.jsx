@@ -9,7 +9,7 @@ import Profile from 'bundle-loader?lazy&name=profile!../Profile'
 import Note from 'bundle-loader?lazy&name=note!../Note'
 import Shoot from 'bundle-loader?lazy&name=shoot!../Shoot'
 import Design from 'bundle-loader?lazy&name=design!../Design'
-import Website from 'bundle-loader?lazy&name=website!../Website'
+import Tools from 'bundle-loader?lazy&name=tools!../Tools'
 import Talk from 'bundle-loader?lazy&name=talk!../Talk'
 
 @withRouter
@@ -58,8 +58,8 @@ export default class Sub extends React.Component {
               component={getBumper(Design)}
             />
             <Route
-              path='/home/website'
-              component={getBumper(Website)}
+              path='/home/tools'
+              component={getBumper(Tools)}
             />
             <Route
               path='/home/talk'
