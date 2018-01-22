@@ -1,96 +1,89 @@
 import React from 'react'
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
-import classNames from 'classnames'
+import { Base64 } from 'js-base64'
+import md5 from 'md5'
+import Time from './Time'
 import './scss/index.scss'
-import ProgressBar from '^/ProgressBar'
 
 @observer
 export default class Tools extends React.Component {
-  @observable surplus = ''
-  @observable distType = 'year'
-  @observable currentPercent = 100
-
-  dayDistHours = 0
-  yearDistDay = 0
-  dayDistPercent = 100
-  yearDistPercent = 100
-
-  @action
-  setPercent (type) {
-    this.distType = type
-    if (type === 'year') {
-      this.currentPercent = this.yearDistPercent
-      this.surplus = `今年还剩 ${this.yearDistDay} 天`
-    } else {
-      this.currentPercent = this.dayDistPercent
-      this.surplus = `今日还剩 ${this.dayDistHours} 小时`
-    }
-    console.log(this.distType)
-  }
+  @observable md5Encode = ''
+  @observable base64Encode = ''
 
   componentWillMount () {
-    const fullDayLong = 24 * 60 * 60 * 1000
-    const curDate = new Date()
-    const curYear = curDate.getFullYear()
-    const firstDate = new Date(`${curYear}-01-01T00:00:00`)
-    const endDate = new Date(`${curYear + 1}-01-01T00:00:00`)
-    const fullYearDay = (endDate.getTime() - firstDate.getTime()) / fullDayLong
-    const yearDistDay = ~~((endDate.getTime() - curDate.getTime()) / fullDayLong)
-    const dayDistSecound = fullDayLong - (curDate.getTime() - (new Date(curDate.setHours(0, 0, 0, 0))).getTime())
-    const dayDistHours = dayDistSecound / 60 / 60 / 1000
+  }
 
-    this.dayDistHours = dayDistHours.toFixed(2)
-    this.dayDistPercent = dayDistHours * 100 / 24
+  @action
+  cleanInputHandle = e => {
+    this.$md5Ipt.value = this.md5Encode = ''
+  }
 
-    this.yearDistDay = yearDistDay
-    this.yearDistPercent = yearDistDay * 100 / fullYearDay
+  @action
+  cleanBaseInputHandle = e => {
+    this.$base64Ipt.value = this.base64Encode = ''
+  }
 
-    this.setPercent('year')
+  @action
+  handleMD5Encode = e => {
+    this.md5Encode = e.target.value.trim()
+  }
+
+  @action
+  handleBase64Encode = e => {
+    this.base64Encode = e.target.value.trim()
   }
 
   render () {
-    const { country, province, city } = window.remote_ip_info
     return (
       <div className='home-tools'>
-        <div className='card'>
-          <div className='title'>
-            <div className='inner'>时间还剩多少</div>
-            <div className='details'>{this.surplus}</div>
-          </div>
-          <ProgressBar
-            color={
-              this.currentPercent > 50
-                ? 'lime lighterGray-face'
-                : 'red lighterGray-face'
-            }
-            progress={this.currentPercent}
-          />
-          <div className='switch'>
-            <div
-              className={classNames({
-                'item-btn': true,
-                'active': this.distType === 'year'
-              })}
-              onClick={e => { this.setPercent('year') }}
-            >
-              今年剩余
+        <Time />
+        <div className='row-double'>
+          <div className='tools-card'>
+            <div className='title'>
+              <div className='inner'>
+                <i className='iconfont'>&#xe60e;</i>
+                <span>MD5在线加密</span>
+              </div>
             </div>
-            <div
-              className={classNames({
-                'item-btn': true,
-                'active': this.distType === 'hour'
-              })}
-              onClick={e => { this.setPercent('hour') }}
-            >
-              今日剩余
+            <div className='fn-area'>
+              <div className='in-string'>
+                <input
+                  type='text'
+                  onChange={this.handleMD5Encode}
+                  placeholder='请输入加密字符'
+                  ref={node => { this.$md5Ipt = node }}
+                />
+                <button className='iconfont trans-btn' onClick={this.cleanInputHandle}>&#xe615;</button>
+              </div>
+              <div className='result'>
+                <textarea name='ecodeString' value={this.md5Encode ? md5(this.md5Encode) : ''} />
+              </div>
+            </div>
+          </div>
+          <div className='tools-card'>
+            <div className='title'>
+              <div className='inner'>
+                <i className='iconfont'>&#xe60e;</i>
+                <span>Base64在线加密</span>
+              </div>
+            </div>
+            <div className='fn-area'>
+              <div className='in-string'>
+                <input
+                  type='text'
+                  onChange={this.handleBase64Encode}
+                  placeholder='请输入加密字符'
+                  ref={node => { this.$base64Ipt = node }}
+                />
+                <button className='iconfont trans-btn' onClick={this.cleanBaseInputHandle}>&#xe615;</button>
+              </div>
+              <div className='result'>
+                <textarea name='ecodeString' value={Base64.encode(this.base64Encode)} />
+              </div>
             </div>
           </div>
         </div>
-        时间进度查看器
-        间隔天数计算
-        MD5加密器
-        IP查看器 {country + province + city}
       </div>
     )
   }

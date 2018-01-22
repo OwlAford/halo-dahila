@@ -26,7 +26,7 @@ module.exports = {
       'http://plug.qiniudn.com/EasePack.min.js',
       'https://cdn.bootcss.com/wavesurfer.js/2.0.0-beta01/wavesurfer.min.js',
       'https://cdn.bootcss.com/dynamics.js/1.1.5/dynamics.min.js',
-      'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js'
+      'http://pv.sohu.com/cityjson?ie=utf-8'
     ],
     extCSS: [
       'https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css',
@@ -65,7 +65,7 @@ module.exports = {
       'http://plug.qiniudn.com/EasePack.min.js',
       'https://cdn.bootcss.com/wavesurfer.js/2.0.0-beta01/wavesurfer.min.js',
       'https://cdn.bootcss.com/dynamics.js/1.1.5/dynamics.min.js',
-      'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js'
+      'http://pv.sohu.com/cityjson?ie=utf-8'
     ],
     extCSS: [
       'https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css',
