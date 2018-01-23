@@ -15,11 +15,14 @@ export default class Tools extends React.Component {
   @observable QRCodeString = ''
 
   genQRcode = e => {
-    const url = this.QRCodeString = this.$qrcodeIpt.value.trim()
-    url && QRCode.toCanvas(this.$qrcode, url, {
-      width: 300,
-      margin: 1
-    })
+    const url = this.$qrcodeIpt.value.trim()
+    if (url) {
+      this.QRCodeString = url
+      QRCode.toCanvas(this.$qrcode, url, {
+        width: 300,
+        margin: 1
+      })
+    }
   }
 
   downloadFile = e => {
@@ -65,7 +68,7 @@ export default class Tools extends React.Component {
               <div className='title'>
                 <div className='inner'>
                   <i className='iconfont'>&#xebc7;</i>
-                  <span>二维码生成</span>
+                  <span>二维码生成器</span>
                 </div>
               </div>
               <div className='canvas-wrap'>
@@ -76,7 +79,7 @@ export default class Tools extends React.Component {
                   <input
                     type='text'
                     ref={node => { this.$qrcodeIpt = node }}
-                    placeholder='请输入二维码生成内容'
+                    placeholder='请输入二维码要生成的内容'
                   />
                   <button className='iconfont trans-btn' onClick={this.genQRcode}>&#xe653;</button>
                 </div>
@@ -87,7 +90,7 @@ export default class Tools extends React.Component {
                   })}
                   onClick={this.downloadFile}
                 >
-                  点击下载
+                  点击下载二维码
                 </button>
               </div>
             </div>

@@ -63,7 +63,7 @@
       outline: none;
       height: 46px;
       width: 56px;
-      line-height: 42px;
+      line-height: 46px;
       font-size: 18px;
       position: absolute;
       top: 0;
@@ -94,7 +94,7 @@
       }
 
       &.disabled {
-        background-color: #ddd;
+        background-color: #c0e2d7;
         cursor: no-drop;
       }
     }
