@@ -14,7 +14,7 @@ export default ({ title, time, lnk, clickEvent }) => (
         width='100%'
       />
       <div className='detailBtn' onClick={e => { clickEvent(e) }}>
-        <i className='iconfont'>&#xe604;</i>
+        <i className='iconfont'>&#xe624;</i>
         查看大图
       </div>
     </div>

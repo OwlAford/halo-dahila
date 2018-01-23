@@ -353,7 +353,7 @@ export default class Music extends React.Component {
               'arrowDown': true,
               'show': this.props.scrollable
             })}
-          >&#xe608;</i>
+          >&#xe61c;</i>
           <div
             id='music'
             className={classNames({

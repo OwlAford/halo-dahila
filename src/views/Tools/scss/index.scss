@@ -8,8 +8,29 @@
     display: flex;
     justify-content: space-between;
 
+    &.wrap {
+      flex-wrap: wrap;
+    }
+
     .tools-card {
-      width: 595px;
+      width: 420px;
+      flex-shrink: 0;
+      padding-bottom: 30px;
+      
+      &.narrow {
+        width: 340px;
+      }
+
+      &.full {
+        width: 100%;
+      }
+
+      .canvas-wrap {
+        width: 300px;
+        height: 300px;
+        margin: 20px auto 0;
+        background: url(../images/bg.gif);
+      }
     }
   }
 
@@ -17,7 +38,7 @@
     padding: 20px 30px 0;
 
     .in-string {
-      padding: 14px 20px;
+      padding: 14px 66px 14px 20px;
       background-color: #E9F3F5;
       width: 100%;
       box-sizing: border-box;
@@ -28,38 +49,59 @@
         outline: none;
         width: 100%;
         background-color: #E9F3F5;
-      }
-
-      &::-webkit-input-placeholder {
-        color: rgb(149, 160, 163);
-      }
-      
-      .trans-btn {
-        display: block;
-        border: none;
-        outline: none;
-        height: 46px;
-        width: 56px;
-        line-height: 42px;
-        font-size: 18px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        background-color: #2f92f8;
-        color: #fff;
-        text-align: center;
-        cursor: pointer;
-        transition: background-color .3s;
-
-        &:hover {
-          background-color: #0f80f0;
+  
+        &::-webkit-input-placeholder {
+          color: rgb(180, 188, 190);
         }
+      }
+    }
+    
+    .trans-btn,
+    .download-btn {
+      display: block;
+      border: none;
+      outline: none;
+      height: 46px;
+      width: 56px;
+      line-height: 42px;
+      font-size: 18px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #2f92f8;
+      color: #fff;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color .3s;
+
+      &:not(.disabled):hover {
+        background-color: #0f80f0;
+      }
+    }
+
+    .download-btn {
+      position: relative;
+      width: 100%;
+      font-size: 14px;
+      line-height: 52px;
+      height: 52px;
+      border-radius: 4px;
+      margin: 20px auto 0;
+      background-color: #28bd8b;
+
+      &:not(.disabled):hover {
+        background-color: #14a172;
+      }
+
+      &.disabled {
+        background-color: #ddd;
+        cursor: no-drop;
       }
     }
 
     .result {
-      padding-top: 20px;
-      height: 120px;
+      padding-top: 15px;
+      height: 80px;
 
       textarea {
         width: 100%;
@@ -70,7 +112,7 @@
         outline: none;
         border: none;
         box-sizing: border-box;
-        padding: 10px;
+        padding: 14px 20px;
       }
     }
   }

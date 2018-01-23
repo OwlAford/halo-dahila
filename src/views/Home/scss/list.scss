@@ -33,7 +33,8 @@
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: center;
-    
+    height: 216px;
+
     &:after {
       content: "";
       display: block;
@@ -128,11 +129,11 @@
 
           &:after {
             color: #fff;
-            content: '\e614'
+            content: '\e603'
           }
 
           &.pause:after {
-            content: '\e613'
+            content: '\e9d3'
           }
         }
       }

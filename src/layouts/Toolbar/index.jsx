@@ -27,11 +27,11 @@ export default class Toolbar extends React.Component {
           'show': this.props.is2rdScreen
         })}
       >
-        <div className='iconfont'>&#xe606;</div>
+        <div className='iconfont'>&#xe627;</div>
         <div className='iconfont'>&#xe607;</div>
         {
           this.props.isNearBottom
-            ? <div className='iconfont' onClick={this.scrollToTop}>&#xe608;</div>
+            ? <div className='iconfont' onClick={this.scrollToTop}>&#xe61c;</div>
             : null
         }
       </div>
