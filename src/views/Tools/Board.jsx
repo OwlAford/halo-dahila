@@ -14,6 +14,9 @@ export default class Board extends React.Component {
   @observable lineColor = '#00367C'
   @observable boxVisibility = false
 
+  stack = []
+  pointer = -1
+
   rWidth = 810
   rHeight = 420
 
@@ -23,6 +26,41 @@ export default class Board extends React.Component {
 
   componentDidMount () {
     this.ctx = this.$canvas.getContext('2d')
+    this.initStack()
+    window.addEventListener('click', this.ProgressDragEnd, false)
+  }
+
+  stackSave () {
+    const canvas = this.$canvas
+    const ctx = this.ctx
+    const width = canvas.width
+    const height = canvas.height
+    if (this.pointer < this.stack.length - 1) {
+      this.stack = this.stack.slice(0, this.pointer + 1)
+    }
+    this.pointer++
+    this.stack.push([ctx.getImageData(0, 0, width, height), [width, height]])
+  }
+
+  setFrame (index) {
+    const data = this.stack[index]
+    this.$canvas.width = data[1][0]
+    this.$canvas.height = data[1][1]
+    this.ctx.putImageData(data[0], 0, 0)
+  }
+
+  stackBack () {
+    if (this.pointer > 0) {
+      this.pointer--
+      this.setFrame(this.pointer)
+    }
+  }
+
+  stackNext () {
+    if (this.pointer < this.stack.length - 1) {
+      this.pointer++
+      this.setFrame(this.pointer)
+    }
   }
 
   @computed
@@ -45,15 +83,28 @@ export default class Board extends React.Component {
     return url
   }
 
+  initStack () {
+    this.stack = []
+    this.pointer = -1
+    this.stackSave()
+  }
+
   clearCanvas () {
     const ctx = this.ctx
     ctx.clearRect(0, 0, this.rWidth, this.rHeight)
+    this.$canvas.height = this.rHeight = 420
+  }
+
+  resetCanvas () {
+    this.clearCanvas()
+    this.initStack()
   }
 
   setCanvasBgColor (color) {
     const ctx = this.ctx
     ctx.fillStyle = this.bgColor = color
     ctx.fillRect(0, 0, this.rWidth, this.rHeight)
+    this.stackSave()
   }
 
   setBgColor (color) {
@@ -66,6 +117,7 @@ export default class Board extends React.Component {
   }
 
   async getImageInfo () {
+    this.clearCanvas()
     const img = this.$oimage
     const canvas = this.$canvas
     await initImage(img)
@@ -75,8 +127,8 @@ export default class Board extends React.Component {
     const rWidth = this.rWidth = 810
     const rHeight = this.rHeight = nHeight * rWidth / nWidth
     canvas.height = rHeight
-    this.clearCanvas()
     this.ctx.drawImage(img, 0, 0, nWidth, nHeight, 0, 0, rWidth, rHeight)
+    this.stackSave()
   }
 
   @action
@@ -88,7 +140,6 @@ export default class Board extends React.Component {
       this.getImageInfo()
     } else {
       this.$path.value = ''
-      this.clearCanvas()
       console.log('文件格式错误！')
     }
   }
@@ -126,6 +177,7 @@ export default class Board extends React.Component {
 
   endDraw = e => {
     this.penPress = false
+    this.stackSave()
     e.preventDefault()
   }
 
@@ -179,7 +231,6 @@ export default class Board extends React.Component {
     return (
       <div
         className='tools-card full'
-        onMouseUp={this.ProgressDragEnd}
         onClick={e => { this.setBoxVisibility(false) }}
       >
         <div className='title'>
@@ -273,15 +324,27 @@ export default class Board extends React.Component {
           <div className='control-panel'>
             <button
               className='reset-btn'
-              onClick={e => { this.clearCanvas() }}
+              onClick={e => { this.resetCanvas() }}
             >
               清空重置
             </button>
             <button
-              className='download-btn'
+              className='fn-btn'
+              onClick={e => { this.stackBack() }}
+            >
+              上一步
+            </button>
+            <button
+              className='fn-btn'
+              onClick={e => { this.stackNext() }}
+            >
+              下一步
+            </button>
+            <button
+              className='fn-btn'
               onClick={e => { this.downloadDraw() }}
             >
-              下载到本地
+              下载
             </button>
           </div>
         </div>

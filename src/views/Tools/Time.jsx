@@ -63,7 +63,9 @@ export default class Time extends React.Component {
           color={
             this.currentPercent > 50
               ? 'lime lighterGray-face'
-              : 'red lighterGray-face'
+              : this.currentPercent > 30
+                ? 'cyan lighterGray-face'
+                : 'red lighterGray-face'
           }
           progress={this.currentPercent}
         />
