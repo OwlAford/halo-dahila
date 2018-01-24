@@ -262,6 +262,7 @@ export default class Music extends React.Component {
       </div>,
       <div
         key='musicBox'
+        id='musciBox'
         className='musciBox'
         style={{
           height: boxHeight

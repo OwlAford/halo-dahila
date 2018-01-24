@@ -1,0 +1,87 @@
+.draw-board {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 20px;
+  min-height: 320px;
+  
+  .origin-image {
+    display: none;
+  }
+
+  .board-wrap {
+    background: url(../images/bg.gif);
+  
+    canvas {
+      display: block;
+      cursor: url(../images/pencil.png), pointer;
+    }
+  }
+
+  .panel {
+    height: 48px;
+    background-color: #37383c;
+    margin: 20px 0 0;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    
+    .label {
+      font-size: 13px;
+      margin-right: 5px;
+    }
+    
+    .bgDot, .brushDot {
+      cursor: pointer;
+      height: 16px;
+      width: 16px;
+      background-color: #ddd;
+      
+      &.active {
+        box-shadow: 0 6px 12px -2px rgba(0, 0, 0, .8);
+      }
+    }
+    
+    .brushDot {
+      border-radius: 100%;
+    }
+
+    .imgBg, .brush {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      
+      input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        height: 100%;
+        width: 100%;
+        border: none;
+        outline: none;
+        opacity: 0;
+      }
+    }
+    
+    .group {
+      padding: 0 20px;
+      width: 50%;
+      height: 100%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+
+      div {
+        margin-right: 10px;
+      }
+
+      & + .group {
+        border-left: 1px solid #333438;
+      }
+    }
+  }
+}
