@@ -1,25 +1,33 @@
 import React from 'react'
-import { observable, action } from 'mobx'
+import { observable, computed, action } from 'mobx'
 import classNames from 'classnames'
 import { observer } from 'mobx-react'
-import { initImage } from '~/libs/tools'
+import { initImage, downloadCanvasImage } from '~/libs/tools'
 import './scss/board.scss'
 
 @observer
 export default class Board extends React.Component {
   @observable imgPath = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
   @observable bgColor = null
+  @observable beforeProgress = 9
+  @observable currentProgress = 9
   @observable lineColor = '#00367C'
-  @observable lineWidth = 1
+  @observable boxVisibility = false
 
   rWidth = 810
   rHeight = 420
 
   penPress = false
-  last = null
+  progressPress = false
+  progressStartPos = 0
 
   componentDidMount () {
     this.ctx = this.$canvas.getContext('2d')
+  }
+
+  @computed
+  get lineWidthPixel () {
+    return ~~(this.currentProgress / 9)
   }
 
   getFileUrl () {
@@ -97,9 +105,11 @@ export default class Board extends React.Component {
   startDraw = e => {
     this.penPress = true
     const ctx = this.ctx
-    ctx.lineWidth = this.lineWidth
+    ctx.lineWidth = this.lineWidthPixel
     ctx.strokeStyle = this.lineColor
-    this.last = this.getPos(e)
+    const last = this.getPos(e)
+    ctx.beginPath()
+    ctx.moveTo(last.x, last.y)
   }
 
   drawing = e => {
@@ -108,19 +118,48 @@ export default class Board extends React.Component {
     }
     const ctx = this.ctx
     const poz = this.getPos(e)
-    const last = this.last
-    ctx.beginPath()
-    ctx.moveTo(last.x, last.y)
     ctx.lineTo(poz.x, poz.y)
+    ctx.lineCap = 'round'
     ctx.stroke()
-    this.last = poz
     e.preventDefault()
   }
 
   endDraw = e => {
     this.penPress = false
-    this.last = null
     e.preventDefault()
+  }
+
+  ProgressDragStart = e => {
+    this.progressPress = true
+    this.progressStartPos = e.pageX
+  }
+
+  ProgressDraging = e => {
+    if (this.progressPress) {
+      let dis = e.pageX - this.progressStartPos
+      let newProg = this.beforeProgress + dis
+      if (newProg < 0) {
+        this.currentProgress = 9
+      } else if (newProg > 180) {
+        this.currentProgress = 180
+      } else {
+        this.currentProgress = newProg
+      }
+    }
+  }
+
+  downloadDraw () {
+    downloadCanvasImage(this.$canvas, `qrcode-${Date.now()}.png`, 'image/png')
+  }
+
+  ProgressDragEnd = e => {
+    this.progressPress = false
+    this.beforeProgress = this.currentProgress
+  }
+
+  setBoxVisibility (state, e) {
+    this.boxVisibility = state
+    e && e.stopPropagation()
   }
 
   render () {
@@ -138,7 +177,11 @@ export default class Board extends React.Component {
     ]
 
     return (
-      <div className='tools-card full'>
+      <div
+        className='tools-card full'
+        onMouseUp={this.ProgressDragEnd}
+        onClick={e => { this.setBoxVisibility(false) }}
+      >
         <div className='title'>
           <div className='inner'>
             <i className='iconfont'>&#xed6b;</i>
@@ -173,8 +216,28 @@ export default class Board extends React.Component {
             </div>
             <div className='group'>
               <div className='label'>画笔</div>
-              <div className='brush'>
+              <div className='brush' onClick={e => { this.setBoxVisibility(true, e) }}>
                 <span className='iconfont'>&#xe8b4;</span>
+                <div
+                  className={classNames({
+                    'size-box': true,
+                    'show': this.boxVisibility
+                  })}
+                  onMouseMove={this.ProgressDraging}
+                >
+                  <div className='progress-bar'>
+                    <div
+                      className='inner'
+                      style={{ width: `${this.currentProgress}px` }}
+                    >
+                      <i
+                        className='dot'
+                        onMouseDown={this.ProgressDragStart}
+                      />
+                    </div>
+                  </div>
+                  <div className='num'>{this.lineWidthPixel}px</div>
+                </div>
               </div>
               {
                 bgColor.map((e, i) => (
@@ -207,6 +270,20 @@ export default class Board extends React.Component {
             alt='draw-image'
             ref={node => { this.$oimage = node }}
           />
+          <div className='control-panel'>
+            <button
+              className='reset-btn'
+              onClick={e => { this.clearCanvas() }}
+            >
+              清空重置
+            </button>
+            <button
+              className='download-btn'
+              onClick={e => { this.downloadDraw() }}
+            >
+              下载到本地
+            </button>
+          </div>
         </div>
       </div>
     )
