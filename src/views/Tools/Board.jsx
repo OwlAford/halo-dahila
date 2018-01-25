@@ -209,9 +209,18 @@ export default class Board extends React.Component {
     this.beforeProgress = this.currentProgress
   }
 
-  setBoxVisibility (state, e) {
-    this.boxVisibility = state
-    e && e.stopPropagation()
+  showProgressBox () {
+    this.brushTimer && clearTimeout(this.brushTimer)
+    this.boxVisibility = true
+  }
+
+  hideProgressBox (e) {
+    this.brushTimer && clearTimeout(this.brushTimer)
+    this.brushTimer = setTimeout(() => {
+      this.boxVisibility = false
+      clearTimeout(this.brushTimer)
+    }, 300)
+    e.stopPropagation()
   }
 
   render () {
@@ -245,10 +254,7 @@ export default class Board extends React.Component {
     ]
 
     return (
-      <div
-        className='tools-card full'
-        onClick={e => { this.setBoxVisibility(false) }}
-      >
+      <div className='tools-card full'>
         <div className='title'>
           <div className='inner'>
             <i className='iconfont'>&#xed6b;</i>
@@ -259,7 +265,7 @@ export default class Board extends React.Component {
           <div className='panel'>
             <div className='group'>
               <div className='label'>背景</div>
-              <div className='imgBg'>
+              <div className='imgBg' title='点击上传背景图片'>
                 <span className='iconfont'>&#xe61f;</span>
                 <input
                   type='file'
@@ -283,13 +289,17 @@ export default class Board extends React.Component {
             </div>
             <div className='group'>
               <div className='label'>画笔</div>
-              <div className='brush' onClick={e => { this.setBoxVisibility(true, e) }}>
+              <div
+                className='brush'
+                onMouseOver={e => { this.showProgressBox() }}
+              >
                 <span className='iconfont'>&#xe8b4;</span>
                 <div
                   className={classNames({
                     'size-box': true,
                     'show': this.boxVisibility
                   })}
+                  onMouseOut={e => { this.hideProgressBox(e) }}
                   onMouseMove={this.ProgressDraging}
                 >
                   <div className='progress-bar'>
@@ -345,19 +355,19 @@ export default class Board extends React.Component {
               清空重置
             </button>
             <button
-              className='fn-btn'
+              className='fn-btn bubbly-button'
               onClick={e => { this.stackBack() }}
             >
               上一步
             </button>
             <button
-              className='fn-btn'
+              className='fn-btn bubbly-button'
               onClick={e => { this.stackNext() }}
             >
               下一步
             </button>
             <button
-              className='fn-btn'
+              className='fn-btn bubbly-button'
               onClick={e => { this.downloadDraw() }}
             >
               下载
