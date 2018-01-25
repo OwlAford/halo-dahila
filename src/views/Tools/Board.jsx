@@ -27,7 +27,7 @@ export default class Board extends React.Component {
   componentDidMount () {
     this.ctx = this.$canvas.getContext('2d')
     this.initStack()
-    window.addEventListener('click', this.ProgressDragEnd, false)
+    window.addEventListener('mouseup', this.ProgressDragEnd, false)
   }
 
   stackSave () {
