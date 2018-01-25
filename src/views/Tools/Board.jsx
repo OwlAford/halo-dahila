@@ -11,7 +11,7 @@ export default class Board extends React.Component {
   @observable bgColor = null
   @observable beforeProgress = 9
   @observable currentProgress = 9
-  @observable lineColor = '#00367C'
+  @observable lineColor = '#000'
   @observable boxVisibility = false
 
   stack = []
@@ -228,6 +228,22 @@ export default class Board extends React.Component {
       '#FFBDC6'
     ]
 
+    const brushColor = [
+      '#fff',
+      '#ccc',
+      '#000',
+      '#ff0000',
+      '#ffff00',
+      '#00ff00',
+      '#00ffff',
+      '#0000ff',
+      '#ff00ff',
+      '#009944',
+      '#00a0e9',
+      '#1d2088',
+      '#e4007f'
+    ]
+
     return (
       <div
         className='tools-card full'
@@ -291,7 +307,7 @@ export default class Board extends React.Component {
                 </div>
               </div>
               {
-                bgColor.map((e, i) => (
+                brushColor.map((e, i) => (
                   <div
                     key={i}
                     style={{ backgroundColor: e }}

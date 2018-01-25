@@ -9,7 +9,7 @@
   }
 
   .board-wrap {
-    background: url(../images/bg.gif);
+    background: url(../images/bg.png);
   
     canvas {
       display: block;
@@ -44,6 +44,9 @@
     
     .brushDot {
       border-radius: 100%;
+      margin-right: 8px;
+      height: 14px;
+      width: 14px;
     }
 
     .imgBg, .brush {
@@ -147,13 +150,12 @@
     
     .group {
       padding: 0 20px;
-      width: 50%;
       height: 100%;
       box-sizing: border-box;
       display: flex;
       align-items: center;
 
-      .label, .imgBg, .brush, .bgDot, .brushDot {
+      .label, .imgBg, .brush, .bgDot {
         margin-right: 10px;
       }
 
