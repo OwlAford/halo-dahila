@@ -2,12 +2,15 @@ import React from 'react'
 import { observable, computed, action } from 'mobx'
 import classNames from 'classnames'
 import { observer } from 'mobx-react'
+import Toast from '^/Toast'
 import { initImage, downloadCanvasImage } from '~/libs/tools'
 import './scss/board.scss'
 
 @observer
 export default class Board extends React.Component {
   @observable imgPath = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+  @observable showToast = false
+  @observable toastMesg = ''
   @observable bgColor = null
   @observable beforeProgress = 9
   @observable currentProgress = 9
@@ -132,6 +135,17 @@ export default class Board extends React.Component {
   }
 
   @action
+  showMessage (msg, delay) {
+    this.showToast = true
+    this.toastMesg = msg
+    clearTimeout(this.msgTimer)
+    this.msgTimer = setTimeout(() => {
+      this.showToast = false
+      clearTimeout(this.msgTimer)
+    }, delay || 3000)
+  }
+
+  @action
   pathHandle = e => {
     const url = this.getFileUrl()
     const reg = /\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/
@@ -140,7 +154,7 @@ export default class Board extends React.Component {
       this.getImageInfo()
     } else {
       this.$path.value = ''
-      console.log('文件格式错误！')
+      this.showMessage('文件格式错误！', 2000)
     }
   }
 
@@ -272,6 +286,9 @@ export default class Board extends React.Component {
                   onChange={this.pathHandle}
                   ref={node => { this.$path = node }}
                 />
+                {
+                  this.showToast && <Toast>{this.toastMesg}</Toast>
+                }
               </div>
               {
                 bgColor.map((e, i) => (
