@@ -3,14 +3,14 @@ import { observable, computed, action } from 'mobx'
 import classNames from 'classnames'
 import { observer } from 'mobx-react'
 import Toast from '^/Toast'
+import WithToast from '^/WithToast'
 import { initImage, downloadCanvasImage } from '~/libs/tools'
 import './scss/board.scss'
 
 @observer
+@WithToast
 export default class Board extends React.Component {
   @observable imgPath = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-  @observable showToast = false
-  @observable toastMesg = ''
   @observable bgColor = null
   @observable beforeProgress = 9
   @observable currentProgress = 9
@@ -132,17 +132,6 @@ export default class Board extends React.Component {
     canvas.height = rHeight
     this.ctx.drawImage(img, 0, 0, nWidth, nHeight, 0, 0, rWidth, rHeight)
     this.stackSave()
-  }
-
-  @action
-  showMessage (msg, delay) {
-    this.showToast = true
-    this.toastMesg = msg
-    clearTimeout(this.msgTimer)
-    this.msgTimer = setTimeout(() => {
-      this.showToast = false
-      clearTimeout(this.msgTimer)
-    }, delay || 3000)
   }
 
   @action
