@@ -337,7 +337,12 @@ export default class Board extends React.Component {
               }
             </div>
           </div>
-          <div className='board-wrap'>
+          <div
+            className={classNames({
+              'board-wrap': true,
+              'thin': this.lineWidthPixel < 5
+            })}
+          >
             <canvas
               ref={node => { this.$canvas = node }}
               width='810'
