@@ -53,7 +53,6 @@ export default class PlayList extends React.Component {
                       <img
                         src={item.cover}
                         alt={item.name}
-                        crossOrigin='anonymous'
                         onLoad={e => { this.loadHandle(e, i) }}
                       />
                     </div>
