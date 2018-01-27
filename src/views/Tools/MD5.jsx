@@ -22,7 +22,7 @@ export default class MD5 extends React.Component {
       <div className='tools-card'>
         <div className='title'>
           <div className='inner'>
-            <i className='iconfont'>&#xe60e;</i>
+            <i className='iconfont'>&#xe908;</i>
             <span>MD5在线加密</span>
           </div>
         </div>

@@ -1,7 +1,7 @@
 @import './variable.scss';
 
 @font-face {
-  @include setIconFont(font_156150_2utkwrprq2hb0529);
+  @include setIconFont(font_156150_eo1ci95rw1h8h0k9);
 }
 
 @font-face {
@@ -24,6 +24,7 @@ body {
   color: $fc;
   font-size: $ft;
   background-color: $bg;
+  user-select: none;
 
   &:lang(zh-CN) {
     font-family: 'SF Pro SC', 'SF Pro Text', 'SF Pro Icons', 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;

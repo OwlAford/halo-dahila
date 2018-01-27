@@ -1,19 +1,26 @@
 import React from 'react'
-import './scss/list.scss'
+import classNames from 'classnames'
+import './scss/playList.scss'
 
 export default class PlayList extends React.Component {
   $items = []
   $canvas = []
   currentIndex = null
 
-  mouseoverHandle (i) {
-    const $item = this.$items[i]
-    $item.className = 'item in-right'
+  mouseoverHandle (i, can) {
+    if (can) {
+      const $item = this.$items[i]
+      $item.classList.add('in-right')
+      $item.classList.remove('out-right')
+    }
   }
 
-  mouseoutHandle (i) {
-    const $item = this.$items[i]
-    $item.className = 'item out-right'
+  mouseoutHandle (i, can) {
+    if (can) {
+      const $item = this.$items[i]
+      $item.classList.add('out-right')
+      $item.classList.remove('in-right')
+    }
   }
 
   playHandle (i) {
@@ -43,10 +50,14 @@ export default class PlayList extends React.Component {
             list.map((item, i) => (
               <div key={i} className='item-wrap'>
                 <div
-                  className='item'
+                  className={classNames({
+                    'item': true,
+                    'in-right': index === i,
+                    'out-right': index !== i
+                  })}
                   ref={node => { this.$items[i] = node }}
-                  onMouseOver={e => { this.mouseoverHandle(i) }}
-                  onMouseLeave={e => { this.mouseoutHandle(i) }}
+                  onMouseOver={e => { this.mouseoverHandle(i, index !== i) }}
+                  onMouseLeave={e => { this.mouseoutHandle(i, index !== i) }}
                 >
                   <div className='album'>
                     <div className='cover'>

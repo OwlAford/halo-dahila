@@ -1,6 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
+import { observable, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
+import Girl from '^/Girl'
 import './scss/index.scss'
 
 @inject(stores => {
@@ -13,20 +15,30 @@ import './scss/index.scss'
 
 @observer
 export default class Toolbar extends React.Component {
+  @observable showGirl = false
 
   scrollToTop () {
     window.scrollTo(0, 0)
   }
 
+  @action
+  toogleGirl () {
+    this.showGirl = !this.showGirl
+  }
+
   render () {
-    return (
+    return [
       <div
+        key='toolbar'
         className={classNames({
           'app-toolbar': true,
           'app-skew-shadow': true,
           'show': this.props.is2rdScreen
         })}
       >
+        <div className='iconfont' onClick={e => { this.toogleGirl() }}>
+          <i className='girl' />
+        </div>
         <div className='iconfont'>&#xe627;</div>
         <div className='iconfont'>&#xe607;</div>
         {
@@ -34,7 +46,8 @@ export default class Toolbar extends React.Component {
             ? <div className='iconfont' onClick={this.scrollToTop}>&#xe61c;</div>
             : null
         }
-      </div>
-    )
+      </div>,
+      this.showGirl ? <Girl key='girl' /> : null
+    ]
   }
 }

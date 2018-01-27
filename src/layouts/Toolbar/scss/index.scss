@@ -30,6 +30,15 @@
       text-align: center;
       background-color: rgba(255,255,255,.9);
       position: relative;
+
+      .girl {
+        padding: 10px;
+        display: block;
+        height: 34px;
+        width: 34px;
+        background: url(../images/girl.svg) no-repeat center center;
+        background-size: 28px;
+      }
       
       &:hover {
         background-color: #f9f9f9;
