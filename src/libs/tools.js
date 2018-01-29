@@ -1,5 +1,8 @@
-export const initImage = img => {
+export const initImage = (img, url) => {
   return new Promise((resolve, reject) => {
+    if (url) {
+      img.src = url
+    }
     img.onload = () => {
       resolve()
     }

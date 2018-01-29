@@ -7,6 +7,7 @@
   .row-double {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 
     &.wrap {
       flex-wrap: wrap;
@@ -15,7 +16,10 @@
     .tools-card {
       width: 420px;
       flex-shrink: 0;
-      padding-bottom: 30px;
+
+      &.pb15 {
+        padding-bottom: 15px;
+      }
       
       &.narrow {
         width: 340px;
@@ -117,6 +121,54 @@
         border: none;
         box-sizing: border-box;
         padding: 14px 20px;
+      }
+    }
+  }
+
+  .open-source-repo {
+    padding: 5px 15px 0;
+
+    .info {
+      color: #666;
+    }
+
+    table, td {
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .item-row {
+      height: 42px;
+      line-height: 42px;
+      color: #586069;
+
+      & + .item-row td {
+        border-top: 1px solid #f4f4f4;
+      }
+
+      .name {
+        width: 180px;
+        padding-left: 10px;
+        white-space: nowrap;
+        word-break: keep-all;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        a {
+          color: #2f92f8;
+          text-decoration: none;
+        }
+      }
+
+      .iconfont {
+        font-size: 13px;
+        margin-right: 4px;
+      }
+
+      .star, .forks {
+        font-size: 12px;
+        margin-left: 10px;
       }
     }
   }

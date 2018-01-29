@@ -18,7 +18,7 @@ module.exports = {
     extJS: [
       'https://cdn.bootcss.com/es5-shim/4.5.10/es5-shim.min.js',
       'https://cdn.bootcss.com/es6-shim/0.35.3/es6-shim.min.js',
-      // 'https://cdn.bootcss.com/axios/0.17.1/axios.min.js',
+      'https://cdn.bootcss.com/axios/0.17.1/axios.min.js',
       'https://cdn.wilddog.com/sdk/js/2.5.17/wilddog-sync.js',
       'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js',
       'https://cdn.bootcss.com/stackblur-canvas/1.4.0/stackblur.min.js',
@@ -57,7 +57,7 @@ module.exports = {
     extJS: [
       'https://cdn.bootcss.com/es5-shim/4.5.10/es5-shim.min.js',
       'https://cdn.bootcss.com/es6-shim/0.35.3/es6-shim.min.js',
-      // 'https://cdn.bootcss.com/axios/0.17.1/axios.min.js',
+      'https://cdn.bootcss.com/axios/0.17.1/axios.min.js',
       'https://cdn.wilddog.com/sdk/js/2.5.17/wilddog-sync.js',
       'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js',
       'https://cdn.bootcss.com/stackblur-canvas/1.4.0/stackblur.min.js',

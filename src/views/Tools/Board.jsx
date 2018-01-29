@@ -2,26 +2,25 @@ import React from 'react'
 import { observable, computed, action } from 'mobx'
 import classNames from 'classnames'
 import { observer } from 'mobx-react'
-import Toast from '^/Toast'
-import WithToast from '^/WithToast'
+import { withToast } from '^/Toast'
 import { initImage, downloadCanvasImage } from '~/libs/tools'
 import './scss/board.scss'
 
+@withToast
 @observer
-@WithToast
 export default class Board extends React.Component {
-  @observable imgPath = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
   @observable bgColor = null
   @observable beforeProgress = 9
   @observable currentProgress = 9
   @observable lineColor = '#000'
   @observable boxVisibility = false
 
+  imgPath = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
   stack = []
   pointer = -1
 
   rWidth = 810
-  rHeight = 420
+  rHeight = 608
 
   penPress = false
   progressPress = false
@@ -95,7 +94,7 @@ export default class Board extends React.Component {
   clearCanvas () {
     const ctx = this.ctx
     ctx.clearRect(0, 0, this.rWidth, this.rHeight)
-    this.$canvas.height = this.rHeight = 420
+    this.$canvas.height = this.rHeight = 608
   }
 
   resetCanvas () {
@@ -119,11 +118,11 @@ export default class Board extends React.Component {
     this.lineColor = color
   }
 
-  async getImageInfo () {
+  async getImageInfo (url) {
     this.clearCanvas()
     const img = this.$oimage
     const canvas = this.$canvas
-    await initImage(img)
+    await initImage(img, url)
     const nWidth = img.naturalWidth
     const nHeight = img.naturalHeight
 
@@ -139,11 +138,10 @@ export default class Board extends React.Component {
     const url = this.getFileUrl()
     const reg = /\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/
     if (reg.test(this.$path.value)) {
-      this.imgPath = url
-      this.getImageInfo()
+      this.getImageInfo(url)
     } else {
       this.$path.value = ''
-      this.showMessage('文件格式错误！', 2000)
+      this.props.showMessage('文件格式错误！', 2000)
     }
   }
 
@@ -204,7 +202,7 @@ export default class Board extends React.Component {
   }
 
   downloadDraw () {
-    downloadCanvasImage(this.$canvas, `qrcode-${Date.now()}.png`, 'image/png')
+    downloadCanvasImage(this.$canvas, `painter-${Date.now()}.png`, 'image/png')
   }
 
   ProgressDragEnd = e => {
@@ -275,9 +273,6 @@ export default class Board extends React.Component {
                   onChange={this.pathHandle}
                   ref={node => { this.$path = node }}
                 />
-                {
-                  this.showToast && <Toast>{this.toastMesg}</Toast>
-                }
               </div>
               {
                 bgColor.map((e, i) => (
@@ -346,7 +341,7 @@ export default class Board extends React.Component {
             <canvas
               ref={node => { this.$canvas = node }}
               width='810'
-              height='420'
+              height='608'
               onMouseDown={this.startDraw}
               onMouseMove={this.drawing}
               onMouseUp={this.endDraw}

@@ -6,6 +6,7 @@ export default class HomeModel {
   @observable isAtBottom = false
   @observable bannerDarkState = false
   @observable scrollable = false
+  @observable starredDataList = []
 
   constructor (scrollableState) {
     this.scrollable = scrollableState
@@ -29,6 +30,18 @@ export default class HomeModel {
   @action
   bannerDarkHandle (state) {
     this.bannerDarkState = state
+  }
+
+  @action
+  getStarredDataList (cb, err) {
+    axios.get('https://api.github.com/users/OwlAford/starred')
+      .then(res => {
+        this.starredDataList = res.data
+        cb && cb(res.data)
+      })
+      .catch(er => {
+        err && err(er)
+      })
   }
 
   @action
