@@ -1,4 +1,5 @@
 import { observable, action } from 'mobx'
+import info from './userInfo.json'
 
 export default class HomeModel {
   @observable is2rdScreen = false
@@ -7,9 +8,16 @@ export default class HomeModel {
   @observable bannerDarkState = false
   @observable scrollable = false
   @observable starredDataList = []
+  @observable userInfo = {
+    author: info.author,
+    bio: info.bio,
+    playlist: info.playlist
+  }
+  @observable hobby = info.hobby
 
   constructor (scrollableState) {
     this.scrollable = scrollableState
+    this.getUserInfo()
   }
 
   @action
@@ -38,6 +46,21 @@ export default class HomeModel {
       .then(res => {
         this.starredDataList = res.data
         cb && cb(res.data)
+      })
+      .catch(er => {
+        err && err(er)
+      })
+  }
+
+  @action
+  getUserInfo (cb, err) {
+    axios.get('/music/userInfo.json')
+      .then(({ data }) => {
+        this.userInfo.author = data.author
+        this.userInfo.bio = data.bio
+        this.userInfo.playlist = data.playlist
+        this.hobby = data.hobby
+        cb && cb(data)
       })
       .catch(er => {
         err && err(er)

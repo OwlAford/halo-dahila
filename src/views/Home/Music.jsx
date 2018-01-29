@@ -10,15 +10,15 @@ import PlayList from './PlayList'
 import { waiter } from '~/libs/tools'
 import initTween from '~/libs/tween'
 import avatar from './images/avatar.jpg'
-import info from './info.json'
 
 @withRouter
 
 @inject(stores => {
-  const { home: { scrollable, is2rdScreen } } = stores
+  const { home: { scrollable, is2rdScreen, userInfo } } = stores
   return {
     scrollable,
     is2rdScreen,
+    userInfo,
     bannerDarkHandle: state => stores.home.bannerDarkHandle(state),
     scrollableHandle: state => stores.home.scrollableHandle(state)
   }
@@ -39,10 +39,32 @@ export default class Music extends React.Component {
     cover: ''
   }
 
-  authorName = info.author
-  mottoWord = info.motto
-  musicPlayList = info.playlist
-  menuList = info.submenu
+  subMenu = [
+    {
+      'label': 'HOME',
+      'path': '/home/profile'
+    },
+    {
+      'label': 'NOTE',
+      'path': '/home/note'
+    },
+    {
+      'label': 'DESIGN',
+      'path': '/home/design'
+    },
+    {
+      'label': 'SHOOT',
+      'path': '/home/shoot'
+    },
+    {
+      'label': 'TOOLS',
+      'path': '/home/tools'
+    },
+    {
+      'label': 'TALK',
+      'path': '/home/talk'
+    }
+  ]
 
   constructor (props) {
     super(props)
@@ -157,7 +179,7 @@ export default class Music extends React.Component {
     this.musicReady = false
     this.isPlaying = false
 
-    const list = this.musicPlayList
+    const list = this.props.userInfo.playlist
     if (index === undefined) {
       index = Math.round(Math.random() * (list.length - 1))
     }
@@ -220,6 +242,7 @@ export default class Music extends React.Component {
   }
 
   render () {
+    const { author, bio, playlist } = this.props.userInfo
     const middStyle = {
       top: `${this.clientH * 0.4}px`,
       left: `${this.clientW * 0.5}px`
@@ -228,12 +251,12 @@ export default class Music extends React.Component {
       play: this.isPlaying,
       switchMusic: this.initMusicPlayer,
       index: this.currentIndex,
-      list: this.musicPlayList,
+      list: playlist,
       changeMode: this.changeReadMode,
       musicHandle: this.musicHandle
     }
 
-    const Menu = ({ defaultClass }) => this.menuList.map(
+    const Menu = ({ defaultClass }) => this.subMenu.map(
       (item, i) => (
         <NavLink
           key={i}
@@ -331,11 +354,11 @@ export default class Music extends React.Component {
                 {
                   this.isPlaying
                     ? this.currentMusic.name
-                    : this.authorName
+                    : author
                 }
               </div>
               {
-                !this.isPlaying && <div className='motto'>{this.mottoWord}</div>
+                !this.isPlaying && <div className='bio'>{bio}</div>
               }
             </div>
           </div>
