@@ -5,7 +5,6 @@ const merge = require('webpack-merge')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const settings = require('../settings/core').build
 const assets = settings.assets
 const baseWebpackConfig = require('./webpack.base')
@@ -37,7 +36,6 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: assetsPath(`${assets.cssDir}/[name].[${settings.cssHashType}].css`),
       allChunks: true
     }),
-    new OptimizeCSSPlugin(),
     new HtmlWebpackPlugin({
       extJS: settings.extJS || [],
       extCSS: settings.extCSS || [],

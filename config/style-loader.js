@@ -1,4 +1,5 @@
 const path = require('path')
+const packageConfig = require('../package.json')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -16,9 +17,20 @@ const styleLoader = (loader, options) => {
     loader: 'postcss-loader',
     options: {
       sourceMap: !isProduction,
-      config: {
-        path: path.join(__dirname, 'postcss.config.js')
-      }
+      ident: 'postcss',
+      plugins: loader => [
+        require('postcss-import')({
+          root: loader.resourcePath
+        }),
+        require('autoprefixer')({
+          browsers: packageConfig.browserslist
+        }),
+        require('postcss-flexibility'),
+        require('cssnano')({
+          preset: 'advanced',
+          reduceIdents: false
+        })
+      ]
     }
   }]
 
