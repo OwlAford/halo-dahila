@@ -115,9 +115,11 @@ export default class Girl extends React.Component {
   }
 
   render () {
+    let customStyle = this.props.style || {}
     const poz = {
       left: this.pozLeft + 'px',
-      top: this.pozTop + 'px'
+      top: this.pozTop + 'px',
+      ...customStyle
     }
     return (
       <div

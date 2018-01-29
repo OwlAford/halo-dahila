@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import { observable, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
+import LazyDisplay from '^/LazyDisplay'
 import Girl from '^/Girl'
 import './scss/index.scss'
 
@@ -27,6 +28,14 @@ export default class Toolbar extends React.Component {
   }
 
   render () {
+    const showStyle = {
+      animation: 'fadeInUp .6s both'
+    }
+
+    const hideStyle = {
+      animation: 'fadeOutDown .6s both'
+    }
+
     return [
       <div
         key='toolbar'
@@ -47,7 +56,14 @@ export default class Toolbar extends React.Component {
             : null
         }
       </div>,
-      this.showGirl ? <Girl key='girl' /> : null
+      <LazyDisplay
+        key='girl'
+        enterDelay={0}
+        leaveDelay={600}
+        visibleKey={this.showGirl}
+      >
+        <Girl style={this.showGirl ? showStyle : hideStyle} />
+      </LazyDisplay>
     ]
   }
 }
