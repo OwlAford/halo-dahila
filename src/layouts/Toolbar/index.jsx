@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { observable, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import LazyDisplay from '^/LazyDisplay'
+import Portal from '^/Portal'
 import Girl from '^/Girl'
 import './scss/index.scss'
 
@@ -17,23 +18,62 @@ import './scss/index.scss'
 @observer
 export default class Toolbar extends React.Component {
   @observable showGirl = false
+  @observable showMenu = false
+  @observable girlZoom = 1
+  @observable girlSing = false
+  @observable menuY = 0
+  @observable menuY = 0
 
   scrollToTop () {
     window.scrollTo(0, 0)
   }
 
   @action
-  toogleGirl () {
+  toogleGirl (e) {
     this.showGirl = !this.showGirl
+    if (!this.showGirl) {
+      this.resetGirl(e, 1)
+    }
+    this.showMenu = false
+  }
+
+  @action
+  singHandle (state) {
+    this.girlSing = state
+  }
+
+  @action
+  setGirlZoom (e, ratio) {
+    this.girlZoom = ratio
+    this.showMenu = false
+    e && e.stopPropagation()
+  }
+
+  resetGirl (e) {
+    this.setGirlZoom(e, 1)
+    this.singHandle(false)
+  }
+
+  contextMenuHandle (e) {
+    this.menuX = e.clientX
+    this.menuY = e.clientY
+    this.showMenu = true
+    console.log(e)
+  }
+
+  componentDidMount () {
+    document.addEventListener('click', () => {
+      this.showMenu = false
+    }, false)
   }
 
   render () {
     const showStyle = {
-      animation: 'fadeInUp .6s both'
+      animation: 'fadeInUp .6s'
     }
 
     const hideStyle = {
-      animation: 'fadeOutDown .6s both'
+      animation: 'fadeOutDown .6s'
     }
 
     return [
@@ -62,8 +102,55 @@ export default class Toolbar extends React.Component {
         leaveDelay={600}
         visibleKey={this.showGirl}
       >
-        <Girl style={this.showGirl ? showStyle : hideStyle} />
-      </LazyDisplay>
+        <Girl
+          singing={this.girlSing}
+          zoom={this.girlZoom}
+          contextMenuHandle={(e, zoom) => { this.contextMenuHandle(e) }}
+          style={this.showGirl ? showStyle : hideStyle}
+        />
+      </LazyDisplay>,
+      this.showMenu
+        ? <Portal key='menu'>
+          <div
+            className='fix-menu'
+            style={{
+              left: this.menuX + 'px',
+              top: this.menuY + 'px'
+            }}
+          >
+            <div
+              className='menu-item'
+              onClick={e => { this.toogleGirl(e) }}
+            >
+              关闭
+            </div>
+            <div
+              className='menu-item'
+              onClick={e => { this.singHandle(!this.girlSing) }}
+            >
+              唱歌
+            </div>
+            <div
+              className='menu-item'
+              onClick={e => { this.setGirlZoom(e, 0.5) }}
+            >
+              缩小至0.5倍
+            </div>
+            <div
+              className='menu-item'
+              onClick={e => { this.setGirlZoom(e, 1.5) }}
+            >
+              放大至1.5倍
+            </div>
+            <div
+              className='menu-item'
+              onClick={e => { this.resetGirl(e) }}
+            >
+              重置
+            </div>
+          </div>
+        </Portal>
+        : null
     ]
   }
 }

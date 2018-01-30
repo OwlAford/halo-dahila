@@ -70,6 +70,11 @@ export default class Girl extends React.Component {
     const iW = this.pozLeft * 2
     const iH = this.pozTop * 2
 
+    if (this.props.singing) {
+      this.lookState = 'none'
+      return
+    }
+
     // look left
     if (cX <= iW / 2) {
       this.lookState = 'l'
@@ -114,21 +119,35 @@ export default class Girl extends React.Component {
     }
   }
 
+  menuHandle (e) {
+    const { contextMenuHandle } = this.props
+    contextMenuHandle && contextMenuHandle(e, this.zoomHandle)
+    e.preventDefault()
+  }
+
   render () {
     let customStyle = this.props.style || {}
+
+    let reduce = {
+      transform: `scale(${this.props.zoom || 1})`
+    }
+
     const poz = {
       left: this.pozLeft + 'px',
       top: this.pozTop + 'px',
+      ...reduce,
       ...customStyle
     }
+
     return (
       <div
         className='girl-wrap'
         style={poz}
         onMouseDown={e => { this.mouseDownHandle(e) }}
         onMouseUp={e => { this.mouseUpHandle(e) }}
+        onContextMenu={e => { this.menuHandle(e) }}
       >
-        <div className='me'>
+        <div className={this.props.singing ? 'me sing' : 'me'}>
           <div className={'hair ' + this.actions[this.lookState]} />
           <div className='clothes'>
             <div className='jumper' />
@@ -136,6 +155,7 @@ export default class Girl extends React.Component {
           <div className={'neck ' + this.actions[this.lookState]} />
           <div className={'head ' + this.actions[this.lookState]} >
             <div className='bangs' />
+            <div className='mouse' />
           </div>
         </div>
       </div>

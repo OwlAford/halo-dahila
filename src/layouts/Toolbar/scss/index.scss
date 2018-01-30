@@ -57,3 +57,23 @@
     }
   }
 }
+
+.fix-menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99999;
+  color: #fff;
+  background-color: rgba(0, 0, 0, .8);
+  cursor: default;
+
+  .menu-item {
+    padding: 10px 10px;
+    min-width: 120px;
+    font-size: 12px;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .5);
+    }
+  }
+}

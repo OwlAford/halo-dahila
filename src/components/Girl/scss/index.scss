@@ -1,5 +1,21 @@
 $ratio: 1.25;
 
+@keyframes girlSing {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(1, .1, 1);
+  }
+  60% {
+    transform: scale(.8, .8, .8);
+  }
+  100% {
+    transform: scale(.5, .5, .5);
+    border-radius: 15px;
+  }
+}
+
 .girl-wrap {
   position: fixed;
   width: 80px/$ratio;
@@ -22,6 +38,18 @@ $ratio: 1.25;
     margin: auto;
     width: 80px/$ratio;
     height: 160px/$ratio;
+
+    &.sing .head .mouse {
+      width: 30px;
+      height: 15px;
+      background-color: #af2e2e;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      position: absolute;
+      left: 12px;
+      top: 48px;
+      animation: girlSing 2s infinite alternate;
+    }
 
     .head {
       transition: all 0.5s ease;
