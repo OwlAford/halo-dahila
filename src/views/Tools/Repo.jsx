@@ -7,10 +7,11 @@ import EmptyBox from '^/EmptyBox'
 
 @inject(stores => {
   const {
-    home: { starredDataList }
+    home: { starredDataList, starredGotten }
   } = stores
 
   return {
+    starredGotten,
     starredDataList,
     getStarredDataList: cb => stores.home.getStarredDataList(cb)
   }
@@ -23,6 +24,9 @@ export default class Repo extends React.Component {
 
   @action
   componentWillMount () {
+    if (this.props.starredGotten) {
+      return
+    }
     NProgress.start()
     this.props.getStarredDataList(data => {
       NProgress.done()
@@ -49,7 +53,7 @@ export default class Repo extends React.Component {
               : <table width='100%'>
                 <tbody>
                   {
-                    list.slice(0, 10).map((item, i) => (
+                    list.slice(0, 9).map((item, i) => (
                       <tr className='item-row gitfont' key={i}>
                         <td>
                           <div className='name'>

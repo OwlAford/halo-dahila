@@ -1,4 +1,5 @@
 import { observable, action } from 'mobx'
+import shuffle from 'lodash/shuffle'
 import info from './userInfo.json'
 
 export default class HomeModel {
@@ -14,10 +15,10 @@ export default class HomeModel {
     playlist: info.playlist
   }
   @observable hobby = info.hobby
+  @observable starredGotten = false
 
   constructor (scrollableState) {
     this.scrollable = scrollableState
-    this.getUserInfo()
   }
 
   @action
@@ -43,9 +44,10 @@ export default class HomeModel {
   @action
   getStarredDataList (cb, err) {
     axios.get('https://api.github.com/users/OwlAford/starred')
-      .then(res => {
-        this.starredDataList = res.data
-        cb && cb(res.data)
+      .then(({ data }) => {
+        this.starredGotten = true
+        this.starredDataList = shuffle(data)
+        cb && cb(data)
       })
       .catch(er => {
         err && err(er)
@@ -58,7 +60,7 @@ export default class HomeModel {
       .then(({ data }) => {
         this.userInfo.author = data.author
         this.userInfo.bio = data.bio
-        this.userInfo.playlist = data.playlist
+        this.userInfo.playlist = shuffle(data.playlist).slice(0, 6)
         this.hobby = data.hobby
         cb && cb(data)
       })

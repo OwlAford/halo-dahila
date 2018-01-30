@@ -20,7 +20,8 @@ import avatar from './images/avatar.jpg'
     is2rdScreen,
     userInfo,
     bannerDarkHandle: state => stores.home.bannerDarkHandle(state),
-    scrollableHandle: state => stores.home.scrollableHandle(state)
+    scrollableHandle: state => stores.home.scrollableHandle(state),
+    getUserInfo: cb => stores.home.getUserInfo(cb)
   }
 })
 
@@ -216,24 +217,25 @@ export default class Music extends React.Component {
       height: 64,
       backend: 'MediaElement'
     })
+    this.props.getUserInfo(async () => {
+      this.initMusicPlayer(0)
 
-    this.initMusicPlayer(0)
+      this.$menu.style.width = `${this.clientW}px`
 
-    this.$menu.style.width = `${this.clientW}px`
-
-    await waiter(1500)
-    this.cricleState = 'run'
-    await waiter(1000)
-    this.cricleState = 'hide'
-    this.avatarState = 'run'
-    this.bannerDarkState = true
-    this.props.bannerDarkHandle(true)
-    await waiter(1000)
-    this.avatarState = 'up'
-    await waiter(300)
-    initTween(this.$tween, this.clientW, this.clientH)
-    await waiter(3000)
-    this.props.scrollableHandle(true)
+      await waiter(1500)
+      this.cricleState = 'run'
+      await waiter(1000)
+      this.cricleState = 'hide'
+      this.avatarState = 'run'
+      this.bannerDarkState = true
+      this.props.bannerDarkHandle(true)
+      await waiter(1000)
+      this.avatarState = 'up'
+      await waiter(300)
+      initTween(this.$tween, this.clientW, this.clientH)
+      await waiter(3000)
+      this.props.scrollableHandle(true)
+    })
   }
 
   componentWillUnmount () {
