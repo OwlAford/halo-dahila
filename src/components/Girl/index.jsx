@@ -65,56 +65,43 @@ export default class Girl extends React.Component {
     if (this.couldDrap) {
       return
     }
-    const cX = e.clientX
-    const cY = e.clientY
-    const iW = this.pozLeft * 2
-    const iH = this.pozTop * 2
+
+    const coordX = e.clientX - this.pozLeft
+    const coordY = this.pozTop - e.clientY
+    let angle = Math.atan(coordY / coordX) / Math.PI * 180
+    const gap = 22.5
+
+    if (coordX < 0 && coordY > 0) {
+      angle = 180 + angle
+    } else if (coordX < 0 && coordY < 0) {
+      angle = 180 + angle
+    } else if (coordX > 0 && coordY < 0) {
+      angle = 360 + angle
+    }
+    // console.log(angle)
 
     if (this.props.singing) {
       this.lookState = 'none'
       return
     }
 
-    // look left
-    if (cX <= iW / 2) {
-      this.lookState = 'l'
-    }
-
-    // look right
-    if (cX >= (iW - (iW / 2))) {
+    if (angle >= gap * 15 || angle < gap) {
       this.lookState = 'r'
-    }
-    // look down
-    if (cY >= (iH - (iH / 2.5))) {
-      this.lookState = 'd'
-    }
-
-    // look up
-    if (cY <= ((iH / 2.5))) {
-      this.lookState = 'u'
-    }
-
-    // look down right
-    if (cY >= (iH - (iH / 2.5)) && cX >= (iW - (iW / 3))) {
-      this.lookState = 'dr'
-    }
-
-    // look down left
-    if (cY >= (iH - (iH / 2.5)) && cX <= iW / 3) {
-      this.lookState = 'dl'
-    }
-
-    // look up right
-    if (cY <= ((iH / 2.5)) && cX >= (iW - (iW / 3))) {
+    } else if (angle >= gap && angle < gap * 3) {
       this.lookState = 'ur'
-    }
-
-    // look up left
-    if (cY <= ((iH / 2.5)) && cX <= iW / 3) {
+    } else if (angle >= gap * 3 && angle < gap * 5) {
+      this.lookState = 'u'
+    } else if (angle >= gap * 5 && angle < gap * 7) {
       this.lookState = 'ul'
-    }
-
-    if (cX > iW / 3 && cX < (iW - (iW / 3)) && cY > iH / 2.5 && cY < (iH - (iH / 2.5))) {
+    } else if (angle >= gap * 7 && angle < gap * 9) {
+      this.lookState = 'l'
+    } else if (angle >= gap * 9 && angle < gap * 11) {
+      this.lookState = 'dl'
+    } else if (angle >= gap * 11 && angle < gap * 13) {
+      this.lookState = 'd'
+    } else if (angle >= gap * 13 && angle < gap * 15) {
+      this.lookState = 'dr'
+    } else {
       this.lookState = 'none'
     }
   }

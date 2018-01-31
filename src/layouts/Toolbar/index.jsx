@@ -58,7 +58,6 @@ export default class Toolbar extends React.Component {
     this.menuX = e.clientX
     this.menuY = e.clientY
     this.showMenu = true
-    console.log(e)
   }
 
   componentDidMount () {
@@ -122,13 +121,13 @@ export default class Toolbar extends React.Component {
               className='menu-item'
               onClick={e => { this.toogleGirl(e) }}
             >
-              关闭
+              退出
             </div>
             <div
               className='menu-item'
               onClick={e => { this.singHandle(!this.girlSing) }}
             >
-              唱歌
+              唱歌/停止唱歌
             </div>
             <div
               className='menu-item'
