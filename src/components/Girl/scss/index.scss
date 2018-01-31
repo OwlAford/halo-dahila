@@ -1,4 +1,5 @@
 $ratio: 1.25;
+$hair: 170px;
 
 @keyframes girlSing {
   0% {
@@ -209,15 +210,10 @@ $ratio: 1.25;
         position: absolute;
         width: 60px/$ratio;
         height: 60px/$ratio;
-        -moz-border-radius: 100%;
-        -webkit-border-radius: 100%;
         border-radius: 100%;
         top: -12px/$ratio;
         background: #ebbfad;
         left: -18px/$ratio;
-        -moz-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        -webkit-transition: all 0.5s ease;
         transition: all 0.5s ease;
       }
 
@@ -261,9 +257,12 @@ $ratio: 1.25;
     .hair {
       transition: all 0.5s ease;
       position: absolute;
-      height: 170px/$ratio;
+      height: $hair/$ratio;
       width: 105px/$ratio;
-      border-radius: 45px/$ratio;
+      border-top-left-radius: 45px/$ratio;
+      border-top-right-radius: 45px/$ratio;
+      border-bottom-left-radius: 36px/$ratio;
+      border-bottom-right-radius: 36px/$ratio;
       background: #111427;
       left: -12px/$ratio;
       top: -12px/$ratio;
@@ -273,7 +272,7 @@ $ratio: 1.25;
         content: "";
         position: absolute;
         width: 80px/$ratio;
-        height: 160px/$ratio;
+        height: ($hair - 10px)/$ratio;
         background: #070a1d;
         border-radius: 25px/$ratio;
         top: 60px/$ratio;
@@ -292,12 +291,12 @@ $ratio: 1.25;
 
       &.look-down {
         top: -12px/$ratio;
-        height: 165px/$ratio;
+        height: ($hair - 5px)/$ratio;
       }
 
       &.look-up {
         top: -8px/$ratio;
-        height: 180px/$ratio;
+        height: ($hair + 10px)/$ratio;
       }
 
       &.look-down-right {
@@ -307,7 +306,7 @@ $ratio: 1.25;
       &.look-up-right {
         left: -25px/$ratio;
         top: -8px/$ratio;
-        height: 180px/$ratio;
+        height: ($hair + 10px)/$ratio;
       }
 
       &.look-down-left {
@@ -317,7 +316,7 @@ $ratio: 1.25;
       &.look-up-left {
         left: -8px/$ratio;
         top: -8px/$ratio;
-        height: 180px/$ratio;
+        height: ($hair + 10px)/$ratio;
       }
     }
 
