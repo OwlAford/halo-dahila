@@ -39,6 +39,7 @@ export default class HomeModel {
     this.girlShow = state
     if (!this.girlShow) {
       this.girlSing = false
+      this.audio.pause()
     }
   }
 

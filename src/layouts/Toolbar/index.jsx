@@ -72,11 +72,11 @@ export default class Toolbar extends React.Component {
 
   render () {
     const showStyle = {
-      animation: 'fadeInUp .6s'
+      animation: 'fadeInUp .6s forwards'
     }
 
     const hideStyle = {
-      animation: 'fadeOutDown .6s'
+      animation: 'fadeOutDown .6s forwards'
     }
 
     return [
