@@ -13,24 +13,11 @@ export default class Girl extends React.Component {
   dragPozX = window.innerWidth / 2
   dragPozY = window.innerHeight / 2
 
-  actions = {
-    none: '',
-    r: 'look-right',
-    l: 'look-left',
-    d: 'look-down',
-    u: 'look-up',
-    dr: 'look-down-right',
-    dl: 'look-down-left',
-    ur: 'look-up-right',
-    ul: 'look-up-left'
-  }
-
   componentWillMount () {
     this.moveHandle = e => {
       this.mouseMoveHandle(e)
       this.direction(e)
     }
-
     window.addEventListener('mousemove', this.moveHandle, false)
   }
 
@@ -86,21 +73,21 @@ export default class Girl extends React.Component {
     }
 
     if (angle >= gap * 15 || angle < gap) {
-      this.lookState = 'r'
+      this.lookState = 'look-right'
     } else if (angle >= gap && angle < gap * 3) {
-      this.lookState = 'ur'
+      this.lookState = 'look-up-right'
     } else if (angle >= gap * 3 && angle < gap * 5) {
-      this.lookState = 'u'
+      this.lookState = 'look-up'
     } else if (angle >= gap * 5 && angle < gap * 7) {
-      this.lookState = 'ul'
+      this.lookState = 'look-up-left'
     } else if (angle >= gap * 7 && angle < gap * 9) {
-      this.lookState = 'l'
+      this.lookState = 'look-left'
     } else if (angle >= gap * 9 && angle < gap * 11) {
-      this.lookState = 'dl'
+      this.lookState = 'look-down-left'
     } else if (angle >= gap * 11 && angle < gap * 13) {
-      this.lookState = 'd'
+      this.lookState = 'look-down'
     } else if (angle >= gap * 13 && angle < gap * 15) {
-      this.lookState = 'dr'
+      this.lookState = 'look-down-right'
     } else {
       this.lookState = 'none'
     }
@@ -135,12 +122,12 @@ export default class Girl extends React.Component {
         onContextMenu={e => { this.menuHandle(e) }}
       >
         <div className={this.props.singing ? 'me sing' : 'me'}>
-          <div className={'hair ' + this.actions[this.lookState]} />
+          <div className={'hair ' + this.lookState} />
           <div className='clothes'>
             <div className='jumper' />
           </div>
-          <div className={'neck ' + this.actions[this.lookState]} />
-          <div className={'head ' + this.actions[this.lookState]} >
+          <div className={'neck ' + this.lookState} />
+          <div className={'head ' + this.lookState} >
             <div className='bangs' />
             <div className='mouse' />
           </div>

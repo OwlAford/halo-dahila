@@ -94,9 +94,8 @@ export default class Toolbar extends React.Component {
         <div className='iconfont'>&#xe627;</div>
         <div className='iconfont'>&#xe607;</div>
         {
-          this.props.isNearBottom
-            ? <div className='iconfont' onClick={this.scrollToTop}>&#xe61c;</div>
-            : null
+          this.props.isNearBottom &&
+          <div className='iconfont' onClick={this.scrollToTop}>&#xe61c;</div>
         }
       </div>,
       <LazyDisplay
@@ -112,8 +111,8 @@ export default class Toolbar extends React.Component {
           style={this.props.girlShow ? showStyle : hideStyle}
         />
       </LazyDisplay>,
-      this.showMenu
-        ? <Portal key='menu'>
+      this.showMenu &&
+        <Portal key='menu'>
           <div
             className='fix-menu'
             style={{
@@ -153,7 +152,6 @@ export default class Toolbar extends React.Component {
             </div>
           </div>
         </Portal>
-        : null
     ]
   }
 }
