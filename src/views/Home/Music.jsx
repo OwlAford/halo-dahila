@@ -14,11 +14,13 @@ import avatar from './images/avatar.jpg'
 @withRouter
 
 @inject(stores => {
-  const { home: { scrollable, is2rdScreen, userInfo } } = stores
+  const { home: { scrollable, is2rdScreen, userInfo, girlShow } } = stores
   return {
     scrollable,
     is2rdScreen,
     userInfo,
+    girlShow,
+    girlVisibleHandle: state => stores.home.girlVisibleHandle(state),
     bannerDarkHandle: state => stores.home.bannerDarkHandle(state),
     scrollableHandle: state => stores.home.scrollableHandle(state),
     getUserInfo: cb => stores.home.getUserInfo(cb)
@@ -467,14 +469,17 @@ export default class Music extends React.Component {
             />
             <Menu defaultClass='item' />
             {
-              this.readMode && (
-                <div
+              this.readMode
+                ? <div
                   className='quitBtn'
                   onClick={e => { this.changeReadMode(false) }}
                 >
                   退出阅读模式
                 </div>
-              )
+                : <i
+                  className='girl'
+                  onClick={e => { this.props.girlVisibleHandle(!this.props.girlShow) }}
+                />
             }
           </div>
         </div>

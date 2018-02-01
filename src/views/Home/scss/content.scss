@@ -566,6 +566,18 @@
           box-shadow: 0 10px 28px rgba(255, 97, 83, .3);
         }
       }
+
+      .girl {
+        display: block;
+        height: 34px;
+        width: 34px;
+        background: url(../images/girl.svg) no-repeat center center;
+        background-size: 100%;
+        position: absolute;
+        right: 0;
+        top: 9px;
+        cursor: pointer;
+      }
     }
   }
 }

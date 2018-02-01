@@ -16,9 +16,24 @@ export default class HomeModel {
   }
   @observable hobby = info.hobby
   @observable starredGotten = false
+  @observable girlShow = false
+  @observable girlSing = false
 
   constructor (scrollableState) {
     this.scrollable = scrollableState
+  }
+
+  @action
+  girlVisibleHandle (state) {
+    this.girlShow = state
+    if (!this.girlShow) {
+      this.girlSing = false
+    }
+  }
+
+  @action
+  girlSingHandle (state) {
+    this.girlSing = state
   }
 
   @action

@@ -22,13 +22,17 @@ import './scss/content.scss'
 export default class Home extends React.Component {
   componentWillMount () {
     let clientH = document.documentElement.clientHeight
+    let clientW = document.documentElement.clientWidth
     const Props = this.props
 
     const refresh = () => {
-      if (Math.abs(document.documentElement.clientHeight - clientH) < 200) {
+      const newCH = document.documentElement.clientHeight
+      const newCW = document.documentElement.clientWidth
+      if (Math.abs(newCH - clientH) < 200 && Math.abs(newCW - clientW) < 200) {
         return
       } else {
-        clientH = document.documentElement.clientHeight
+        clientH = newCH
+        clientW = newCW
       }
       Props.setScrollable(false)
       Props.setBannerDark(false)
