@@ -60,6 +60,7 @@ $hair: 170px;
   z-index: 999999;
   cursor: move;
   user-select: none;
+  transition: transform .3s;
 
   div {
     position: absolute;
@@ -102,7 +103,7 @@ $hair: 170px;
         position: absolute;
         left: 12px;
         top: 48px;
-        animation: girlSing 2s infinite alternate;
+        animation: girlSing 1s infinite alternate;
       }
     }
 

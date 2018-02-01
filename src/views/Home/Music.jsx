@@ -477,7 +477,10 @@ export default class Music extends React.Component {
                   退出阅读模式
                 </div>
                 : <i
-                  className='girl'
+                  className={classNames({
+                    'girl': true,
+                    'active': this.props.girlShow
+                  })}
                   onClick={e => { this.props.girlVisibleHandle(!this.props.girlShow) }}
                 />
             }

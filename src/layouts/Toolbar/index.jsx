@@ -32,18 +32,17 @@ export default class Toolbar extends React.Component {
 
   @action
   toogleGirl (e) {
-    this.props.girlVisibleHandle(!this.props.girlShow)
-    if (!this.props.girlShow) {
+    if (this.props.girlShow) {
       this.resetGirl(e, 1)
     }
+    this.props.girlVisibleHandle(!this.props.girlShow)
     this.showMenu = false
   }
 
   @action
   toogleSingGirl (e) {
     this.props.girlSingHandle(true)
-    this.props.girlVisibleHandle(!this.props.girlShow)
-    this.showMenu = false
+    this.toogleGirl()
   }
 
   @action
@@ -72,11 +71,11 @@ export default class Toolbar extends React.Component {
 
   render () {
     const showStyle = {
-      animation: 'fadeInUp .6s forwards'
+      animation: 'fadeInUp .6s'
     }
 
     const hideStyle = {
-      animation: 'fadeOutDown .6s forwards'
+      animation: 'fadeOutDown .6s .3s forwards'
     }
 
     return [

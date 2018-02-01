@@ -19,7 +19,7 @@ export default class HomeModel {
   @observable girlShow = false
   @observable girlSing = false
 
-  musicLink = '/music/Nightwish-Sagan.mp3'
+  musicLink = '/music/singing.mp3'
 
   constructor (scrollableState) {
     this.scrollable = scrollableState
@@ -32,6 +32,9 @@ export default class HomeModel {
     audio.preload = 'auto'
     audio.style.display = 'none'
     document.body.appendChild(audio)
+    audio.addEventListener('ended', e => {
+      this.girlSingHandle(false)
+    }, false)
   }
 
   @action
@@ -45,6 +48,7 @@ export default class HomeModel {
 
   @action
   girlSingHandle (state) {
+    this.audio.currentTime = 0
     state ? this.audio.play() : this.audio.pause()
     this.girlSing = state
   }

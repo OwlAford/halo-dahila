@@ -577,6 +577,13 @@
         right: 0;
         top: 9px;
         cursor: pointer;
+        border-radius: 4px;
+        opacity: .6;
+        transition: opacity .3s;
+
+        &.active {
+          opacity: 1;
+        }
       }
     }
   }
