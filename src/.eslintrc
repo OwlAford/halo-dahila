@@ -2,6 +2,7 @@
   "globals": {
     "axios": true,
     "wilddog": true,
+    "IScroll": true,
     "NProgress": true,
     "echarts": true,
     "StackBlur": true,

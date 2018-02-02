@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import BubblyButton from '^/BubblyButton'
 import './scss/playList.scss'
 
 export default class PlayList extends React.Component {
@@ -91,7 +92,7 @@ export default class PlayList extends React.Component {
             ))
           }
         </div>
-        <div className='hideButton' onClick={e => { changeMode(true) }}>切换至阅读模式</div>
+        <BubblyButton clickEvent={() => { changeMode(true) }}>切换至阅读模式</BubblyButton>
       </div>
     )
   }

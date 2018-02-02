@@ -157,26 +157,11 @@
     }
   }
 
-  .hideButton {
+  .app-bubbly-button {
     position: absolute;
-    width: 200px;
-    height: 44px;
     left: 50%;
     bottom: 0;
     margin: 0 0 -22px -100px;
-    background-color: #28bd8b;
-    color: #fff;
-    text-align: center;
-    line-height: 44px;
     z-index: 99;
-    cursor: pointer;
-    border-radius: 22px;
-    box-shadow: 0 12px 20px -6px rgba(0, 0, 0, .28);
-    transition: all .3s;
-
-    &:hover {
-      background-color: #24d499;
-      box-shadow: 0 12px 20px -6px rgba(60, 250, 204, 0.28);
-    }
   }
 }
