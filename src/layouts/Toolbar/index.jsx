@@ -91,7 +91,7 @@ export default class Toolbar extends React.Component {
           &#xe895;
         </div>
         <div className='iconfont'>&#xe627;</div>
-        <div className='iconfont'>&#xe607;</div>
+        <div className='iconfont'>&#xe6f5;</div>
         {
           this.props.isNearBottom &&
           <div className='iconfont' onClick={this.scrollToTop}>&#xe61c;</div>

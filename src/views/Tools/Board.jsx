@@ -293,6 +293,7 @@ export default class Board extends React.Component {
               <div
                 className='brush'
                 onMouseOver={e => { this.showProgressBox() }}
+                onMouseOut={e => { this.hideProgressBox(e) }}
               >
                 <span className='iconfont'>&#xe8b4;</span>
                 <div
@@ -300,7 +301,6 @@ export default class Board extends React.Component {
                     'size-box': true,
                     'show': this.boxVisibility
                   })}
-                  onMouseOut={e => { this.hideProgressBox(e) }}
                   onMouseMove={this.ProgressDraging}
                 >
                   <div className='progress-bar'>
