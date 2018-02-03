@@ -50,7 +50,7 @@ export default class Time extends React.Component {
   render () {
     const { cname, cip } = window.returnCitySN
     return (
-      <div className='tools-card'>
+      <div className='tools-card dark'>
         <div className='title'>
           <div className='inner'>
             <i className='iconfont'>&#xe6e8;</i>
@@ -62,10 +62,10 @@ export default class Time extends React.Component {
         <ProgressBar
           color={
             this.currentPercent > 50
-              ? 'lime lighterGray-face'
+              ? 'lime'
               : this.currentPercent > 30
-                ? 'cyan lighterGray-face'
-                : 'red lighterGray-face'
+                ? 'cyan'
+                : 'red'
           }
           progress={this.currentPercent}
         />

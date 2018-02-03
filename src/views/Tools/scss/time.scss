@@ -1,12 +1,24 @@
 .tools-card {
-  background-color: #fefefe;
+  background-color: #fff;
   border-radius: 5px;
   padding-bottom: 25px;
   margin-bottom: 10px;
+  
+  &.dark {
+    background-color: #f4f4f4;
+    background-image: linear-gradient(180deg, rgb(236, 236, 236), #fefefe);
 
-  & >.title {
+    >.title {
+      border-bottom-color: #eaeaea;
+      background-color: #fff;
+    }
+  }
+  
+  >.title {
     padding: 18px 20px;
     line-height: 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     border-bottom: 1px solid #f2f2f2;
     display: flex;
     justify-content: space-between;
