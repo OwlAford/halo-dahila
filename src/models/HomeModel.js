@@ -88,7 +88,7 @@ export default class HomeModel {
 
   @action
   getUserInfo (cb, err) {
-    axios.get('/music/userInfo.json')
+    axios.get('/music/userInfo_v1.json')
       .then(({ data }) => {
         this.userInfo.author = data.author
         this.userInfo.bio = data.bio

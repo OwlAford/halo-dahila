@@ -8,6 +8,7 @@ export default Component => {
   @observer
   class WithToastComponent extends React.Component {
     @observable showToast = false
+    @observable toastType = ''
     @observable toastMesg = ''
 
     constructor (props) {
@@ -16,9 +17,10 @@ export default Component => {
     }
 
     @action
-    showMessage (msg, delay) {
+    showMessage (msg, delay, type) {
       this.showToast = true
       this.toastMesg = msg
+      this.toastType = type || 'warning'
       clearTimeout(this.msgTimer)
       this.msgTimer = setTimeout(() => {
         this.showToast = false
@@ -47,7 +49,7 @@ export default Component => {
           leaveDelay={300}
           visibleKey={this.showToast}
         >
-          <Toast style={this.showToast ? showStyle : hideStyle}>{this.toastMesg}</Toast>
+          <Toast type={this.toastType} style={this.showToast ? showStyle : hideStyle}>{this.toastMesg}</Toast>
         </LazyDisplay>
       ]
     }

@@ -1,0 +1,102 @@
+.talk-avatar {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; 
+
+}
+
+.avatar-wrap {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 12px;
+  position: relative;
+
+  i.round-avatar {
+    cursor: pointer;
+  }
+
+  .iconfont {
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background-color: #28bd8b;
+    text-align: center;
+    line-height: 24px;
+    font-size: 12px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    z-index: 9;
+    transition: opacity .3s;
+  }
+  
+  &.active {
+    i.round-avatar {
+      opacity: .5;
+    }
+
+    .iconfont {
+      opacity: 1;
+    }
+  }
+}
+
+i.round-avatar {
+  width: 60px;
+  height: 60px;
+  display: block;
+  background: url(../images/avtars.png) no-repeat;
+  background-size: 500% auto;
+  border-radius: 100%;
+  transition: opacity .3s;
+
+  &.woman {
+    background-position: 0 0;
+  }
+
+  &.man {
+    background-position: 25% * 1 0;
+  }
+
+  &.dog {
+    background-position: 25% * 2 0;
+  }
+
+  &.bear {
+    background-position: 25% * 3 0;
+  }
+
+  &.owl {
+    background-position: 25% * 4 0;
+  }
+
+  &.rabbit {
+    background-position: 0 50%;
+  }
+
+  &.fox {
+    background-position: 25% * 1 50%;
+  }
+
+  &.cat {
+    background-position: 25% * 2 50%;
+  }
+
+  &.tree {
+    background-position: 25% * 3 50%;
+  }
+
+  &.raccoon {
+    background-position: 25% * 4 50%;
+  }
+
+  &.shark {
+    background-position: 0  25% * 2;
+  }
+
+  &.elk {
+    background-position: 25% * 1 50% * 2;
+  }
+}

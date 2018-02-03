@@ -8,9 +8,13 @@
   width: 240px;
   margin-left: -120px;
   color: #fff;
-  background-color: #f53e48;
+  background-color: rgba(245, 62, 72, 0.9);
   text-align: center;
   z-index: 999;
-  box-shadow: 0 6px 20px -4px #ff0000c2;
+  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.3);
   border-radius: 4px;
+
+  &.success {
+    background-color: rgba(52, 214, 147, 0.9);
+  }
 }

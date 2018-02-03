@@ -125,6 +125,17 @@
     }
   }
 
+  .repo-list {
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    position: relative;
+
+    .iScrollIndicator {
+      opacity: .4 !important;
+    }
+  }
+
   .open-source-repo {
     padding: 5px 15px 0;
 

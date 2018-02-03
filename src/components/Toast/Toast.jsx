@@ -8,7 +8,8 @@ export default ({ type, children, style }) => (
     <div
       className={classNames({
         'app-toast': true,
-        'warning': type === 'warning'
+        'warning': type === 'warning',
+        'success': type === 'success'
       })}
       style={style || {}}
     >

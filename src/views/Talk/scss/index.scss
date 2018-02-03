@@ -1,4 +1,78 @@
 .home-talk {
   width: 1200px;
   margin: 0 auto;
+  display: flex;
+  min-height: 580px;
+  border-radius: 5px;
+  overflow: hidden;
+
+  .talk-sidebar {
+    width: 320px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    background-color: #242a31;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: #fff;
+    position: relative;
+
+    .user-name {
+      padding: 30px 20px 20px;
+    }
+
+    .fm-title {
+      font-size: 16px;
+      padding: 0 20px;
+      font-weight: 700;
+    }
+
+    .name-ipt {
+      background-color: #363d45;
+      padding: 10px 20px;
+      border-radius: 20px;
+
+      input[type=text] {
+        border: none;
+        outline: none;
+        background: none;
+        color: #fff;
+        font-size: 14px;
+        width: 100%;
+
+        &:-webkit-input-placeholder {
+          color: #868b8e;
+        }
+      }
+    }
+
+    .login-info {
+      padding: 30px 20px;
+      text-align: center;
+
+      .round-avatar {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+      }
+
+      .nick-name {
+        padding: 20px 0;
+        font-size: 16px;
+      }
+    }
+
+    .app-bubbly-button {
+      position: absolute;
+      left: 50%;
+      margin-left: -100px;
+      bottom: 30px;
+    }
+  }
+
+  .talk-content {
+    background-color: #fff;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    flex-grow: 1;
+  }
 }

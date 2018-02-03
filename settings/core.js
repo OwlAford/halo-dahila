@@ -26,6 +26,7 @@ module.exports = {
       'http://plug.qiniudn.com/EasePack.min.js',
       'https://cdn.bootcss.com/wavesurfer.js/2.0.0-beta01/wavesurfer.min.js',
       'https://cdn.bootcss.com/dynamics.js/1.1.5/dynamics.min.js',
+      'https://cdn.bootcss.com/iScroll/5.2.0/iscroll.min.js',
       'http://pv.sohu.com/cityjson?ie=utf-8'
     ],
     extCSS: [
@@ -65,6 +66,7 @@ module.exports = {
       'http://plug.qiniudn.com/EasePack.min.js',
       'https://cdn.bootcss.com/wavesurfer.js/2.0.0-beta01/wavesurfer.min.js',
       'https://cdn.bootcss.com/dynamics.js/1.1.5/dynamics.min.js',
+      'https://cdn.bootcss.com/iScroll/5.2.0/iscroll.min.js',
       'http://pv.sohu.com/cityjson?ie=utf-8'
     ],
     extCSS: [

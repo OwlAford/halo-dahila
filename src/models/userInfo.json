@@ -32,6 +32,16 @@
       "singer": "X Japan",
       "file": "/music/X-JAPAN-Say_Anything.mp3",
       "cover": "/music/x-jpan.jpg"
+    }, {
+      "name": "Eva",
+      "singer": "Nightwish",
+      "file": "/music/Nightwish-Eva.mp3",
+      "cover": "/music/Nightwish-Eva.jpg"
+    }, {
+      "name": "Eva",
+      "singer": "Nightwish",
+      "file": "/music/Nightwish-Eva.mp3",
+      "cover": "/music/Nightwish-Eva.jpg"
     }
   ],
   "hobby": {
