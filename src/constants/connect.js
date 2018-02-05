@@ -37,5 +37,3 @@ export const online = (name, avatar) => {
   WD.sync().ref(onlineRef).update(item)
   WD.sync().ref(onlineRef + curKey).onDisconnect().remove()
 }
-
-online('Aford', 'owl')
