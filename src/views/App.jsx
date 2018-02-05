@@ -3,8 +3,6 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { getBumper } from '^/Bumper'
 import Home from './Home'
 import Efforts from 'bundle-loader?lazy&name=efforts!./Efforts'
-// import Login from './Login'
-// import TodoList from 'bundle-loader?lazy&name=todolist!./TodoList'
 import '#/styles'
 
 const App = () => (
@@ -18,14 +16,6 @@ const App = () => (
         path='/efforts'
         component={getBumper(Efforts)}
       />
-      {/* <Route
-        path='/login'
-        component={Login}
-      />
-      <Route
-        path='/todolist'
-        component={getBumper(TodoList)}
-      /> */}
       <Route component={() => <Redirect to='/home' />} />
     </Switch>
   </div>
