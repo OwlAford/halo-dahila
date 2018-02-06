@@ -47,7 +47,6 @@ export default class Talk extends React.Component {
   constructor (props) {
     super(props)
     this.selectAvatar = this.selectAvatar.bind(this)
-    this.refreshOnlineHandle = this.refreshOnlineHandle.bind(this)
   }
 
   @computed get couldSend () {
@@ -55,25 +54,32 @@ export default class Talk extends React.Component {
   }
 
   componentWillMount () {
-    this.props.onlineAuto(this.refreshOnlineHandle)
+    this.props.onlineAuto()
   }
 
   componentDidMount () {
-    this.onlineScroll = new IScroll(this.refs.$onlineList, {
+    const params = {
       disableTouch: true,
       scrollbars: true,
       mouseWheel: true,
       fadeScrollbars: true
-    })
+    }
+    this.onlineScroll = new IScroll(this.refs.$onlineList, params)
+    this.talkScroll = new IScroll(this.refs.$talkList, params)
   }
 
-  refreshOnlineHandle (val) {
-    // console.log(val)
+  componentDidUpdate () {
     this.onlineScroll && this.onlineScroll.refresh()
+    if (this.talkScroll) {
+      this.talkScroll.refresh()
+      // this.talkScroll._end()
+      console.log(this.talkScroll)
+    }
   }
 
   componentWillUnmount () {
     this.onlineScroll.destroy()
+    this.talkScroll.destroy()
   }
 
   @action
@@ -133,7 +139,7 @@ export default class Talk extends React.Component {
       sendMessage(uploadInfo, () => {
         this.sendIngState = false
         this.talkingText = ''
-      }, () => {
+      }, this.refreshTalkListHandle, () => {
         this.props.showMessage('消息发送失败！', 2000)
       })
     }
@@ -149,7 +155,7 @@ export default class Talk extends React.Component {
       prevDate,
       onlinelist
     } = this.props
-    console.log('👻', curChatList, prevDate)
+
     return (
       <div className='home-talk'>
         <div className='talk-sidebar'>
@@ -195,7 +201,7 @@ export default class Talk extends React.Component {
                       />
                       <div className='name'>
                         <span>{item.name}</span>
-                        <span className='state'>（在线）</span>
+                        <span className='state'>在线</span>
                       </div>
                       <div className='local'>IP: {item.cip} {item.cname}</div>
                     </div>
@@ -207,7 +213,7 @@ export default class Talk extends React.Component {
         </div>
         <div className='talk-content'>
           <div className='group-name'>技术讨论交流</div>
-          <div className='talking-cxt'>
+          <div className='talking-cxt' ref='$talkList'>
             <div className='chat-list'>
               {
                 prevDate &&
@@ -221,27 +227,27 @@ export default class Talk extends React.Component {
                   </span>
                 </div>
               }
-              {console.log(curChatList)}
               {
-                Object.keys(curChatList).map(item => {
-                  const curGrp = curChatList[item]
+                curChatList.map((item, i) => {
                   return (
-                    <div className='date-group' key={item}>
+                    <div className='date-group' key={i}>
                       {
-                        Object.keys(curGrp).map(sub => {
-                          const subItem = curGrp[sub]
+                        item.map((sub, j) => {
                           return (
-                            <div className='date-group' key={sub}>
-                              <div className='chat-list-item'>
-                                <i
-                                  alt={subItem.avatar}
-                                  className={'round-avatar ' + subItem.avatar}
-                                >
-                                  <div className='send-time'>{subItem.time}</div>
-                                </i>
-                                <div className='nicname'>{subItem.author}</div>
-                                <div className='message-detail'>{subItem.text}</div>
-                              </div>
+                            <div
+                              key={j}
+                              className={classNames('chat-list-item', {
+                                'dir-right': window.returnCitySN.cip === sub.ip
+                              })}
+                            >
+                              <i
+                                alt={sub.avatar}
+                                className={'round-avatar ' + sub.avatar}
+                              >
+                                <div className='send-time'>{sub.time}</div>
+                              </i>
+                              <div className='nicname'>{sub.author}</div>
+                              <div className='message-detail'>{sub.text}</div>
                             </div>
                           )
                         })
@@ -250,38 +256,6 @@ export default class Talk extends React.Component {
                   )
                 })
               }
-              <div className='date-group'>
-                <div className='chat-list-item'>
-                  <i
-                    alt={'owl'}
-                    className={'round-avatar ' + 'owl'}
-                  >
-                    <div className='send-time'>12:12</div>
-                  </i>
-                  <div className='nicname'>OwlAford</div>
-                  <div className='message-detail'>我要发送消息</div>
-                </div>
-                <div className='chat-list-item'>
-                  <i
-                    alt={'owl'}
-                    className={'round-avatar ' + 'owl'}
-                  >
-                    <div className='send-time'>12:12</div>
-                  </i>
-                  <div className='nicname'>OwlAford</div>
-                  <div className='message-detail'>我要发送消息</div>
-                </div>
-                <div className='chat-list-item dir-right'>
-                  <i
-                    alt={'owl'}
-                    className={'round-avatar ' + 'owl'}
-                  >
-                    <div className='send-time'>12:12</div>
-                  </i>
-                  <div className='nicname'>OwlAford</div>
-                  <div className='message-detail'>我要发送消息</div>
-                </div>
-              </div>
             </div>
           </div>
           <div className='talking-input'>

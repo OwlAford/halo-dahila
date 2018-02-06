@@ -41,13 +41,13 @@ export const online = (name, avatar) => {
 export const sendMessage = (data, cb, err) => {
   const timestamp = Date.now()
   const curKey = ~~(timestamp / 24 / 60 / 60 / 1000)
-  const chatlistRef = rootPath + 'chatRoom/chatlist/' + curKey
+  const chatlistRef = rootPath + 'chatRoom/chatlist/id_' + curKey
   const chatdateRef = rootPath + 'chatRoom/chatdate'
 
   let flag = 0
 
   let itemA = {}
-  itemA[timestamp] = data
+  itemA['id_' + timestamp] = data
   WD.sync().ref(chatlistRef).update(itemA, error => {
     if (error === null) {
       err && err()
@@ -59,7 +59,7 @@ export const sendMessage = (data, cb, err) => {
   })
 
   let itemB = {}
-  itemB[curKey] = curKey
+  itemB['id_' + curKey] = curKey
   WD.sync().ref(chatdateRef).update(itemB, error => {
     if (error === null) {
       err && err()

@@ -97,6 +97,15 @@
       height: 400px;
       overflow: hidden;
       background-color: #eee;
+      position: relative;
+      
+      .iScrollLoneScrollbar {
+        .iScrollIndicator {
+          background-color: rgba(0, 0, 0, .2) !important;
+          border: none !important;
+          z-index: 9;
+        }
+      }
     }
 
     .talking-input {
@@ -244,7 +253,7 @@
   }
 
   .chat-list {
-    padding: 0 20px;
+    padding: 0 30px;
 
     .before-view {
       text-align: center;
@@ -268,7 +277,7 @@
 
   .chat-list-item {
     position: relative;
-    padding: 38px 0 20px 60px;
+    padding: 30px 0 28px 60px;
     display: flex;
 
     .round-avatar {
@@ -276,7 +285,7 @@
       width: 40px;
       position: absolute;
       left: 0;
-      top: 36px;
+      top: 28px;
 
       .send-time {
         width: 80px;
@@ -295,7 +304,7 @@
       font-size: 12px;
       position: absolute;
       left: 60px;
-      top: 20px;
+      top: 12px;
       color: #999;
     }
 
@@ -321,7 +330,7 @@
     }
 
     &.dir-right {
-      padding: 38px 60px 20px 0;
+      padding: 30px 60px 28px 0;
       justify-content: flex-end;
 
       .round-avatar {
@@ -361,8 +370,8 @@
     }
 
     i.round-avatar {
-      height: 46px;
-      width: 46px;
+      height: 44px;
+      width: 44px;
     }
 
     .order-list {
@@ -372,6 +381,12 @@
 
         .name {
           padding-bottom: 10px;
+
+          .state {
+            font-size: 12px;
+            margin-left: 5px;
+            color: #ddd;
+          }
         }
 
         .local {

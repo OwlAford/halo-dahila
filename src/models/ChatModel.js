@@ -10,10 +10,12 @@ export default class ChatModel {
   @observable onlinelist = []
 
   @observable chatdate = []
-  @observable curChatList = {}
+  @observable curChatList = []
 
   @observable prevDate = null
   @observable pointer = 0
+
+  originChatList = {}
 
   constructor () {
     this.onlineAuto()
@@ -54,8 +56,17 @@ export default class ChatModel {
       const curDate = chatDate.reverse()[pointer]
       getData('chatRoom/chatlist/' + curDate, val => {
         if (val) {
-          this.curChatList[curDate] = val
-          // console.log('👻', val)
+          this.originChatList[curDate] = val
+          let arr = []
+          for (let e in this.originChatList) {
+            let sub = []
+            for (let m in this.originChatList[e]) {
+              sub.push(this.originChatList[e][m])
+            }
+            arr.push(sub)
+          }
+          this.curChatList = arr
+          // console.log('👻', arr)
         }
         cb && cb()
       })
@@ -86,7 +97,9 @@ export default class ChatModel {
     })
 
     getData('chatRoom/chatdate', val => {
-      this.chatdate = Object.keys(val)
+      if (val) {
+        this.chatdate = Object.keys(val)
+      }
       this.getCurChatList()
     })
   }
