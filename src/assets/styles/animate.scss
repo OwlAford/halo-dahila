@@ -11,6 +11,19 @@
   animation: fadeIn .3s both;
 }
 
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  animation: fadeOut .3s both;
+}
+
 @keyframes fadeInUp {
   0% {
     opacity: 0;

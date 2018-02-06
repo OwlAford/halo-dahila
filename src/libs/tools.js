@@ -12,6 +12,16 @@ export const initImage = (img, url) => {
   })
 }
 
+export const JSON2Array = val => {
+  let arr = []
+  for (let key in val) {
+    let item = val[key]
+    item.id = key
+    arr.push(item)
+  }
+  return arr
+}
+
 export const waiter = time => {
   return new Promise((resolve, reject) => {
     const tempTimer = setTimeout(() => {

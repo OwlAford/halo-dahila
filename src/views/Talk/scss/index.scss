@@ -4,13 +4,21 @@
   display: flex;
   min-height: 580px;
   border-radius: 5px;
-  overflow: hidden;
+  // overflow: hidden;
+
+  .step {
+    display: none;
+
+    &.show {
+      display: block;
+    }
+  }
 
   .talk-sidebar {
     width: 320px;
     flex-grow: 0;
     flex-shrink: 0;
-    background-color: #242a31;
+    background-color: #252525;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     color: #fff;
@@ -46,7 +54,7 @@
     }
 
     .login-info {
-      padding: 30px 20px;
+      padding: 30px 20px 0;
       text-align: center;
 
       .round-avatar {
@@ -75,5 +83,309 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     flex-grow: 1;
+
+    .group-name {
+      padding: 15px 20px;
+      border-bottom: 1px solid #e2e2e2;
+      background-color: #eee;
+      font-size: 16px;
+      font-weight: 700;
+      border-top-right-radius: 5px;
+    }
+
+    .talking-cxt {
+      height: 400px;
+      overflow: hidden;
+      background-color: #eee;
+    }
+
+    .talking-input {
+      width: 100%;
+      box-sizing: border-box;
+      height: 130px;
+      padding: 20px 180px 20px 30px;
+      position: relative;
+      border-bottom-right-radius: 5px;
+      box-shadow: 0 -2px 14px rgba(0, 0, 0, 0.04);
+
+      .txtipt {
+        height: 100%;
+        
+        textarea {
+          width: 100%;
+          height: 100%;
+          border: none;
+          outline: none;
+          resize: none;
+
+          &::-webkit-input-placeholder {
+            color: #999;
+          }
+        }
+      }
+
+      .emoji {
+        height: 32px;
+        width: 32px;
+        border: 1px solid #dedede;
+        border-radius: 3px;
+        position: absolute;
+        top: 50%;
+        margin-top: -16px;
+        right: 110px;
+        
+        .inner {
+          text-align: center;
+          line-height: 32px;
+          cursor: pointer;
+        }
+
+        .emojilist {
+          position: absolute;
+          right: 42px;
+          bottom: 0;
+          width: 28px * 20;
+          z-index: 9;
+          display: none;
+          flex-wrap: wrap;
+          background-color: #fff;
+          justify-content: flex-start;
+          padding: 10px;
+          border: 1px solid #dedede;
+
+          &.show {
+            display: flex;
+          }
+
+          > div {
+            height: 28px;
+            width: 28px;
+            text-align: center;
+            line-height: 28px;
+            font-size: 18px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .send-btn {
+        height: 60px;
+        width: 60px;
+        background-color: #3bc348;
+        border-radius: 100%;
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        margin-top: -30px;
+        color: #fff;
+        line-height: 60px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color .3s;
+
+        i {
+          display: none;
+        }
+
+        &.disabled {
+          background-color: #dedede;
+          cursor: no-drop;
+        }
+
+        &:not(.disabled):not(.loading):hover {
+          background-color: #2da839;;
+        }
+
+        &.loading {
+          line-height: 58px;
+          cursor: default;
+
+          .iconfont {
+            display: none;
+          }
+
+          i.dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            margin-right: 3px;
+            border-radius: 50%;
+            background: rgb(255, 255, 255);
+            animation: fadeOut 1.04s ease infinite;
+    
+            &:last-child {
+              margin-right: 0px;
+            }
+    
+            &:nth-child(1) {
+              animation-delay: 0.13s;
+            }
+    
+            &:nth-child(2) {
+              animation-delay: 0.26s;
+            }
+    
+            &:nth-child(3) {
+              animation-delay: 0.39s;
+            }
+    
+            &:nth-child(4) {
+              animation-delay: 0.52s;
+            }
+    
+            &:nth-child(5) {
+              animation-delay: 0.65s;
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  .chat-list {
+    padding: 0 20px;
+
+    .before-view {
+      text-align: center;
+      padding: 20px;
+
+      > span {
+        background-color: rgba(0, 0, 0, .1);
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-size: 12px;
+      }
+
+      .jump {
+        color: #1188f8;
+        margin-left: 4px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .chat-list-item {
+    position: relative;
+    padding: 38px 0 20px 60px;
+    display: flex;
+
+    .round-avatar {
+      height: 40px;
+      width: 40px;
+      position: absolute;
+      left: 0;
+      top: 36px;
+
+      .send-time {
+        width: 80px;
+        text-align: center;
+        top: 46px;
+        left: 50%;
+        position: absolute;
+        margin-left: -40px;
+        font-size: 12px;
+        font-style: normal;
+        color: #999;
+      }
+    }
+
+    .nicname {
+      font-size: 12px;
+      position: absolute;
+      left: 60px;
+      top: 20px;
+      color: #999;
+    }
+
+    .message-detail {
+      padding: 10px 15px;
+      background-color: #fff;
+      border-radius: 4px;
+      max-width: 504px;
+      position: relative;
+      line-height: 1.5;
+
+      &:after {
+        content: "";
+        display: block;
+        height: 0;
+        width: 0;
+        border: 4px solid #fff;
+        border-color: transparent #fff transparent transparent;
+        position: absolute;
+        left: -8px;
+        top: 14px;
+      }
+    }
+
+    &.dir-right {
+      padding: 38px 60px 20px 0;
+      justify-content: flex-end;
+
+      .round-avatar {
+        left: auto;
+        right: 0;
+      }
+
+      .nicname {
+        left: auto;
+        right: 60px;
+      }
+
+      .message-detail {
+        background-color: #3bc347;
+        color: #fff;
+
+        &:after {
+          left: auto;
+          right: -8px;
+          border-color: transparent transparent transparent #3bc347;
+        }
+      }
+    }
+  }
+
+  .online-list {
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+
+    .iScrollLoneScrollbar {
+      .iScrollIndicator {
+        background-color: rgba(255, 255, 255, .2) !important;
+        border: none !important;
+        z-index: 9;
+      }
+    }
+
+    i.round-avatar {
+      height: 46px;
+      width: 46px;
+    }
+
+    .order-list {
+      .list-item {
+        padding: 20px 20px 20px 76px;
+        position: relative;
+
+        .name {
+          padding-bottom: 10px;
+        }
+
+        .local {
+          font-size: 12px;
+          color: #979797;
+        }
+
+        i.round-avatar {
+          position: absolute;
+          left: 20px;
+          top: 50%;
+          margin-top: -23px;
+        }
+      }
+    }
   }
 }

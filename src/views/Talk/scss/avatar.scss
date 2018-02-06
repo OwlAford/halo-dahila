@@ -51,6 +51,21 @@ i.round-avatar {
   background-size: 500% auto;
   border-radius: 100%;
   transition: opacity .3s;
+  position: relative;
+
+  &.online:after {
+    content: "";
+    display: block;
+    height: 8px;
+    width: 8px;
+    background-color: #3bc347;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9;
+    border: 4px solid #252525;
+  }
 
   &.woman {
     background-position: 0 0;

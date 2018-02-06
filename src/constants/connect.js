@@ -37,3 +37,34 @@ export const online = (name, avatar) => {
   WD.sync().ref(onlineRef).update(item)
   WD.sync().ref(onlineRef + curKey).onDisconnect().remove()
 }
+
+export const sendMessage = (data, cb) => {
+  const timestamp = Date.now()
+  const curKey = ~~(timestamp / 24 / 60 / 60 / 1000)
+  const chatlistRef = rootPath + 'chatRoom/chatlist/' + curKey
+  const chatdateRef = rootPath + 'chatRoom/chatdate'
+
+  let flag = 0
+
+  let itemA = {}
+  itemA[timestamp] = data
+  WD.sync().ref(chatlistRef).update(itemA, error => {
+    if (error === null) {
+      flag += 1
+      if (flag === 2) {
+        cb && cb()
+      }
+    }
+  })
+
+  let itemB = {}
+  itemB[curKey] = curKey
+  WD.sync().ref(chatdateRef).update(itemB, error => {
+    if (error === null) {
+      flag += 1
+      if (flag === 2) {
+        cb && cb()
+      }
+    }
+  })
+}
