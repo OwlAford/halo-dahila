@@ -1,3 +1,5 @@
+import UAparser from 'ua-parser-js'
+
 export const WD = window.wilddog.initializeApp({
   authDomain: 'carbon.wilddog.com',
   syncURL: 'carbon.wilddogio.com'
@@ -28,7 +30,11 @@ export const online = (name, avatar) => {
   const { cname, cip } = window.returnCitySN
   let item = {}
   let curKey = '/' + cip.replace(/\./g, '_')
+  const parser = new UAparser()
   item[curKey] = {
+    browser: parser.getBrowser(),
+    os: parser.getOS(),
+    cpu: parser.getCPU(),
     cip,
     cname,
     name,
