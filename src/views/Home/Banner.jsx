@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react'
 import classNames from 'classnames'
 import './scss/banner.scss'
 import throttle from 'lodash/throttle'
+import debounce from 'lodash/debounce'
 // import StackBlur from 'stackblur-canvas'
 import { initImage } from '~/libs/tools'
 import imageThumb from './images/bg-city-thumb.jpg'
@@ -25,12 +26,17 @@ class Banner extends React.Component {
   constructor (props) {
     super(props)
     this.scrollPage = this.scrollPage.bind(this)
+    this.initBanner = this.initBanner.bind(this)
+  }
+
+  getClient () {
+    const doc = document.documentElement
+    this.clientH = doc.clientHeight
+    this.clientW = window.innerWidth
   }
 
   componentWillMount () {
-    const doc = document.documentElement
-    this.clientH = doc.clientHeight
-    this.clientW = doc.clientWidth
+    this.getClient()
     this.props.bannerDarkHandle(false)
   }
 
@@ -56,121 +62,143 @@ class Banner extends React.Component {
       ? this.props.isAtBottomHandle(false)
       : this.props.isAtBottomHandle(true)
 
-    if (this.$thumbCanvas) {
-      this.$thumbCanvas.style.opacity = percent
+    if (this.refs.$thumbCanvas) {
+      this.refs.$thumbCanvas.style.opacity = percent
     }
   }
 
-  async componentDidMount () {
-    const { $banner, $originImage, $imageThumb, $originCanvas, $thumbCanvas } = this
+  componentDidMount () {
+    this.initBanner(true)
+    this.optScroller = throttle(this.scrollPage, 30)
+    this.optInitBanner = debounce(e => { this.initBanner() }, 100)
+    window.addEventListener('scroll', this.optScroller, false)
+    window.addEventListener('resize', this.optInitBanner, false)
+  }
 
-    const genSize = wh => {
-      const origin = wh
-      const view = [
-        this.clientW,
-        this.clientH
-      ]
-      const originRatio = origin[0] / origin[1]
-      const viewRatio = view[0] / view[1]
+  genSize = wh => {
+    const origin = wh
+    const view = [
+      this.clientW,
+      this.clientH
+    ]
+    const originRatio = origin[0] / origin[1]
+    const viewRatio = view[0] / view[1]
 
-      let clipPoz = [0, 0]
-      let clipSize = [].concat(origin)
+    let clipPoz = [0, 0]
+    let clipSize = [].concat(origin)
 
-      if (originRatio > viewRatio) {
-        clipSize[1] = origin[1]
-        clipSize[0] = origin[1] * viewRatio
-        clipPoz[1] = 0
-        clipPoz[0] = (origin[0] - clipSize[0]) / 2
-      } else {
-        clipSize[0] = origin[0]
-        clipSize[1] = origin[0] / viewRatio
-        clipPoz[0] = 0
-        clipPoz[1] = (origin[1] - clipSize[1]) / 2 * 0.3
-      }
-
-      return {
-        origin,
-        originRatio,
-        view,
-        viewRatio,
-        clipPoz,
-        clipSize
-      }
+    if (originRatio > viewRatio) {
+      clipSize[1] = origin[1]
+      clipSize[0] = origin[1] * viewRatio
+      clipPoz[1] = 0
+      clipPoz[0] = (origin[0] - clipSize[0]) / 2
+    } else {
+      clipSize[0] = origin[0]
+      clipSize[1] = origin[0] / viewRatio
+      clipPoz[0] = 0
+      clipPoz[1] = (origin[1] - clipSize[1]) / 2 * 0.3
     }
 
-    const size = genSize([2048, 1365])
-    const thumbSize = genSize([320, 213])
-
-    const drawCanvas = (img, canvas, size) => {
-      const view = size.view
-
-      canvas.width = view[0]
-      canvas.height = view[1]
-
-      const ctx = canvas.getContext('2d')
-      ctx.drawImage(
-        img,
-
-        size.clipPoz[0],
-        size.clipPoz[1],
-
-        size.clipSize[0],
-        size.clipSize[1],
-
-        0, 0,
-
-        view[0],
-        view[1]
-      )
+    return {
+      origin,
+      originRatio,
+      view,
+      viewRatio,
+      clipPoz,
+      clipSize
     }
+  }
+
+  drawCanvas = (img, canvas, size) => {
+    const view = size.view
+    canvas.width = view[0]
+    canvas.height = view[1]
+
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(
+      img,
+
+      size.clipPoz[0],
+      size.clipPoz[1],
+
+      size.clipSize[0],
+      size.clipSize[1],
+
+      0, 0,
+
+      view[0],
+      view[1]
+    )
+  }
+
+  initBanner (first) {
+    const { $banner, $originImage, $imageThumb, $originCanvas, $thumbCanvas } = this.refs
+
+    this.getClient()
+    const size = this.genSize([2048, 1365])
+    const thumbSize = this.genSize([320, 213])
 
     const fullCSS = `width: 100%; height: ${size.view[1]}px`
     $banner.style.cssText = fullCSS
 
-    await initImage($imageThumb)
-    drawCanvas($imageThumb, $thumbCanvas, thumbSize)
-    StackBlur.canvasRGB($thumbCanvas, 0, 0, thumbSize.view[0], thumbSize.view[1], 20)
+    const drawBlur = () => {
+      this.drawCanvas($imageThumb, $thumbCanvas, thumbSize)
+      StackBlur.canvasRGB($thumbCanvas, 0, 0, thumbSize.view[0], thumbSize.view[1], 20)
+    }
 
-    await initImage($originImage)
-    $thumbCanvas.style.opacity = 0
-    $thumbCanvas.style.webkitTransition = $thumbCanvas.style.transition = 'opacity 30ms linear'
-    drawCanvas($originImage, $originCanvas, size)
+    if (first) {
+      initImage($imageThumb)
+        .then(drawBlur)
+    } else {
+      drawBlur()
+    }
 
-    this.optScroller = throttle(this.scrollPage, 30)
-    window.addEventListener('scroll', this.optScroller, false)
+    if (first) {
+      initImage($originImage)
+        .then(() => {
+          const Style = $thumbCanvas.style
+          Style.opacity = 0
+          Style.webkitTransition = Style.transition = 'opacity 30ms linear'
+          this.drawCanvas($originImage, $originCanvas, size)
+        })
+    } else {
+      this.drawCanvas($originImage, $originCanvas, size)
+    }
   }
 
   componentWillUnmount () {
-    window.removeEventListener('scroll', this.optScroller, false)
+    window.removeEventListener('scroll', this.optScroller)
+    window.removeEventListener('scroll', this.optInitBanner)
   }
 
   render () {
+    const Props = this.props
     return [
-      <div key='banner' className='home-banner' ref={node => { this.$banner = node }}>
+      <div key='banner' className='home-banner' ref='$banner'>
         <canvas
           className='originCanvas'
-          ref={node => { this.$originCanvas = node }}
+          ref='$originCanvas'
         />
         <canvas
           className='thumbCanvas'
-          ref={node => { this.$thumbCanvas = node }}
+          ref='$thumbCanvas'
         />
         <img
           className='imageThumb'
           src={imageThumb}
-          ref={node => { this.$imageThumb = node }}
+          ref='$imageThumb'
         />
         <img
           className='originImage'
           src={originImage}
-          ref={node => { this.$originImage = node }}
+          ref='$originImage'
         />
       </div>,
       <div
         key='home-mask'
         className={classNames({
           'home-mask': true,
-          'dark': !this.props.is2rdScreen && this.props.bannerDarkState
+          'dark': !Props.is2rdScreen && Props.bannerDarkState
         })}
       />
     ]

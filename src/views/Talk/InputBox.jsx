@@ -48,6 +48,7 @@ export default class InputBox extends React.Component {
   appendEmoji (e) {
     this.talkingText += e.target.innerText
     this.emojiShowHandle(null, false)
+    this.refs.$ipt.focus()
   }
 
   sendMessage () {
@@ -61,7 +62,7 @@ export default class InputBox extends React.Component {
         avatar: this.props.chatAvatar,
         ip: window.returnCitySN.cip
       }
-      console.log(uploadInfo)
+      // console.log(uploadInfo)
       this.sendIngState = true
       sendMessage(uploadInfo, () => {
         this.sendIngState = false
@@ -83,11 +84,12 @@ export default class InputBox extends React.Component {
       <div className='talking-input'>
         <div className='txtipt'>
           <textarea
-            name='fm-ipt'
+            ref='$ipt'
             placeholder='请输入聊天内容，Ctrl + Enter 键发送'
             value={this.talkingText}
             onChange={e => { this.editTalkText(e) }}
             onKeyDown={e => { this.sendPress(e) }}
+            onFocus={e => { this.showEmojiList = false }}
           />
         </div>
         <div className='emoji'>

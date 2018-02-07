@@ -1,7 +1,5 @@
 import React from 'react'
-import { observer, inject } from 'mobx-react'
 import { withRouter } from 'react-router'
-import debounce from 'lodash/debounce'
 import Banner from './Banner'
 import Music from './Music'
 import Sub from './Sub'
@@ -9,40 +7,10 @@ import Toolbar from '~/layouts/Toolbar'
 import './scss/content.scss'
 
 @withRouter
-
-@inject(stores => ({
-  setBannerDark: state => stores.home.bannerDarkHandle(state),
-  setIsNearBottom: state => stores.home.isNearBottomHandle(state),
-  setIs2rdScreen: state => stores.home.is2rdScreenHandle(state),
-  setIsAtBottom: state => stores.home.isAtBottomHandle(state),
-  setScrollable: state => stores.home.scrollableHandle(state)
-}))
-
-@observer
 export default class Home extends React.Component {
   componentWillMount () {
     let clientH = document.documentElement.clientHeight
-    let clientW = document.documentElement.clientWidth
     const Props = this.props
-
-    const refresh = () => {
-      const newCH = document.documentElement.clientHeight
-      const newCW = document.documentElement.clientWidth
-      if (Math.abs(newCH - clientH) < 200 && Math.abs(newCW - clientW) < 200) {
-        return
-      } else {
-        clientH = newCH
-        clientW = newCW
-      }
-      Props.setScrollable(false)
-      Props.setBannerDark(false)
-      Props.setIsNearBottom(false)
-      Props.setIs2rdScreen(false)
-      Props.setIsAtBottom(false)
-      Props.history.push('/')
-    }
-
-    window.addEventListener('resize', debounce(refresh, 600))
 
     Props.history.listen(e => {
       const $menu = document.querySelector('.readModeMenu')

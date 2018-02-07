@@ -128,19 +128,24 @@ export default class Online extends React.Component {
           <div className='online-list' ref='$onlineList'>
             <div className='order-list'>
               {
-                onlinelist.map(({ avatar, name, os, browser, cip, cname }, i) => (
-                  <div className='list-item' key={i}>
-                    <i
-                      alt={avatar}
-                      className={'round-avatar online ' + avatar}
-                    />
-                    <div className='name'>
-                      <span>{name}</span>
+                onlinelist.map(({ avatar, name, os, browser, cip, cname }, i) => {
+                  const State = os
+                    ? <div className='state'>{`${os.name}${os.version} ${browser.name} `}在线</div>
+                    : <div className='state'>在线</div>
+                  return (
+                    <div className='list-item' key={i}>
+                      <i
+                        alt={avatar}
+                        className={`round-avatar online ${avatar}`}
+                      />
+                      <div className='name'>
+                        <span>{name}</span>
+                      </div>
+                      {State}
+                      <div className='local'>IP: {cip} {cname}</div>
                     </div>
-                    <div className='state'>{`${os.name}${os.version} ${browser.name} `}在线</div>
-                    <div className='local'>IP: {cip} {cname}</div>
-                  </div>
-                ))
+                  )
+                })
               }
             </div>
           </div>
