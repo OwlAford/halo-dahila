@@ -70,8 +70,8 @@ const initHeader = (canvas, w, h) => {
 
 // Event handling
 const addListeners = () => {
-  window.addEventListener('mousemove', mouseMove)
-  window.addEventListener('scroll', scrollCheck)
+  window.addEventListener('mousemove', mouseMove, false)
+  window.addEventListener('scroll', scrollCheck, false)
 }
 
 const mouseMove = e => {

@@ -270,6 +270,7 @@ export default class Board extends React.Component {
                 <span className='iconfont'>&#xe61f;</span>
                 <input
                   type='file'
+                  accept='image/*'
                   onChange={this.pathHandle}
                   ref={node => { this.$path = node }}
                 />

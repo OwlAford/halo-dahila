@@ -29,14 +29,7 @@ class Banner extends React.Component {
     this.initBanner = this.initBanner.bind(this)
   }
 
-  getClient () {
-    const doc = document.documentElement
-    this.clientH = doc.clientHeight
-    this.clientW = window.innerWidth
-  }
-
   componentWillMount () {
-    this.getClient()
     this.props.bannerDarkHandle(false)
   }
 
@@ -45,20 +38,20 @@ class Banner extends React.Component {
     const $content = document.querySelector('.home-content')
     const fullHeight = $content ? $content.offsetHeight : 0
     const scrollTop = docEl.scrollTop || document.body.scrollTop
-    let percent = (~~(scrollTop / this.clientH * 2 * 10000)) / 10000
+    let percent = (~~(scrollTop / this.props.clientH * 2 * 10000)) / 10000
     if (percent > 1) {
       percent = 1
     }
 
-    scrollTop > this.clientH
+    scrollTop > this.props.clientH
       ? this.props.is2rdScreenHandle(true)
       : this.props.is2rdScreenHandle(false)
 
-    scrollTop > this.clientH * 2
+    scrollTop > this.props.clientH * 2
       ? this.props.isNearBottomHandle(true)
       : this.props.isNearBottomHandle(false)
 
-    fullHeight - scrollTop - this.clientH > 100
+    fullHeight - scrollTop - this.props.clientH > 100
       ? this.props.isAtBottomHandle(false)
       : this.props.isAtBottomHandle(true)
 
@@ -78,8 +71,8 @@ class Banner extends React.Component {
   genSize = wh => {
     const origin = wh
     const view = [
-      this.clientW,
-      this.clientH
+      this.props.clientW,
+      this.props.clientH
     ]
     const originRatio = origin[0] / origin[1]
     const viewRatio = view[0] / view[1]
@@ -134,7 +127,6 @@ class Banner extends React.Component {
   initBanner (first) {
     const { $banner, $originImage, $imageThumb, $originCanvas, $thumbCanvas } = this.refs
 
-    this.getClient()
     const size = this.genSize([2048, 1365])
     const thumbSize = this.genSize([320, 213])
 

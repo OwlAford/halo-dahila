@@ -23,20 +23,18 @@ import Talk from 'bundle-loader?lazy&name=talk!../Talk'
 
 @observer
 export default class Sub extends React.Component {
-  componentWillMount () {
-    const doc = document.documentElement
-    this.clientH = doc.clientHeight
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.initScreen)
   }
 
   render () {
     return (
       <div
-        className={classNames({
-          'content-wrap': true,
+        className={classNames('content-wrap', {
           'scrollable': this.props.scrollable
         })}
         style={{
-          minHeight: `${this.clientH}px`
+          minHeight: `${this.props.clientH}px`
         }}
       >
         <div className='content-main' key='content-main'>

@@ -82,12 +82,6 @@ export default class Music extends React.Component {
     this.musicHandle = this.musicHandle.bind(this)
   }
 
-  componentWillMount () {
-    const doc = document.documentElement
-    this.clientH = doc.clientHeight
-    this.clientW = doc.clientWidth
-  }
-
   @action
   changeReadMode (state) {
     this.readMode = state
@@ -228,7 +222,7 @@ export default class Music extends React.Component {
     this.props.getUserInfo(async () => {
       this.initMusicPlayer(0)
 
-      this.$menu.style.width = `${this.clientW}px`
+      this.$menu.style.width = `${this.props.clientW}px`
 
       await waiter(1500)
       this.cricleState = 'run'
@@ -240,7 +234,7 @@ export default class Music extends React.Component {
       await waiter(1000)
       this.avatarState = 'up'
       await waiter(300)
-      initTween(this.$tween, this.clientW, this.clientH)
+      initTween(this.$tween, this.props.clientW, this.props.clientH)
       await waiter(1000)
       this.props.scrollableHandle(true)
     })
@@ -254,8 +248,8 @@ export default class Music extends React.Component {
   render () {
     const { author, bio, playlist } = this.props.userInfo
     const middStyle = {
-      top: `${this.clientH * 0.4}px`,
-      left: `${this.clientW * 0.5}px`
+      top: `${this.props.clientH * 0.4}px`,
+      left: `${this.props.clientW * 0.5}px`
     }
     const musicBox = {
       play: this.isPlaying,
@@ -286,8 +280,8 @@ export default class Music extends React.Component {
     const boxHeight = this.readMode
       ? '0'
       : this.props.scrollable
-        ? `${this.clientH + 315}px`
-        : `${this.clientH}px`
+        ? `${this.props.clientH + 315}px`
+        : `${this.props.clientH}px`
 
     return [
       <div className='tween-wrap' key='tween'>
@@ -304,7 +298,7 @@ export default class Music extends React.Component {
         <div
           className='content-banner'
           ref={node => { this.$banner = node }}
-          style={{ height: `${this.clientH}px` }}
+          style={{ height: `${this.props.clientH}px` }}
         >
           <Logo
             size={48}
@@ -398,7 +392,7 @@ export default class Music extends React.Component {
               className={classNames({
                 'musicControl': true,
                 'pause': this.isPlaying,
-                'right': this.clientH < 620
+                'right': this.props.clientH < 620
               })}
               onClick={e => this.musicHandle()}
             />
@@ -416,7 +410,7 @@ export default class Music extends React.Component {
           <div
             className={classNames({
               'calibration': true,
-              'upper': this.clientH < 620,
+              'upper': this.props.clientH < 620,
               'show': couldPlay
             })}
             onMouseDown={e => this.mousedownHandle(e)}
@@ -431,7 +425,7 @@ export default class Music extends React.Component {
           <div
             className={classNames({
               'volume': true,
-              'upper': this.clientH < 620,
+              'upper': this.props.clientH < 620,
               'show': couldPlay
             })}
             onMouseDown={e => this.mousedownHandle(e)}
