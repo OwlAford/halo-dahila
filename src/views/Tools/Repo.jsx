@@ -36,12 +36,15 @@ export default class Repo extends React.Component {
     NProgress.start()
     this.props.getStarredDataList(data => {
       NProgress.done()
-      this.scroll.refresh()
     }, () => this.props.showMessage('数据获取失败！', 2000))
   }
 
   componentWillUnmount () {
     this.scroll.destroy()
+  }
+
+  componentDidUpdate () {
+    this.scroll.refresh()
   }
 
   render () {

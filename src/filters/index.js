@@ -39,3 +39,24 @@ export const formatNumner = num => {
   }
   return numString
 }
+
+const intTime = t => t <= 9 ? `0${t}` : t
+
+export const formatDate = t => {
+  const time = new Date(t * 1)
+  const y = time.getFullYear()
+  const m = intTime(time.getMonth() + 1)
+  const d = intTime(time.getDate())
+  const h = intTime(time.getHours())
+  const n = intTime(time.getMinutes())
+  const clock = `${h}:${n}`
+  const fullDate = `${y}/${m}/${d}`
+  const ChineseFullDate = `${y}年${m}月${d}日`
+  return {
+    fullDate,
+    ChineseFullDate,
+    clock,
+    fullTime: `${fullDate} ${clock}`,
+    ChineseFullTime: `${ChineseFullDate} ${clock}`
+  }
+}

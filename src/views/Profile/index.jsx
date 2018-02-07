@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './scss/index.scss'
 import Terminal from './Terminal'
+import './scss/index.scss'
 
 const Profile = () => (
   <div className='home-profile gitfont'>

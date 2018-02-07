@@ -52,7 +52,10 @@ export default class ChatModel {
     const max = chatDate.length - 1
     if (max >= pointer + 1) {
       this.prevDate = chatDate.reverse()[pointer + 1]
-    } else if (pointer <= max) {
+    } else {
+      this.prevDate = null
+    }
+    if (max >= pointer) {
       const curDate = chatDate.reverse()[pointer]
       getData('chatRoom/chatlist/' + curDate, val => {
         if (val) {
@@ -65,13 +68,10 @@ export default class ChatModel {
             }
             arr.push(sub)
           }
-          this.curChatList = arr
-          // console.log('👻', arr)
+          this.curChatList = arr.reverse()
         }
         cb && cb()
       })
-    } else {
-      this.prevDate = null
     }
   }
 
@@ -92,7 +92,7 @@ export default class ChatModel {
   getChatDataHandle (cb) {
     getData('chatRoom/online', val => {
       const online = val || {}
-      this.onlinelist = JSON2Array(online)
+      this.onlinelist = JSON2Array(online).reverse()
       cb && cb(val)
     })
 

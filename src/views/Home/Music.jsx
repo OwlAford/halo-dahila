@@ -45,26 +45,32 @@ export default class Music extends React.Component {
   subMenu = [
     {
       'label': 'HOME',
+      'labelZh': '首页',
       'path': '/home/profile'
     },
     {
       'label': 'NOTE',
+      'labelZh': '笔记',
       'path': '/home/note'
     },
     {
       'label': 'DESIGN',
+      'labelZh': '设计',
       'path': '/home/design'
     },
     {
       'label': 'SHOOT',
+      'labelZh': '摄影',
       'path': '/home/shoot'
     },
     {
       'label': 'TOOLS',
+      'labelZh': '工具',
       'path': '/home/tools'
     },
     {
       'label': 'TALK',
+      'labelZh': '闲聊',
       'path': '/home/talk'
     }
   ]
@@ -260,7 +266,7 @@ export default class Music extends React.Component {
       musicHandle: this.musicHandle
     }
 
-    const Menu = ({ defaultClass }) => this.subMenu.map(
+    const Menu = ({ defaultClass, isZh }) => this.subMenu.map(
       (item, i) => (
         <NavLink
           key={i}
@@ -269,7 +275,7 @@ export default class Music extends React.Component {
           to={item.path}
           activeClassName='active'
         >
-          {item.label}
+          {isZh ? item.labelZh : item.label}
         </NavLink>
       )
     )
@@ -467,7 +473,7 @@ export default class Music extends React.Component {
                 top: '8px'
               }}
             />
-            <Menu defaultClass='item' />
+            <Menu defaultClass='item' isZh />
             {
               this.readMode
                 ? <div

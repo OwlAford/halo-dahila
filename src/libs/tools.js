@@ -60,3 +60,4 @@ export const openFile = (content, fileName) => {
   const win = window.open('about:blank')
   win.document.write(`<img src='${content}' alt='${fileName}' />`)
 }
+
