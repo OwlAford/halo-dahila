@@ -21,7 +21,7 @@ import { withToast } from '^/Toast'
 })
 
 @observer
-export default class TalkList extends React.Component {
+export default class ChatList extends React.Component {
   couldAutoScroll = true
 
   componentDidMount () {
@@ -31,29 +31,29 @@ export default class TalkList extends React.Component {
       mouseWheel: true,
       fadeScrollbars: true
     }
-    this.talkScroll = new IScroll(this.refs.$talkList, params)
+    this.chatScroll = new IScroll(this.refs.$chatList, params)
     setTimeout(() => {
-      this.talkScroll.refresh()
-      this.talkScroll.scrollTo(0, this.talkScroll.maxScrollY, 300)
+      this.chatScroll.refresh()
+      this.chatScroll.scrollTo(0, this.chatScroll.maxScrollY, 300)
     }, 300)
-    this.talkScroll.on('scrollEnd', () => {
-      if (this.talkScroll.y === this.talkScroll.maxScrollY) {
+    this.chatScroll.on('scrollEnd', () => {
+      if (this.chatScroll.y === this.chatScroll.maxScrollY) {
         this.couldAutoScroll = true
       }
     })
   }
 
   componentDidUpdate () {
-    if (this.talkScroll) {
-      this.talkScroll.refresh()
+    if (this.chatScroll) {
+      this.chatScroll.refresh()
 
       this.couldAutoScroll &&
-      this.talkScroll.scrollTo(0, this.talkScroll.maxScrollY, 300)
+      this.chatScroll.scrollTo(0, this.chatScroll.maxScrollY, 300)
     }
   }
 
   componentWillUnmount () {
-    this.talkScroll.destroy()
+    this.chatScroll.destroy()
   }
 
   triggerPrev () {
@@ -72,7 +72,7 @@ export default class TalkList extends React.Component {
     } = this.props
 
     return (
-      <div className='talking-cxt' ref='$talkList'>
+      <div className='chating-cxt' ref='$chatList'>
         <div className='chat-list'>
           {
             prevDate &&

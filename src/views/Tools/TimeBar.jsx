@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import ProgressBar from '^/ProgressBar'
 
 @observer
-export default class Time extends React.Component {
+export default class TimeBar extends React.Component {
   @observable surplus = ''
   @observable distType = 'year'
   @observable currentPercent = 100

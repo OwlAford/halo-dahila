@@ -8,7 +8,7 @@ import './scss/board.scss'
 
 @withToast
 @observer
-export default class Board extends React.Component {
+export default class Sketchpad extends React.Component {
   @observable bgColor = null
   @observable beforeProgress = 9
   @observable currentProgress = 9

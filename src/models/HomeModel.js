@@ -1,6 +1,5 @@
 import { observable, action } from 'mobx'
 import shuffle from 'lodash/shuffle'
-import info from './userInfo.json'
 
 export default class HomeModel {
   @observable is2rdScreen = false
@@ -10,16 +9,16 @@ export default class HomeModel {
   @observable scrollable = false
   @observable starredDataList = []
   @observable userInfo = {
-    author: info.author,
-    bio: info.bio,
-    playlist: info.playlist
+    author: '',
+    bio: '',
+    playlist: []
   }
-  @observable hobby = info.hobby
+  @observable hobby = []
   @observable starredGotten = false
   @observable girlShow = false
   @observable girlSing = false
 
-  musicLink = '/music/singing.mp3'
+  musicLink = 'http://yuis.qiniudn.com/music/singing.mp3'
 
   constructor (scrollableState) {
     this.scrollable = scrollableState

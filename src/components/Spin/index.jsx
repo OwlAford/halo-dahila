@@ -5,7 +5,7 @@ import { waiter } from '~/libs/tools'
 import './scss/index.scss'
 
 @observer
-export default class Loaing extends React.Component {
+export default class Spin extends React.Component {
   @observable showSpin = false
 
   @action

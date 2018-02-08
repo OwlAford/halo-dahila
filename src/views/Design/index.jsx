@@ -1,8 +1,8 @@
 import React from 'react'
-import { computed } from 'mobx'
+import { computed, reaction } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import { num2even } from '~/libs/tools'
-import Loading from '^/Loading'
+import Spin from '^/Spin'
 import PicBox from '^/PicBox'
 import './scss/index.scss'
 
@@ -44,12 +44,16 @@ export default class Design extends React.Component {
       NProgress.start()
       this.props.getDesignList(NProgress.done)
     }
+    reaction(
+      () => this.props.isAtBottom,
+      bottom => console.log('触发了些啥', bottom)
+    )
   }
 
   render () {
     return (
       <div className='home-design'>
-        {this.displayList.length === 0 && <Loading />}
+        {this.displayList.length === 0 && <Spin />}
         <div className='design-list'>
           {
             this.displayList.map((item, i) => (

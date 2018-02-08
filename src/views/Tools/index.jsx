@@ -1,24 +1,24 @@
 import React from 'react'
-import Time from './Time'
+import TimeBar from './TimeBar'
 import QRCode from './QRCode'
-import Repo from './Repo'
+import RepoStar from './RepoStar'
 import MD5 from './MD5'
 import Base64 from './Base64'
-import Board from './Board'
+import Sketchpad from './Sketchpad'
 import './scss/index.scss'
 
 export default () => (
   <div className='home-tools'>
-    <Time />
+    <TimeBar />
     <div className='row-double'>
       <div className='row-single'>
-        <Repo />
+        <RepoStar />
         <QRCode />
       </div>
       <div className='row-double wrap' style={{ width: '850px' }}>
         <MD5 />
         <Base64 />
-        <Board />
+        <Sketchpad />
       </div>
     </div>
   </div>

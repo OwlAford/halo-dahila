@@ -4,8 +4,8 @@ import { observer } from 'mobx-react'
 import { withRouter } from 'react-router'
 import debounce from 'lodash/debounce'
 import Banner from './Banner'
-import Music from './Music'
-import Sub from './Sub'
+import MusicBox from './MusicBox'
+import ChildNode from './ChildNode'
 import Toolbar from '~/layouts/Toolbar'
 import './scss/content.scss'
 
@@ -42,8 +42,8 @@ export default class Home extends React.Component {
       <div className='home'>
         <Banner clientH={this.clientH} clientW={this.clientW} />
         <div className='home-content'>
-          <Music clientH={this.clientH} clientW={this.clientW} />
-          <Sub clientH={this.clientH} clientW={this.clientW} />
+          <MusicBox clientH={this.clientH} clientW={this.clientW} />
+          <ChildNode clientH={this.clientH} clientW={this.clientW} />
         </div>
         <Toolbar />
       </div>

@@ -3,8 +3,8 @@ import classNames from 'classnames'
 import { observable, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import LazyDisplay from '^/LazyDisplay'
-import Portal from '^/Portal'
-import Girl from '^/Girl'
+import RootPortal from '^/RootPortal'
+import RobotGirl from '^/RobotGirl'
 import './scss/index.scss'
 
 @inject(stores => {
@@ -103,7 +103,7 @@ export default class Toolbar extends React.Component {
         leaveDelay={600}
         visibleKey={this.props.girlShow}
       >
-        <Girl
+        <RobotGirl
           singing={this.props.girlSing}
           zoom={this.girlZoom}
           contextMenuHandle={(e, zoom) => { this.contextMenuHandle(e) }}
@@ -111,7 +111,7 @@ export default class Toolbar extends React.Component {
         />
       </LazyDisplay>,
       this.showMenu &&
-        <Portal key='menu'>
+        <RootPortal key='menu'>
           <div
             className='fix-menu'
             style={{
@@ -150,7 +150,7 @@ export default class Toolbar extends React.Component {
               重置
             </div>
           </div>
-        </Portal>
+        </RootPortal>
     ]
   }
 }

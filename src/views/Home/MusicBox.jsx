@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { observable, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import classNames from 'classnames'
-import Loading from '^/Loading'
+import Spin from '^/Spin'
 import Logo from '~/layouts/Logo'
 import PlayList from './PlayList'
 import { waiter } from '~/libs/tools'
@@ -28,7 +28,7 @@ import avatar from './images/avatar.jpg'
 })
 
 @observer
-export default class Music extends React.Component {
+export default class MusicBox extends React.Component {
   @observable cricleState = 'hide'
   @observable avatarState = 'hide'
   @observable musicReady = false
@@ -69,9 +69,9 @@ export default class Music extends React.Component {
       'path': '/home/tools'
     },
     {
-      'label': 'TALK',
+      'label': 'CHAT',
       'labelZh': '闲聊',
-      'path': '/home/talk'
+      'path': '/home/chat'
     }
   ]
 
@@ -405,7 +405,7 @@ export default class Music extends React.Component {
             </div>
           </div>
           {
-            waitPlay && <div className='musicPlaceholder'><Loading /></div>
+            waitPlay && <div className='musicPlaceholder'><Spin /></div>
           }
           <div
             className={classNames({

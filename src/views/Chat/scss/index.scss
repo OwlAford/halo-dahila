@@ -1,4 +1,4 @@
-.home-talk {
+.home-chat {
   width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -14,7 +14,7 @@
     }
   }
 
-  .talk-sidebar {
+  .chat-sidebar {
     width: 320px;
     flex-grow: 0;
     flex-shrink: 0;
@@ -78,7 +78,7 @@
     }
   }
 
-  .talk-content {
+  .chat-content {
     background-color: #fff;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -93,7 +93,7 @@
       border-top-right-radius: 5px;
     }
 
-    .talking-cxt {
+    .chating-cxt {
       height: 460px;
       overflow: hidden;
       background-color: #eee;
@@ -108,7 +108,7 @@
       }
     }
 
-    .talking-input {
+    .chating-input {
       width: 100%;
       box-sizing: border-box;
       height: 130px;

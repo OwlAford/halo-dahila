@@ -4,7 +4,7 @@ import { observer } from 'mobx-react'
 import './scss/index.scss'
 
 @observer
-export default class Girl extends React.Component {
+export default class RobotGirl extends React.Component {
   @observable lookState = 'none'
   @observable pozLeft = window.innerWidth / 2
   @observable pozTop = window.innerHeight / 2

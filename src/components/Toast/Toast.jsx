@@ -1,10 +1,10 @@
 import React from 'react'
 import classNames from 'classnames'
-import Portal from '^/Portal'
+import RootPortal from '^/RootPortal'
 import './scss/index.scss'
 
 export default ({ type, children, style }) => (
-  <Portal>
+  <RootPortal>
     <div
       className={classNames({
         'app-toast': true,
@@ -15,5 +15,5 @@ export default ({ type, children, style }) => (
     >
       <div className='context'>{children}</div>
     </div>
-  </Portal>
+  </RootPortal>
 )

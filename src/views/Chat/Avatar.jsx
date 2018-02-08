@@ -32,7 +32,7 @@ export default class Avatar extends React.Component {
 
   render () {
     return (
-      <div className='talk-avatar'>
+      <div className='chat-avatar'>
         {
           this.avatarList.map((item, i) => (
             <div

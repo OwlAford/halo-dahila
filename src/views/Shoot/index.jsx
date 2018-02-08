@@ -1,7 +1,7 @@
 import React from 'react'
 import { computed } from 'mobx'
 import { observer, inject } from 'mobx-react'
-import Loading from '^/Loading'
+import Spin from '^/Spin'
 import PicBox from '^/PicBox'
 import './scss/index.scss'
 
@@ -48,7 +48,7 @@ export default class Shoot extends React.Component {
   render () {
     return (
       <div className='home-shoot'>
-        {this.displayList.length === 0 && <Loading />}
+        {this.displayList.length === 0 && <Spin />}
         <div className='shoot-list'>
           {
             this.displayList.map((item, i) => (

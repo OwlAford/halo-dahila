@@ -1,18 +1,18 @@
 import React from 'react'
 import Online from './Online'
-import TalkList from './TalkList'
+import ChatList from './ChatList'
 import InputBox from './InputBox'
 import './scss/index.scss'
 
-const Talk = () => (
-  <div className='home-talk'>
+const Chat = () => (
+  <div className='home-chat'>
     <Online />
-    <div className='talk-content'>
+    <div className='chat-content'>
       <div className='group-name'>技术讨论交流</div>
-      <TalkList />
+      <ChatList />
       <InputBox />
     </div>
   </div>
 )
 
-export default Talk
+export default Chat

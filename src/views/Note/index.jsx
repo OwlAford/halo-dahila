@@ -2,7 +2,7 @@ import React from 'react'
 import { computed } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import { timeAgo, limitString } from '~/filters'
-import Loading from '^/Loading'
+import Spin from '^/Spin'
 import book from './images/book.svg'
 import './scss/index.scss'
 
@@ -43,7 +43,7 @@ export default class Note extends React.Component {
   render () {
     return (
       <div className='home-note'>
-        {this.displayList.length === 0 && <Loading /> }
+        {this.displayList.length === 0 && <Spin /> }
         <div className='note-list'>
           {
             this.displayList.map((item, i) => (

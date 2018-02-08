@@ -1,10 +1,10 @@
 import React from 'react'
 import LazyLoader from './LazyLoader'
-import Loading from './Loading'
+import Spin from './Spin'
 
 const Bumper = ({ compnent }) => (
   <LazyLoader load={compnent}>
-    {Bumper => Bumper ? <Bumper /> : <Loading delay={200} />}
+    {Bumper => Bumper ? <Bumper /> : <Spin delay={200} />}
   </LazyLoader>
 )
 

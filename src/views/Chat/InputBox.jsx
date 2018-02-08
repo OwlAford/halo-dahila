@@ -25,18 +25,18 @@ import { withToast } from '^/Toast'
 @observer
 export default class InputBox extends React.Component {
   @observable showEmojiList = false
-  @observable talkingText = ''
+  @observable chatingText = ''
   @observable sendIngState = false
 
   emojiArray = ['☀', '☁', '☔', '⛄', '⚡', '🌀', '🌂', '🌙', '🌟', '🍀', '🌷', '🌱', '🍁', '🌸', '🌹', '🍂', '🍃', '🌺', '🌻', '🌴', '🌵', '🌾', '🍎', '🍊', '🍓', '👀', '👂', '👃', '👄', '👅', '💅', '👦', '👧', '👨', '👩', '👫', '👮', '👱', '👲', '👳', '👴', '👵', '👶', '👷', '👸', '👯', '👻', '👼', '👽', '👾', '👿', '💀', '💂', '💃', '🐍', '🐎', '🐔', '🐗', '🐫', '🐘', '🐨', '🐒', '🐑', '🐙', '🐚', '🐛', '🐠', '🐡', '🐥', '🐦', '🐧', '🐩', '🐟', '🐬', '🐭', '🐯', '🐱', '🐳', '🐴', '🐵', '🐶', '🐷', '🐻', '🐹', '🐺', '🐮', '🐰', '🐸', '🐾', '😠', '😩', '😲', '😞', '😵', '😰', '😒', '😍', '😤', '😜', '😝', '😋', '😘', '😚', '😷', '😳', '😃', '😆', '😁', '😂', '☺', '😄', '😢', '😭', '😨', '😣', '😡', '😌', '😖', '😔', '😱', '😪', '😏', '😓', '😥', '😫', '😉', '😺', '😸', '😹', '😽', '😻', '😿', '😼', '🙀', '🙋', '🙌', '🙍', '🙏', '🔥', '🎁', '🎄', '🎅', '🎈', '🎉', '🎍', '🎎', '🎓', '🎏', '🎐', '🎃', '📞', '📱', '📲', '📠', '💻', '💽', '💾', '💿', '📀', '🎵', '🎶', '🎼', '📺', '💋', '💏', '💐', '💑', '🍔', '☕', '🍸', '🍺', '❤', '💓', '💔', '💖', '💗', '💘', '💙', '💚', '💛', '💜', '💝', '♥', '💢', '💤', '💦', '💨', '💩', '💪', '✨', '🔔', '✊', '✋', '✌', '👊', '👍', '☝', '👆', '👇', '👈', '👉', '👋', '👏', '👌', '👎', '👐']
 
   @computed get couldSend () {
-    return this.talkingText.length !== 0 && !this.props.needReg && !this.sendIngState
+    return this.chatingText.length !== 0 && !this.props.needReg && !this.sendIngState
   }
 
   @action
-  editTalkText (e) {
-    this.talkingText = e.target.value
+  editChatText (e) {
+    this.chatingText = e.target.value
   }
 
   @action
@@ -46,14 +46,14 @@ export default class InputBox extends React.Component {
   }
 
   appendEmoji (e) {
-    this.talkingText += e.target.innerText
+    this.chatingText += e.target.innerText
     this.emojiShowHandle(null, false)
     this.refs.$ipt.focus()
   }
 
   sendMessage () {
     if (this.couldSend) {
-      const originText = this.talkingText
+      const originText = this.chatingText
       let formatText = originText.replace('\n', '<br />')
       const uploadInfo = {
         text: formatText,
@@ -66,8 +66,8 @@ export default class InputBox extends React.Component {
       this.sendIngState = true
       sendMessage(uploadInfo, () => {
         this.sendIngState = false
-        this.talkingText = ''
-      }, this.refreshTalkListHandle, () => {
+        this.chatingText = ''
+      }, this.refreshChatListHandle, () => {
         this.props.showMessage('消息发送失败！', 2000)
       })
     }
@@ -81,13 +81,13 @@ export default class InputBox extends React.Component {
 
   render () {
     return (
-      <div className='talking-input'>
+      <div className='chating-input'>
         <div className='txtipt'>
           <textarea
             ref='$ipt'
             placeholder='请输入聊天内容，Ctrl + Enter 键发送'
-            value={this.talkingText}
-            onChange={e => { this.editTalkText(e) }}
+            value={this.chatingText}
+            onChange={e => { this.editChatText(e) }}
             onKeyDown={e => { this.sendPress(e) }}
             onFocus={e => { this.showEmojiList = false }}
           />

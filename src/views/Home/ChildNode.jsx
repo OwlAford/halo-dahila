@@ -10,7 +10,7 @@ import Note from 'bundle-loader?lazy&name=note!../Note'
 import Shoot from 'bundle-loader?lazy&name=shoot!../Shoot'
 import Design from 'bundle-loader?lazy&name=design!../Design'
 import Tools from 'bundle-loader?lazy&name=tools!../Tools'
-import Talk from 'bundle-loader?lazy&name=talk!../Talk'
+import Chat from 'bundle-loader?lazy&name=chat!../Chat'
 
 @withRouter
 
@@ -22,7 +22,7 @@ import Talk from 'bundle-loader?lazy&name=talk!../Talk'
 })
 
 @observer
-export default class Sub extends React.Component {
+export default class ChildNode extends React.Component {
   componentWillUnmount () {
     window.removeEventListener('scroll', this.initScreen)
   }
@@ -60,13 +60,11 @@ export default class Sub extends React.Component {
               component={getBumper(Tools)}
             />
             <Route
-              path='/home/talk'
-              component={getBumper(Talk)}
+              path='/home/chat'
+              component={getBumper(Chat)}
             />
             <Route
-              component={
-                () => <Redirect to='/home/profile' />
-              }
+              component={() => <Redirect to='/home/profile' />}
             />
           </Switch>
         </div>

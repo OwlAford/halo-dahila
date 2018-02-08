@@ -93,7 +93,7 @@ export default class Online extends React.Component {
     } = this.props
 
     return (
-      <div className='talk-sidebar'>
+      <div className='chat-sidebar'>
         <div
           className={classNames('step', {
             'show': needReg
