@@ -17,6 +17,9 @@ export default class ChatModel {
 
   originChatList = {}
 
+  firstTime = true
+  dayLength = 0
+
   constructor () {
     this.onlineAuto()
   }
@@ -25,7 +28,7 @@ export default class ChatModel {
   triggerPrevHandle (cb) {
     const max = this.chatdate.length - 1
     const newPointer = this.pointer + 1
-    if (newPointer <= max && max > 0) {
+    if (newPointer <= max && max >= 0) {
       this.pointer = newPointer
       this.getCurChatList(cb)
     } else {
@@ -98,9 +101,20 @@ export default class ChatModel {
 
     getData('chatRoom/chatdate', val => {
       if (val) {
-        this.chatdate = Object.keys(val)
+        const dates = this.chatdate = Object.keys(val)
+        if (dates.length !== this.dayLength) {
+          this.pointer = 0
+        }
+        this.dayLength = dates.length
+        const outdate = ~~(Date.now() / 24 / 60 / 60 / 1000) > dates.reverse()[0].replace('id_', '') * 1
+        if (outdate && this.firstTime) {
+          this.pointer = -1
+          this.prevDate = dates.reverse()[0]
+          this.firstTime = false
+        } else {
+          this.getCurChatList()
+        }
       }
-      this.getCurChatList()
     })
   }
 }
