@@ -1,5 +1,5 @@
 import React from 'react'
-import { computed, reaction } from 'mobx'
+import { computed } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import { num2even } from '~/libs/tools'
 import Spin from '^/Spin'
@@ -44,10 +44,10 @@ export default class Design extends React.Component {
       NProgress.start()
       this.props.getDesignList(NProgress.done)
     }
-    reaction(
-      () => this.props.isAtBottom,
-      bottom => console.log('触发了些啥', bottom)
-    )
+    // reaction(
+    //   () => this.props.isAtBottom,
+    //   bottom => console.log('触发了些啥', bottom)
+    // )
   }
 
   render () {

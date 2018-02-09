@@ -7,6 +7,17 @@ export const WD = window.wilddog.initializeApp({
 
 const rootPath = 'carbon/'
 
+const trans2Array = val => {
+  val = val || {}
+  let arr = []
+  for (let key in val) {
+    let item = val[key]
+    item.id = String(key)
+    arr.push(item)
+  }
+  return arr
+}
+
 export const getData = (path, callback) => {
   WD.sync().ref(rootPath + path).on('value', snapshot => {
     callback(snapshot.val())
@@ -15,13 +26,7 @@ export const getData = (path, callback) => {
 
 export const getData2Array = (path, callback) => {
   getData(path, val => {
-    let arr = []
-    for (let key in val) {
-      let item = val[key]
-      item.id = 'detail_' + key
-      arr.push(item)
-    }
-    callback(arr)
+    callback(trans2Array(val))
   })
 }
 
@@ -32,9 +37,8 @@ export const online = (name, avatar) => {
   let curKey = '/' + cip.replace(/\./g, '_')
   const parser = new UAparser()
   item[curKey] = {
-    browser: parser.getBrowser(),
-    os: parser.getOS(),
-    cpu: parser.getCPU(),
+    browser: parser.getBrowser() || { name: '未知浏览器' },
+    os: parser.getOS() || '',
     cip,
     cname,
     name,

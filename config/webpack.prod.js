@@ -12,14 +12,15 @@ const baseWebpackConfig = require('./webpack.base')
 const resolve = dir => path.join(__dirname, '..', dir)
 
 const assetsPath = curPath => path.posix.join(assets.subDir, curPath)
+const staticPath = path => process.env.npm_config_static ? 'static' : path
 
 const webpackConfig = merge(baseWebpackConfig, {
   devtool: settings.sourceMap ? '#source-map' : false,
   output: {
     path: assets.root,
     publicPath: settings.publicPath,
-    filename: assetsPath(`${assets.jsDir}/[name].[${settings.jsHashType}].js`),
-    chunkFilename: assetsPath(`${assets.jsDir}/[id].[name].[${settings.jsHashType}].js`)
+    filename: assetsPath(`${staticPath(assets.jsDir)}/[name].[${settings.jsHashType}].js`),
+    chunkFilename: assetsPath(`${staticPath(assets.jsDir)}/[id].[name].[${settings.jsHashType}].js`)
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -33,7 +34,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       sourceMap: settings.sourceMap
     }),
     new ExtractTextPlugin({
-      filename: assetsPath(`${assets.cssDir}/[name].[${settings.cssHashType}].css`),
+      filename: assetsPath(`${staticPath(assets.cssDir)}/[name].[${settings.cssHashType}].css`),
       allChunks: true
     }),
     new HtmlWebpackPlugin({

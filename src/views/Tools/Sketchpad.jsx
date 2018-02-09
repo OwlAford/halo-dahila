@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { observer } from 'mobx-react'
 import { withToast } from '^/Toast'
 import { initImage, downloadCanvasImage } from '~/libs/tools'
-import './scss/board.scss'
+import './scss/sketchpad.scss'
 
 @withToast
 @observer

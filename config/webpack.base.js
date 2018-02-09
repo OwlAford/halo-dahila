@@ -9,6 +9,8 @@ const assetsPath = curPath => path.posix.join(settings[env].assets.subDir, curPa
 const resolve = dir => path.join(__dirname, '..', dir)
 const publicPath = dir => settings[env].publicPath + dir
 
+const staticPath = path => process.env.npm_config_static ? 'static' : path
+
 let loaderRules = [
   {
     test: /\.(js|jsx)$/,
@@ -31,21 +33,21 @@ let loaderRules = [
     loader: 'url-loader',
     query: {
       limit: 8192,
-      name: assetsPath('images/[name].[hash:7].[ext]')
+      name: assetsPath(`${staticPath('images')}/[name].[hash:7].[ext]`)
     }
   }, {
     test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
     loader: 'url-loader',
     query: {
       limit: 8192,
-      name: assetsPath('fonts/[name].[hash:7].[ext]')
+      name: assetsPath(`${staticPath('fonts')}/[name].[hash:7].[ext]`)
     }
   }, {
     test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
     loader: 'url-loader',
     options: {
       limit: 10000,
-      name: assetsPath('media/[name].[hash:7].[ext]')
+      name: assetsPath(`${staticPath('media')}/[name].[hash:7].[ext]`)
     }
   }
 ]

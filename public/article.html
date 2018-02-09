@@ -44,7 +44,7 @@
   </div>
 </div>
 <script>
-  var id = window.location.search.split('_')[1];
+  var id = window.location.search.replace('?', '');
   var rootPath = 'carbon/';
 
   var WD = window.wilddog.initializeApp({
@@ -54,6 +54,7 @@
 
   WD.sync().ref(rootPath + 'article/' + id).on('value', function (snapshot) {
     var val = snapshot.val();
+    console.log(val);
     document.getElementById('title').innerHTML = document.title = val.title;
     document.getElementById('time').innerHTML = (new Date(val.time * 1)).toLocaleDateString();
   });
