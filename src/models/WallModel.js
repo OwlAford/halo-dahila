@@ -5,7 +5,7 @@ export default class ListModel {
 
   @action
   getFavList (cb, err) {
-    axios.get('http://yuis.qiniudn.com/music/wallpaper-favorite.json')
+    axios.get('https://owlaford.github.io/data/wallpaper-favorite.json')
       .then(({ data }) => {
         this.favList = data.src || []
         cb && cb(data)

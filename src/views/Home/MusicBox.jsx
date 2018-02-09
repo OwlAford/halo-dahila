@@ -251,10 +251,11 @@ export default class MusicBox extends React.Component {
   }
 
   render () {
-    const { author, bio, playlist } = this.props.userInfo
+    const { userInfo, clientH, clientW, scrollable, is2rdScreen, girlShow } = this.props
+    const { author, bio, playlist } = userInfo
     const middStyle = {
-      top: `${this.props.clientH * 0.4}px`,
-      left: `${this.props.clientW * 0.5}px`
+      top: `${clientH * 0.4}px`,
+      left: `${clientW * 0.5}px`
     }
     const musicBox = {
       play: this.isPlaying,
@@ -281,12 +282,12 @@ export default class MusicBox extends React.Component {
 
     const couldPlay = this.avatarState === 'up' && this.musicReady
     const waitPlay = this.avatarState === 'up' && !this.musicReady
-
+    const realHeight = clientH > 500 ? clientH : 500
     const boxHeight = this.readMode
       ? '0'
-      : this.props.scrollable
-        ? `${this.props.clientH + 315}px`
-        : `${this.props.clientH}px`
+      : scrollable
+        ? `${realHeight + 315}px`
+        : `${realHeight}px`
 
     return [
       <div className='tween-wrap' key='tween'>
@@ -303,7 +304,7 @@ export default class MusicBox extends React.Component {
         <div
           className='content-banner'
           ref={node => { this.$banner = node }}
-          style={{ height: `${this.props.clientH}px` }}
+          style={{ height: `${clientH}px` }}
         >
           <Logo
             size={48}
@@ -384,7 +385,7 @@ export default class MusicBox extends React.Component {
             className={classNames({
               'iconfont': true,
               'arrowDown': true,
-              'show': this.props.scrollable
+              'show': scrollable
             })}
           >&#xe61c;</i>
           <div
@@ -397,7 +398,7 @@ export default class MusicBox extends React.Component {
               className={classNames({
                 'musicControl': true,
                 'pause': this.isPlaying,
-                'right': this.props.clientH < 620
+                'right': clientH < 620
               })}
               onClick={e => this.musicHandle()}
             />
@@ -415,7 +416,7 @@ export default class MusicBox extends React.Component {
           <div
             className={classNames({
               'calibration': true,
-              'upper': this.props.clientH < 620,
+              'upper': clientH < 620,
               'show': couldPlay
             })}
             onMouseDown={e => this.mousedownHandle(e)}
@@ -430,7 +431,7 @@ export default class MusicBox extends React.Component {
           <div
             className={classNames({
               'volume': true,
-              'upper': this.props.clientH < 620,
+              'upper': clientH < 620,
               'show': couldPlay
             })}
             onMouseDown={e => this.mousedownHandle(e)}
@@ -456,9 +457,9 @@ export default class MusicBox extends React.Component {
         className={
           classNames({
             'readModeMenu': true,
-            'alpha': this.props.is2rdScreen,
+            'alpha': is2rdScreen,
             'hasHeight': this.readMode,
-            'show': this.readMode || this.props.is2rdScreen
+            'show': this.readMode || is2rdScreen
           })
         }
       >
@@ -484,9 +485,9 @@ export default class MusicBox extends React.Component {
                 : <i
                   className={classNames({
                     'girl': true,
-                    'active': this.props.girlShow
+                    'active': girlShow
                   })}
-                  onClick={e => { this.props.girlVisibleHandle(!this.props.girlShow) }}
+                  onClick={e => { this.props.girlVisibleHandle(!girlShow) }}
                 />
             }
           </div>
