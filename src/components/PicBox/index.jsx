@@ -1,12 +1,20 @@
 import React from 'react'
+import classNames from 'classnames'
 import './scss/index.scss'
 
-export default ({ title, time, lnk, clickEvent }) => (
-  <div className='app-pic-box app-skew-shadow'>
-    <div className='title'>
-      <div className='inner'>{title || '未命名'}</div>
-      <div className='timestamp'>{time}</div>
-    </div>
+export default ({ title, time, lnk, clickEvent, notitle }) => (
+  <div
+    className={classNames('app-pic-box', 'app-skew-shadow', {
+      'notitle': notitle
+    })}
+  >
+    {
+      !notitle &&
+      <div className='title'>
+        <div className='inner'>{title || '未命名'}</div>
+        <div className='timestamp'>{time}</div>
+      </div>
+    }
     <div className='content'>
       <img
         src={lnk}

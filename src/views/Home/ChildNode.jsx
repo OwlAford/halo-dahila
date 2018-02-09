@@ -9,6 +9,7 @@ import Profile from 'bundle-loader?lazy&name=profile!../Profile'
 import Note from 'bundle-loader?lazy&name=note!../Note'
 import Shoot from 'bundle-loader?lazy&name=shoot!../Shoot'
 import Design from 'bundle-loader?lazy&name=design!../Design'
+import Wall from 'bundle-loader?lazy&name=wall!../Wall'
 import Tools from 'bundle-loader?lazy&name=tools!../Tools'
 import Chat from 'bundle-loader?lazy&name=chat!../Chat'
 
@@ -54,6 +55,10 @@ export default class ChildNode extends React.Component {
             <Route
               path='/home/design'
               component={getBumper(Design)}
+            />
+            <Route
+              path='/home/wall'
+              component={getBumper(Wall)}
             />
             <Route
               path='/home/tools'

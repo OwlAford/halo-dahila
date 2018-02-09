@@ -64,6 +64,11 @@ export default class MusicBox extends React.Component {
       'path': '/home/shoot'
     },
     {
+      'label': 'WALL',
+      'labelZh': '壁纸',
+      'path': '/home/wall'
+    },
+    {
       'label': 'TOOLS',
       'labelZh': '工具',
       'path': '/home/tools'

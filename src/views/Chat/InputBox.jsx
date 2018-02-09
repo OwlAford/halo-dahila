@@ -2,6 +2,7 @@ import React from 'react'
 import { observable, computed, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import classNames from 'classnames'
+import { formatMessage } from '~/libs/tools'
 import { sendMessage } from '~/constants/connect'
 import { withToast } from '^/Toast'
 
@@ -54,7 +55,7 @@ export default class InputBox extends React.Component {
   sendMessage () {
     if (this.couldSend) {
       const originText = this.chatingText
-      let formatText = originText.replace('\n', '<br />')
+      let formatText = formatMessage(originText)
       const uploadInfo = {
         text: formatText,
         time: Date.now(),

@@ -44,7 +44,7 @@
   </div>
 </div>
 <script>
-  var id = window.location.search.replace('?', '');
+  var id = window.location.search.substr(1);
   var rootPath = 'carbon/';
 
   var WD = window.wilddog.initializeApp({
