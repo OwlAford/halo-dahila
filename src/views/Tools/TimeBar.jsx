@@ -2,7 +2,7 @@ import React from 'react'
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
 import classNames from 'classnames'
-import MultiBar from '^/ProgressBar/MultiBar'
+import ProgressBar from '^/ProgressBar'
 
 @observer
 export default class TimeBar extends React.Component {
@@ -64,11 +64,13 @@ export default class TimeBar extends React.Component {
     this.MonthDistDay = MonthDistDay
     this.MonthDistPercent = MonthDistDay * 100 / fullMonthDay
 
-    this.setPercent('year')
+    this.setPercent('hour')
   }
 
   render () {
     const { cname, cip } = window.returnCitySN
+
+    const numGetColor = num => num > 30 ? num > 60 ? 'lime' : 'yellow' : 'red'
 
     return (
       <div className='tools-card dark'>
@@ -80,24 +82,7 @@ export default class TimeBar extends React.Component {
           </div>
           <div className='details'>{this.surplus}</div>
         </div>
-        <MultiBar
-          params={[{
-            color: this.distType === 'hour' ? 'red' : 'cyan',
-            progress: this.dayDistPercent,
-            percent: 8,
-            clickEvent: () => { this.distType = 'hour' }
-          }, {
-            color: this.distType === 'month' ? 'red' : 'yellow',
-            progress: 80,
-            percent: 16,
-            clickEvent: () => { this.distType = 'month' }
-          }, {
-            color: this.distType === 'year' ? 'red' : 'lime',
-            progress: this.yearDistPercent,
-            percent: 76,
-            clickEvent: () => { this.distType = 'year' }
-          }]}
-        />
+        <ProgressBar color={numGetColor(this.currentPercent)} progress={this.currentPercent} />
         <div className='switch'>
           <div
             className={classNames('item-btn', {
