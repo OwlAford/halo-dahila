@@ -29,10 +29,11 @@ export default class Home extends React.Component {
 
     this.props.history.listen(e => {
       const $menu = document.querySelector('.readModeMenu')
+      const realHeight = this.clientH > 500 ? this.clientH : 500
       if ($menu && $menu.classList.contains('hasHeight')) {
         window.scrollTo(0, 0)
       } else {
-        window.scrollTo(0, this.clientH + 250)
+        window.scrollTo(0, realHeight + 250)
       }
     })
   }
