@@ -23,6 +23,14 @@ export default class HomeModel {
   constructor (scrollableState) {
     this.scrollable = scrollableState
     this.initMusicAudio()
+    document.addEventListener('visibilitychange', () => {
+      const isHidden = document.hidden
+      if (isHidden) {
+        document.title = `HALO - 🍺及时行乐`
+      } else {
+        document.title = 'Halo - Carpe Diem'
+      }
+    })
   }
 
   initMusicAudio () {

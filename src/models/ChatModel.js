@@ -62,6 +62,14 @@ export default class ChatModel {
       const curDate = chatDate.reverse()[pointer]
       getData('chatRoom/chatlist/' + curDate, val => {
         if (val) {
+          if (document.hidden) {
+            document.title = `【您有新消息】HALO - 🍺及时行乐`
+          }
+          if (!this.originChatList[curDate]) {
+            this.pointer = 0
+            this.prevDate = curDate
+            this.originChatList = []
+          }
           this.originChatList[curDate] = val
           let arr = []
           for (let e in this.originChatList) {

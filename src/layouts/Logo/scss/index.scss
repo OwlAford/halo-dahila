@@ -1,9 +1,9 @@
 @keyframes logoRotate {
   0% {
-    transform: rotate(0deg)
+    transform: rotate(0deg);
   }
   50% {
-    transform: rotate(1080deg)
+    transform: rotate(1080deg);
   }
 }
 
@@ -29,7 +29,7 @@
 
   &.running {
     &:after {
-      animation: logoRotate ease-in-out 6s infinite;
+      animation: logoRotate ease-in-out 6s 2s infinite;
     }
   }
 }
