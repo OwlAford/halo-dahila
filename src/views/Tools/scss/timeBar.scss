@@ -63,7 +63,9 @@
       &.active {
         color: #fff;
         background-color: #2f92f8;
-        box-shadow: 0 14px 24px -6px rgb(100, 176, 250), 0 22px 40px 2px rgb(186, 220, 255);
+        box-shadow: 
+          0 14px 24px -6px rgb(100, 176, 250),
+          0 22px 40px 2px rgb(186, 220, 255);
         z-index: 1;
       }
 

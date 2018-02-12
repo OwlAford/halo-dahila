@@ -22,12 +22,12 @@ module.exports = {
       'https://cdn.wilddog.com/sdk/js/2.5.17/wilddog-sync.js',
       'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js',
       'https://cdn.bootcss.com/stackblur-canvas/1.4.0/stackblur.min.js',
-      'http://plug.qiniudn.com/TweenLite.min.js',
-      'http://plug.qiniudn.com/EasePack.min.js',
+      'https://cdn.bootcss.com/gsap/latest/TweenLite.min.js',
+      'https://cdn.bootcss.com/gsap/latest/easing/EasePack.min.js',
       'https://cdn.bootcss.com/wavesurfer.js/2.0.0-beta01/wavesurfer.min.js',
       'https://cdn.bootcss.com/dynamics.js/1.1.5/dynamics.min.js',
       'https://cdn.bootcss.com/iScroll/5.2.0/iscroll.min.js',
-      'http://pv.sohu.com/cityjson?ie=utf-8'
+      'https://pv.sohu.com/cityjson?ie=utf-8'
     ],
     extCSS: [
       'https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css',
@@ -62,12 +62,12 @@ module.exports = {
       'https://cdn.wilddog.com/sdk/js/2.5.17/wilddog-sync.js',
       'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js',
       'https://cdn.bootcss.com/stackblur-canvas/1.4.0/stackblur.min.js',
-      'http://plug.qiniudn.com/TweenLite.min.js',
-      'http://plug.qiniudn.com/EasePack.min.js',
+      'https://cdn.bootcss.com/gsap/latest/TweenLite.min.js',
+      'https://cdn.bootcss.com/gsap/latest/easing/EasePack.min.js',
       'https://cdn.bootcss.com/wavesurfer.js/2.0.0-beta01/wavesurfer.min.js',
       'https://cdn.bootcss.com/dynamics.js/1.1.5/dynamics.min.js',
       'https://cdn.bootcss.com/iScroll/5.2.0/iscroll.min.js',
-      'http://pv.sohu.com/cityjson?ie=utf-8'
+      'https://pv.sohu.com/cityjson?ie=utf-8'
     ],
     extCSS: [
       'https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css',
@@ -81,10 +81,10 @@ module.exports = {
       //   target: 'https://flameapp.cn',
       //   changeOrigin: true
       // },
-      '/music': {
-        target: 'http://yuis.qiniudn.com',
-        changeOrigin: true
-      }
+      // '/music': {
+      //   target: 'http://yuis.qiniudn.com',
+      //   changeOrigin: true
+      // }
     }
   },
   test: {
