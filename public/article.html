@@ -54,7 +54,6 @@
 
   WD.sync().ref(rootPath + 'article/' + id).on('value', function (snapshot) {
     var val = snapshot.val();
-    console.log(val);
     document.getElementById('title').innerHTML = document.title = val.title;
     document.getElementById('time').innerHTML = (new Date(val.time * 1)).toLocaleDateString();
   });
