@@ -22,8 +22,7 @@ import BubblyButton from '^/BubblyButton'
     chatAvatar,
     needReg,
     onlinelist,
-    onlineHandle: (name, avatar) => stores.chat.onlineHandle(name, avatar),
-    onlineAuto: cb => stores.chat.onlineAuto(cb)
+    onlineHandle: (name, avatar) => stores.chat.onlineHandle(name, avatar)
   }
 })
 
@@ -35,10 +34,6 @@ export default class Online extends React.Component {
   constructor (props) {
     super(props)
     this.selectAvatar = this.selectAvatar.bind(this)
-  }
-
-  componentWillMount () {
-    this.props.onlineAuto()
   }
 
   componentDidMount () {

@@ -4,8 +4,6 @@ import MultiWave from '~/libs/multiWave'
 
 export default class Footer extends React.Component {
   componentDidMount () {
-    this.$wave.style.width = document.documentElement.clientWidth + 'px'
-    this.$wave.style.height = '200px'
     this.multiWave = new MultiWave(this.$wave, [{
       waveWidth: '20%',
       offsetX: '0%',
@@ -41,7 +39,14 @@ export default class Footer extends React.Component {
     return (
       <footer>
         <div className='home-footer'>
-          <div className='wave' ref={node => { this.$wave = node }} />
+          <div
+            className='wave'
+            ref={node => { this.$wave = node }}
+            style={{
+              height: '200px',
+              width: `${window.innerWidth}px`
+            }}
+          />
           <div className='text'>
             <div className='social'>
               <a className='iconfont' href='https://www.twitter.com/Aford79872215' target='_blank'>&#xe638;</a>

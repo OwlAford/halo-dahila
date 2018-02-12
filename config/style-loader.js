@@ -28,7 +28,8 @@ const styleLoader = (loader, options) => {
         require('postcss-flexibility'),
         require('cssnano')({
           preset: 'advanced',
-          reduceIdents: false
+          reduceIdents: false,
+          safe: true
         })
       ]
     }

@@ -54,21 +54,16 @@ export default class ChatModel {
     const pointer = this.pointer
     const max = chatDate.length - 1
     if (max >= pointer + 1) {
-      this.prevDate = chatDate.reverse()[pointer + 1]
+      this.prevDate = chatDate[pointer + 1]
     } else {
       this.prevDate = null
     }
     if (max >= pointer) {
-      const curDate = chatDate.reverse()[pointer]
+      const curDate = chatDate[pointer]
       getData('chatRoom/chatlist/' + curDate, val => {
         if (val) {
           if (document.hidden) {
             document.title = `【您有新消息】HALO - 🍺及时行乐`
-          }
-          if (!this.originChatList[curDate]) {
-            this.pointer = 0
-            this.prevDate = curDate
-            this.originChatList = []
           }
           this.originChatList[curDate] = val
           let arr = []
@@ -102,22 +97,25 @@ export default class ChatModel {
   @action
   getChatDataHandle (cb) {
     getData('chatRoom/online', val => {
-      const online = val || {}
-      this.onlinelist = JSON2Array(online).reverse()
+      val = val || {}
+      this.onlinelist = JSON2Array(val).reverse()
       cb && cb(val)
     })
 
     getData('chatRoom/chatdate', val => {
       if (val) {
-        const dates = this.chatdate = Object.keys(val)
+        const dates = this.chatdate = Object.keys(val).reverse()
+        // 聊天天数发生变化
         if (dates.length !== this.dayLength) {
           this.pointer = 0
+          this.prevDate = dates[this.pointer + 1]
+          this.originChatList = []
         }
         this.dayLength = dates.length
-        const outdate = ~~(Date.now() / 24 / 60 / 60 / 1000) > dates.reverse()[0].replace('id_', '') * 1
+        const outdate = ~~(Date.now() / 24 / 60 / 60 / 1000) > dates[0].replace('id_', '') * 1
         if (outdate && this.firstTime) {
           this.pointer = -1
-          this.prevDate = dates.reverse()[0]
+          this.prevDate = dates[0]
           this.firstTime = false
         } else {
           this.getCurChatList()

@@ -4,7 +4,6 @@
   display: flex;
   min-height: 580px;
   border-radius: 5px;
-  // overflow: hidden;
 
   .step {
     display: none;
@@ -103,7 +102,6 @@
         .iScrollIndicator {
           background-color: rgba(0, 0, 0, .2) !important;
           border: none !important;
-          // z-index: 9;
         }
       }
     }
@@ -367,7 +365,6 @@
       .iScrollIndicator {
         background-color: rgba(255, 255, 255, .2) !important;
         border: none !important;
-        // z-index: 9;
       }
     }
 
