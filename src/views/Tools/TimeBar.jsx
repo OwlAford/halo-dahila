@@ -17,16 +17,21 @@ export default class TimeBar extends React.Component {
   MonthDistDay = 0
   yearDistDay = 0
 
+  @observable curdeg = 80
+
   @action
   setPercent (type) {
     this.distType = type
     if (type === 'year') {
+      this.curdeg = 80
       this.currentPercent = this.yearDistPercent
       this.surplus = `今年还剩 ${this.yearDistDay} 天`
     } else if (type === 'month') {
+      this.curdeg = 60
       this.currentPercent = this.MonthDistPercent
       this.surplus = `本月还剩 ${this.MonthDistDay} 天`
     } else {
+      this.curdeg = 40
       this.currentPercent = this.dayDistPercent
       this.surplus = `今日还剩 ${this.dayDistHours} 小时`
     }
@@ -64,13 +69,17 @@ export default class TimeBar extends React.Component {
     this.MonthDistDay = MonthDistDay
     this.MonthDistPercent = MonthDistDay * 100 / fullMonthDay
 
-    this.setPercent('hour')
+    this.setPercent('year')
   }
 
   render () {
     const { cname, cip } = window.returnCitySN
 
     const numGetColor = num => num > 30 ? num > 60 ? 'lime' : 'yellow' : 'red'
+
+    const barStyle = {
+      transform: `rotateX(${this.curdeg}deg) rotateY(0deg)`
+    }
 
     return (
       <div className='tools-card dark'>
@@ -82,7 +91,15 @@ export default class TimeBar extends React.Component {
           </div>
           <div className='details'>{this.surplus}</div>
         </div>
-        <ProgressBar color={numGetColor(this.currentPercent)} progress={this.currentPercent} />
+        <div
+          className='bar-wrap'
+        >
+          <ProgressBar
+            style={barStyle}
+            color={numGetColor(this.currentPercent)}
+            progress={this.currentPercent}
+          />
+        </div>
         <div className='switch'>
           <div
             className={classNames('item-btn', {

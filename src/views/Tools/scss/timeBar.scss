@@ -45,11 +45,15 @@
       color: #999;
     }
   }
+
+  .bar-wrap {
+    padding: 30px 0;
+  }
   
   .switch {
     display: flex;
     justify-content: center;
-    padding: 30px 0 20px;
+    padding: 0 0 20px;
 
     .item-btn {
       padding: 12px 26px;
@@ -87,7 +91,7 @@
   
   .progress-chart {
     width: 600px;
-    margin: 30px auto 0;
+    margin: 0 auto;
   }
 
 }

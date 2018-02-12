@@ -1,16 +1,23 @@
 import React from 'react'
 import './scss/index.scss'
 
-export default ({ color, progress, percent, clickEvent }) => {
+export default ({ color, progress, percent, clickEvent, style }) => {
+  style = style || {}
+
   const params = {
     style: {
       width: `${progress}%`
     }
   }
+
+  const barStyle = {
+    width: `${percent || 100}%`,
+    ...style
+  }
   return (
     <div
       className={'bar ' + color}
-      style={{ width: `${percent || 100}%` }}
+      style={barStyle}
       onClick={e => { clickEvent && clickEvent() }}
     >
       <div className='face top'>
