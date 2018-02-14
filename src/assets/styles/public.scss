@@ -69,3 +69,22 @@ min-height: 400px;
     width: 100%;
   }
 }
+
+.iScrollVerticalScrollbar {
+  position: absolute;
+  z-index: 9;
+  width: 7px;
+  bottom: 2px;
+  top: 2px;
+  right: 1px;
+  overflow: hidden;
+  pointer-events: none;
+
+  .iScrollIndicator {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    width: 100%;
+    display: block;
+  }
+}

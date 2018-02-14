@@ -26,7 +26,7 @@ export default class RepoStar extends React.Component {
   componentDidMount () {
     this.scroll = new IScroll(this.refs.$repoList, {
       disableTouch: true,
-      scrollbars: true,
+      scrollbars: 'custom',
       mouseWheel: true,
       fadeScrollbars: true
     })

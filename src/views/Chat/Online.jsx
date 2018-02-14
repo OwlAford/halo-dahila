@@ -39,7 +39,7 @@ export default class Online extends React.Component {
   componentDidMount () {
     const params = {
       disableTouch: true,
-      scrollbars: true,
+      scrollbars: 'custom',
       mouseWheel: false,
       fadeScrollbars: true
     }

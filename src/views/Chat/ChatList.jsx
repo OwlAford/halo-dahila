@@ -23,13 +23,16 @@ import { withToast } from '^/Toast'
 @observer
 export default class ChatList extends React.Component {
   couldAutoScroll = true
+  delta = 0
 
   componentDidMount () {
     const params = {
       disableTouch: true,
-      scrollbars: true,
+      disablePointer: true,
+      scrollbars: 'custom',
+      shrinkScrollbars: 'scale',
       mouseWheel: true,
-      fadeScrollbars: true
+      fadeScrollbars: false
     }
     this.chatScroll = new IScroll(this.refs.$chatList, params)
     setTimeout(() => {
@@ -37,8 +40,10 @@ export default class ChatList extends React.Component {
       this.chatScroll.scrollTo(0, this.chatScroll.maxScrollY, 300)
     }, 300)
     this.chatScroll.on('scrollEnd', () => {
-      if (this.chatScroll.y === this.chatScroll.maxScrollY) {
+      if (Math.abs(this.chatScroll.maxScrollY - this.chatScroll.y) < 100) {
         this.couldAutoScroll = true
+      } else {
+        this.couldAutoScroll = false
       }
     })
   }

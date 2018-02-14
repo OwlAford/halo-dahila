@@ -97,13 +97,6 @@
       overflow: hidden;
       background-color: #eee;
       position: relative;
-      
-      .iScrollLoneScrollbar {
-        .iScrollIndicator {
-          background-color: rgba(0, 0, 0, .2) !important;
-          border: none !important;
-        }
-      }
     }
 
     .chating-input {
@@ -361,10 +354,9 @@
     overflow: hidden;
     position: relative;
 
-    .iScrollLoneScrollbar {
+    .iScrollVerticalScrollbar {
       .iScrollIndicator {
-        background-color: rgba(255, 255, 255, .2) !important;
-        border: none !important;
+        background: rgba(255, 255, 255, .2);
       }
     }
 
