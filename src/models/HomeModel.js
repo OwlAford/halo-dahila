@@ -28,7 +28,7 @@ export default class HomeModel {
       if (isHidden) {
         document.title = `HALO - 🍺及时行乐`
       } else {
-        document.title = 'Halo - Carpe Diem'
+        document.title = 'HALO - Carpe Diem'
       }
     })
   }
