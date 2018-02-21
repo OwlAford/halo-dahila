@@ -81,10 +81,10 @@ module.exports = {
       //   target: 'https://flameapp.cn',
       //   changeOrigin: true
       // },
-      // '/music': {
-      //   target: 'http://yuis.qiniudn.com',
-      //   changeOrigin: true
-      // }
+      '/music': {
+        target: 'http://yuis.qiniudn.com',
+        changeOrigin: true
+      }
     }
   },
   test: {
