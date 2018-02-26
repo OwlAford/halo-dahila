@@ -1,34 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Terminal from './Terminal'
-import './scss/index.scss'
+import Loadable from 'react-loadable'
+import Spin from '^/Spin'
 
-const Profile = () => (
-  <div className='home-profile gitfont'>
-    <div className='card light-gray'>
-      <h1>MY SERVICES / <span>what service I offer remotley</span></h1>
-      <div className='grid'>
-        <div className='cell'>
-          <i className='iconfont'>&#xed6b;</i>
-          <h2>Web Design</h2>
-          <p>把情调和创意，融入交互和设计</p>
-        </div>
-        <div className='cell'>
-          <Link to='/efforts' className='iconfont'>&#xe64c;</Link>
-          <h2>Development</h2>
-          <p>以码为笔，让所有的想象成为现实</p>
-        </div>
-        <div className='cell'>
-          <i className='iconfont'>&#xe607;</i>
-          <h2>Photography</h2>
-          <p>捕捉生活中每个闪光点，瞬间即永恒</p>
-        </div>
-      </div>
-    </div>
-    <div className='card double'>
-      <Terminal />
-    </div>
-  </div>
-)
-
-export default Profile
+export default Loadable({
+  loader: () => import('./Profile'),
+  loading: Spin
+})

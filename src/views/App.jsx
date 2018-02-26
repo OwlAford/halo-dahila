@@ -1,8 +1,7 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { getBumper } from '^/Bumper'
 import Home from './Home'
-import Efforts from 'bundle-loader?lazy&name=efforts!./Efforts'
+import Efforts from './Efforts'
 import '#/styles'
 
 const App = () => (
@@ -14,7 +13,7 @@ const App = () => (
       />
       <Route
         path='/efforts'
-        component={getBumper(Efforts)}
+        component={Efforts}
       />
       <Route component={() => <Redirect to='/home' />} />
     </Switch>

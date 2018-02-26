@@ -4,14 +4,13 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import classNames from 'classnames'
 import Footer from './Footer'
-import { getBumper } from '^/Bumper'
-import Profile from 'bundle-loader?lazy&name=profile!../Profile'
-import Note from 'bundle-loader?lazy&name=note!../Note'
-import Shoot from 'bundle-loader?lazy&name=shoot!../Shoot'
-import Design from 'bundle-loader?lazy&name=design!../Design'
-import Wall from 'bundle-loader?lazy&name=wall!../Wall'
-import Tools from 'bundle-loader?lazy&name=tools!../Tools'
-import Chat from 'bundle-loader?lazy&name=chat!../Chat'
+import Profile from '../Profile'
+import Note from '../Note'
+import Shoot from '../Shoot'
+import Design from '../Design'
+import Wall from '../Wall'
+import Tools from '../Tools'
+import Chat from '../Chat'
 
 @withRouter
 
@@ -42,31 +41,31 @@ export default class ChildNode extends React.Component {
           <Switch>
             <Route
               path='/home/profile'
-              component={getBumper(Profile)}
+              component={Profile}
             />
             <Route
               path='/home/note'
-              component={getBumper(Note)}
+              component={Note}
             />
             <Route
               path='/home/shoot'
-              component={getBumper(Shoot)}
+              component={Shoot}
             />
             <Route
               path='/home/design'
-              component={getBumper(Design)}
+              component={Design}
             />
             <Route
               path='/home/wall'
-              component={getBumper(Wall)}
+              component={Wall}
             />
             <Route
               path='/home/tools'
-              component={getBumper(Tools)}
+              component={Tools}
             />
             <Route
               path='/home/chat'
-              component={getBumper(Chat)}
+              component={Chat}
             />
             <Route
               component={() => <Redirect to='/home/profile' />}
