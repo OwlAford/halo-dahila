@@ -54,7 +54,7 @@ npm run build --report
 # if you want to automatically open the browser or generate screenshots
 # adds the [--opn] or [--shot] parameter for the current command line
 
-npm run dist-server --opn --shot
+npm run serve --opn --shot
 ```
 
 ``` bash
