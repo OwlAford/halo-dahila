@@ -108,7 +108,7 @@ export default class Terminal extends React.Component {
       />
     )
 
-    const next = () => <p key='continue'>请点击输入框按Enter键继续...{cursor()}</p>
+    const next = () => <p key='continue'>请点击窗口按Enter键继续...{cursor()}</p>
 
     const inputNext = () => [
       <p className='gap' key='iptcontinue'>请输入您选择的数字Enter键继续：</p>,
@@ -166,7 +166,11 @@ export default class Terminal extends React.Component {
           </div>
         </div>
       </div>,
-      <div className='profile-effect' key='effect' ref={node => { this.$effect = node }} />,
+      <div
+        className='profile-effect'
+        key='effect'
+        ref={node => { this.$effect = node }}
+      />,
       <Payload key='payload' option={this.applySelected} />
     ]
   }
