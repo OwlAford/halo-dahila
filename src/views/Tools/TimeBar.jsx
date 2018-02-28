@@ -52,10 +52,10 @@ export default class TimeBar extends React.Component {
     const monthEndDate = new Date(`${curYear}-${intNum(curMonth + 1)}-01T00:00:00`)
 
     const fullYearDay = (endDate.getTime() - firstDate.getTime()) / fullDayLong
-    const yearDistDay = ~~((endDate.getTime() - curDate.getTime()) / fullDayLong)
+    const yearDistDay = Math.ceil((endDate.getTime() - curDate.getTime()) / fullDayLong)
 
     const fullMonthDay = (monthEndDate.getTime() - monthFirstDate.getTime()) / fullDayLong
-    const MonthDistDay = ~~((monthEndDate.getTime() - curDate.getTime()) / fullDayLong)
+    const MonthDistDay = Math.ceil((monthEndDate.getTime() - curDate.getTime()) / fullDayLong)
 
     const dayDistSecound = fullDayLong - (curDate.getTime() - (new Date(curDate.setHours(0, 0, 0, 0))).getTime())
     const dayDistHours = dayDistSecound / 60 / 60 / 1000
