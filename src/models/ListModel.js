@@ -1,5 +1,6 @@
 import { observable, action } from 'mobx'
 import { getData2Array } from '~/constants/connect'
+import shuffle from 'lodash/shuffle'
 
 export default class ListModel {
   @observable list = []
@@ -11,7 +12,7 @@ export default class ListModel {
   @action
   getList (cb) {
     getData2Array(this.type, list => {
-      this.list = list.reverse()
+      this.list = shuffle(list.reverse())
       cb && cb()
     })
   }

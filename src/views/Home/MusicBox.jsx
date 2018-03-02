@@ -14,15 +14,17 @@ import avatar from './images/avatar.jpg'
 @withRouter
 
 @inject(stores => {
-  const { home: { scrollable, is2rdScreen, userInfo, girlShow } } = stores
+  const { home: { scrollable, readMode, is2rdScreen, userInfo, girlShow } } = stores
   return {
     scrollable,
+    readMode,
     is2rdScreen,
     userInfo,
     girlShow,
     girlVisibleHandle: state => stores.home.girlVisibleHandle(state),
     bannerDarkHandle: state => stores.home.bannerDarkHandle(state),
     scrollableHandle: state => stores.home.scrollableHandle(state),
+    readModeHandle: state => stores.home.readModeHandle(state),
     getUserInfo: cb => stores.home.getUserInfo(cb)
   }
 })
@@ -35,7 +37,6 @@ export default class MusicBox extends React.Component {
   @observable bannerDarkState = false
   @observable isPlaying = false
   @observable currentIndex = 0
-  @observable readMode = false
   @observable currentMusic = {
     name: '',
     file: '',
@@ -89,7 +90,7 @@ export default class MusicBox extends React.Component {
 
   @action
   changeReadMode (state) {
-    this.readMode = state
+    this.props.readModeHandle(state)
     this.isPlaying = false
     this.wavesurfer.pause()
   }
@@ -283,7 +284,7 @@ export default class MusicBox extends React.Component {
     const couldPlay = this.avatarState === 'up' && this.musicReady
     const waitPlay = this.avatarState === 'up' && !this.musicReady
     const realHeight = clientH > 500 ? clientH : 500
-    const boxHeight = this.readMode
+    const boxHeight = this.props.readMode
       ? '0'
       : scrollable
         ? `${realHeight + 315}px`
@@ -458,8 +459,8 @@ export default class MusicBox extends React.Component {
           classNames({
             'readModeMenu': true,
             'alpha': is2rdScreen,
-            'hasHeight': this.readMode,
-            'show': this.readMode || is2rdScreen
+            'hasHeight': this.props.readMode,
+            'show': this.props.readMode || is2rdScreen
           })
         }
       >
@@ -475,7 +476,7 @@ export default class MusicBox extends React.Component {
             />
             <Menu defaultClass='item' isZh />
             {
-              this.readMode
+              this.props.readMode
                 ? <div
                   className='quitBtn'
                   onClick={e => { this.changeReadMode(false) }}

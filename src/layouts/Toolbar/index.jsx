@@ -8,9 +8,10 @@ import RobotGirl from '^/RobotGirl'
 import './scss/index.scss'
 
 @inject(stores => {
-  const { home: { is2rdScreen, isNearBottom, girlShow, girlSing } } = stores
+  const { home: { is2rdScreen, readMode, isNearBottom, girlShow, girlSing } } = stores
   return {
     is2rdScreen,
+    readMode,
     isNearBottom,
     girlShow,
     girlSing,
@@ -84,7 +85,7 @@ export default class Toolbar extends React.Component {
         className={classNames({
           'app-toolbar': true,
           'app-skew-shadow': true,
-          'show': this.props.is2rdScreen
+          'show': this.props.is2rdScreen || this.props.readMode
         })}
       >
         <div className='iconfont' onClick={e => { this.toogleSingGirl() }}>

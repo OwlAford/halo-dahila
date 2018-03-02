@@ -6,6 +6,7 @@ export default class HomeModel {
   @observable isNearBottom = false
   @observable isAtBottom = false
   @observable bannerDarkState = false
+  @observable readMode = false
   @observable scrollable = false
   @observable starredDataList = []
   @observable userInfo = {
@@ -58,6 +59,11 @@ export default class HomeModel {
     this.audio.currentTime = 0
     state ? this.audio.play() : this.audio.pause()
     this.girlSing = state
+  }
+
+  @action
+  readModeHandle (state) {
+    this.readMode = state
   }
 
   @action
