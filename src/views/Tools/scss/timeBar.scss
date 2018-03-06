@@ -50,45 +50,6 @@
     padding: 30px 0;
   }
   
-  .switch {
-    display: flex;
-    justify-content: center;
-    padding: 0 0 20px;
-
-    .item-btn {
-      padding: 12px 26px;
-      background-color: #fff;
-      border: 1px solid #2f92f8;
-      color: #2f92f8;
-      cursor: pointer;
-      transition: all .3s;
-      z-index: 3;
-
-      &.active {
-        color: #fff;
-        background-color: #2f92f8;
-        box-shadow: 
-          0 14px 24px -6px rgb(100, 176, 250),
-          0 22px 40px 2px rgb(186, 220, 255);
-        z-index: 1;
-      }
-
-      & + .item-btn {
-        border-left: 0;
-      }
-
-      &:first-child {
-        border-bottom-left-radius: 22px;
-        border-top-left-radius: 22px;
-      }
-
-      &:last-child {
-        border-bottom-right-radius: 22px;
-        border-top-right-radius: 22px;
-      }
-    }
-  }
-  
   .progress-chart {
     width: 600px;
     margin: 0 auto;

@@ -100,7 +100,7 @@ export default class TimeBar extends React.Component {
             progress={this.currentPercent}
           />
         </div>
-        <div className='switch'>
+        <div className='app-switch'>
           <div
             className={classNames('item-btn', {
               'active': this.distType === 'hour'
