@@ -33,14 +33,14 @@ export const setCookie = (name, value, delay) => {
     delayTime = delay
   }
   exp.setTime(exp.getTime() + delayTime)
-  window.document.cookie = `${name} = ${escape(value)}; expires=${exp.toGMTString()}; path=/`
+  window.document.cookie = `${name}=${escape(value)}; expires=${exp.toGMTString()}; path=/`
 }
 
 export const delCookie = name => {
   const exp = new Date()
   exp.setTime(exp.getTime() - 100)
   const cval = getCookie(name)
-  window.document.cookie = `${name} = ${cval}; expires=${exp.toGMTString()}; path=/`
+  window.document.cookie = `${name}=${cval}; expires=${exp.toGMTString()}; path=/`
 }
 
 export const delCookies = nameArray => {
