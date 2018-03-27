@@ -10,6 +10,7 @@
 
   .board-wrap {
     background: url(../images/bg.png);
+    background-size: 20px;
   
     &.thin canvas {
       cursor: url(../images/pencil_tip.png), pointer;
