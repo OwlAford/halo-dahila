@@ -273,7 +273,7 @@ exports.distDiffer = (map, outPath) => {
   */
 exports.screenshot = async (url, deviceList, filename, delay) => {
   const browser = await puppeteer.launch({
-    // executablePath: getFullPath('chromium/chrome.exe'),
+    executablePath: getFullPath('chromium/chrome.exe'),
     headless: false
   })
   for (let device of deviceList) {

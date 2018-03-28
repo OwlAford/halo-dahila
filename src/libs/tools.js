@@ -66,7 +66,7 @@ export const openFile = (content, fileName) => {
 export const html2Escape = html => html.replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' })[c])
 
 
-// 回车转为br标签
+//回车转为br标签
 export const return2Br = str => str.replace(/\r?\n/g, '<br />')
 
 // 去除开头结尾换行,并将连续3次以上换行转换成2次换行
