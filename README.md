@@ -15,7 +15,7 @@
 
 ## 📦 Effect Preview
 
-![preview demo](https://raw.githubusercontent.com/OwlAford/halo-dahila/master/preview.jpg)
+![preview demo](https://raw.githubusercontent.com/OwlAford/halo-dahila/master/preview.png)
 
 
 ## 🐠 Install Chromium
