@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const chalk = require('chalk')
+const fse = require('fs-extra')
 const moment = require('moment')
 const mkdirp = require('mkdirp')
 const merge = require('webpack-merge')
@@ -231,13 +232,6 @@ exports.compare = opts => {
   opts.callback && opts.callback(report)
 }
 
-exports.copyFile = (filePath, tarDir) => {
-  const files = fs.readFileSync(filePath)
-  const spl = filePath.split('\\')
-  const filename = spl[spl.length - 1]
-  fs.writeFileSync(path.join(tarDir, filename), files)
-}
-
 exports.distDiffer = (map, outPath) => {
   exports.deleteFolder(getFullPath(outPath))
   createDir(outPath, true)
@@ -254,11 +248,12 @@ exports.distDiffer = (map, outPath) => {
         const subDir = key === 'static' ? '' : key
         subDir && createDir(`${outPath}/${subDir}`, true)
         const filePath = item.path || item.newfilePath
-        const curPath = path.join(incPath, subDir)
-        exports.copyFile(filePath, curPath)
+        const curPath = path.join(incPath, `${subDir}/${filePath.substr(filePath.lastIndexOf('/') + 1)}`)
+        fse.copy(filePath, curPath)
+          .then(() => console.log(chalk.green(`"${filePath}" copy successfully!`)))
+          .catch(err => console.log(chalk.red(err)))
       }
     }
-    console.log(chalk.green('Files copy successfully!'))
   } else {
     console.log(chalk.yellow('No files available for replication!'))
   }
