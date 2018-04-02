@@ -250,7 +250,7 @@ exports.distDiffer = (map, outPath) => {
         const filePath = item.path || item.newfilePath
         const curPath = path.join(incPath, `${subDir}/${filePath.substr(filePath.lastIndexOf('/') + 1)}`)
         fse.copy(filePath, curPath)
-          .then(() => console.log(chalk.green(`"${filePath}" copy successfully!`)))
+          .then(() => console.log(chalk.yellow(`"${filePath}" `) + chalk.green('copy successfully!')))
           .catch(err => console.log(chalk.red(err)))
       }
     }
