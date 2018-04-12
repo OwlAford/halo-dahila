@@ -1,4 +1,3 @@
-const path = require('path')
 const packageConfig = require('../package.json')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'

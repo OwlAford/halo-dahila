@@ -7,7 +7,6 @@ const isProd = process.env.NODE_ENV === 'production'
 const env = isProd ? 'build' : 'dev'
 const assetsPath = curPath => path.posix.join(settings[env].assets.subDir, curPath)
 const resolve = dir => path.join(__dirname, '..', dir)
-const publicPath = dir => settings[env].publicPath + dir
 
 const staticPath = path => process.env.npm_config_static ? 'static' : path
 
