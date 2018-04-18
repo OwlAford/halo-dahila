@@ -65,7 +65,6 @@ export const openFile = (content, fileName) => {
 // 普通字符转换成转意符
 export const html2Escape = html => html.replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' })[c])
 
-
 // 回车转为br标签
 export const return2Br = str => str.replace(/\r?\n/g, '<br />')
 

@@ -1,4 +1,9 @@
-let width, height, canvas, ctx, points, target, animateHeader = true
+let width
+let height
+let ctx
+let points
+let target
+let animateHeader = true
 
 const initHeader = (canvas, w, h) => {
   const clientHeight = document.documentElement.clientHeight
@@ -6,7 +11,7 @@ const initHeader = (canvas, w, h) => {
   width = w || clientWidth
   height = h || (clientHeight > 560 ? clientHeight : 560)
   target = {
-    x: width / 2, 
+    x: width / 2,
     y: height / 2
   }
 
@@ -19,14 +24,14 @@ const initHeader = (canvas, w, h) => {
   // create points
   points = []
   for (let x = 0; x < width; x = x + width / 20) {
-    for (let y = 0; y < height; y = y + height/20) {
+    for (let y = 0; y < height; y = y + height / 20) {
       const px = x + Math.random() * width / 20
       const py = y + Math.random() * height / 20
       points.push({
-        x: px, 
-        originX: px, 
-        y: py, 
-        originY: py 
+        x: px,
+        originX: px,
+        y: py,
+        originY: py
       })
     }
   }
@@ -48,7 +53,7 @@ const initHeader = (canvas, w, h) => {
           }
         }
 
-        for(let k = 0; k < 5; k++) {
+        for (let k = 0; k < 5; k++) {
           if (!placed) {
             if (getDistance(p1, p2) < getDistance(p1, closest[k])) {
               closest[k] = p2
@@ -80,27 +85,29 @@ const mouseMove = e => {
   if (e.pageX || e.pageY) {
     posx = e.pageX
     posy = e.pageY
-  }
-  else if (e.clientX || e.clientY)  {
+  } else if (e.clientX || e.clientY) {
     posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft
     posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop
   }
+
   target.x = posx
   target.y = posy
 }
 
-const scrollCheck = () => document.body.scrollTop > height ? animateHeader = false : animateHeader = true
+const scrollCheck = () => {
+  animateHeader = document.body.scrollTop < height
+}
 
 // animation
 const initAnimation = () => {
   animate()
-  for(let i in points) {
+  for (let i in points) {
     shiftPoint(points[i])
   }
 }
 
 const animate = () => {
-  if(animateHeader) {
+  if (animateHeader) {
     ctx.clearRect(0, 0, width, height)
     for (let i in points) {
       // detect points in range
@@ -127,9 +134,9 @@ const animate = () => {
 const shiftPoint = p => {
   TweenLite.to(p, 1 + 1 * Math.random(), {
     x: p.originX - 50 + Math.random() * 100,
-    y: p.originY - 50 + Math.random() * 100, 
+    y: p.originY - 50 + Math.random() * 100,
     ease: Circ.easeInOut,
-    onComplete() {
+    onComplete () {
       shiftPoint(p)
     }
   })
@@ -137,9 +144,10 @@ const shiftPoint = p => {
 
 // Canvas manipulation
 const drawLines = p => {
-  if (!p.active) 
+  if (!p.active) {
     return
-  for(let i in p.closest) {
+  }
+  for (let i in p.closest) {
     ctx.beginPath()
     ctx.moveTo(p.x, p.y)
     ctx.lineTo(p.closest[i].x, p.closest[i].y)
@@ -155,8 +163,9 @@ function Circle (pos, rad, color) {
 }
 
 Circle.prototype.draw = function () {
-  if (!this.active) 
+  if (!this.active) {
     return
+  }
   ctx.beginPath()
   ctx.arc(this.pos.x, this.pos.y, this.radius, 0, 2 * Math.PI, false)
   ctx.fillStyle = `rgba(255, 255, 255, ${this.active})`
